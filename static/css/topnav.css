@@ -1,0 +1,66 @@
+body{
+    background-image: url(../images/background_main_page.jpg);
+    background-size: cover;
+}
+
+.main_logo_title img{
+    max-width: 20%;
+    max-height: auto;
+    margin-left: 0px;
+}
+
+.round{
+    border-radius: 50%;
+    max-width: 70px;
+    max-height: auto;
+}
+
+.logo{
+    width: 14%;
+    height: auto;
+    margin-left: 8px;
+    margin-bottom: 5px;
+}
+
+.logomargin{
+    margin-left: 100px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+#nav {
+    text-align:center;
+    width: 100%;
+}
+
+#nav li{
+    display:inline-block;
+}
+
+#nav a{
+    display: block;
+    text-decoration:none;
+    color:#fff;
+    font-size: 24px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    padding:7px 15px;
+}
+
+.light-up:hover{
+    background: #404040;
+    color: #ccf;
+}
+
+.main-text{
+    margin-top: 80px;
+}
+
+.main-text h1{
+    font-size: 64px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color:#fff;
+    margin-left: 200px
+}
+
