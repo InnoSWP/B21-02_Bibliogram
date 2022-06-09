@@ -1,4 +1,5 @@
 import json
+import requests
 
 
 # authors from IU
@@ -57,21 +58,15 @@ class University:
 
 
 # write JSON file
-def write(data, filename):
-    data = json.dumps(data)
-    data = json.loads(str(data))
+def write(dt, filename):
+    dt = json.dumps(dt)
+    dt = json.loads(str(dt))
     with open(filename, 'w', encoding='utf-8') as file:
-        json.dump(data, file, indent=3)
-
-
-# read JSON file
-def read(filename):
-    with open(filename, 'r', encoding='utf-8') as file:
-        return json.load(file)
+        json.dump(dt, file, indent=3)
 
 
 # data parsing
-data = read('data_example.json')
+data = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/data").json()
 authors = data['authors']
 papers = data['papers']
 
