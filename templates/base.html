@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,
+           initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topnav.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <ul id="nav">
+        <li><a class="active" href="/">
+                <div class="logomargin">
+                    <img src="{{ main_logo }}" alt="Logo not found" class="round logo">
+                    <img src="{{ main_title }}" alt="Title not found" class="logo">
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="/" class="light-up">Publications</a>
+        </li>
+        <li>
+            <a href="/" class="light-up">Authors</a>
+        </li>
+        <li>
+            <a href="https://innopolis.university/" class="light-up">About IU</a>
+        </li>
+    </ul>
+
+    <div class="main-text">
+        <h1>
+            Research in the field
+        </h1>
+        <h1>
+            of IT and Robotics
+        </h1>
+    </div>
+</body>
+</html>
