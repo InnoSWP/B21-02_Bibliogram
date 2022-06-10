@@ -1,6 +1,33 @@
 from flask import Flask, render_template, url_for
+import requests
 
 app = Flask(__name__)
+
+
+# general statistics of IU
+class University:
+    num_publications: int
+    num_researchers: int
+    public_per_person: int
+    cit_per_person: int
+
+    def __init__(self):
+        self.cit_per_person = 0
+
+
+# data parsing
+data = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/data").json()
+authors = data['authors']
+papers = data['papers']
+
+# get statistics of IU
+uni = University()
+uni.num_researchers = len(authors)
+uni.num_publications = len(papers)
+uni.public_per_person = uni.num_publications / uni.num_researchers
+for auth in authors:
+    uni.cit_per_person += int(auth['overall_citation'])
+uni.cit_per_person /= uni.num_researchers
 
 
 @app.route('/')
@@ -18,15 +45,11 @@ def index():
 
 @app.route('/aboutIU')
 def about_section():
-    amount_of_publications = 0
-    number_of_researches = 0
-    pubications_per_person = 0
-    citations_per_person = 0
     return render_template('about_page.html', title='About IU',
-                           amount_of_publications=amount_of_publications,
-                           number_of_researches=number_of_researches,
-                           pubications_per_person=pubications_per_person,
-                           citations_per_person=citations_per_person)
+                           amount_of_publications=uni.num_publications,
+                           number_of_researches=uni.num_researchers,
+                           pubications_per_person=uni.public_per_person,
+                           citations_per_person=uni.cit_per_person)
 
 
 if __name__ == '__main__':
