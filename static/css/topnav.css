@@ -16,35 +16,35 @@ body{
 }
 
 .logo{
-    width: 14%;
+    width: 25%;
     height: auto;
-    margin-left: 8px;
+    margin-left: 0px;
     margin-bottom: 5px;
 }
 
 .logomargin{
-    margin-left: 100px;
+    margin-left: 0px;
     margin-top: 10px;
     text-align: left;
 }
 
 #nav {
-    text-align: center;
+    text-align:center;
     width: 100%;
 }
 
 #nav li{
-    display: inline-block;
+    display:inline-block;
 }
 
 #nav a{
     display: block;
-    text-decoration: none;
-    color: #fff;
+    text-decoration:none;
+    color:#fff;
     font-size: 24px;
     font-family: 'Open Sans';
     font-style: normal;
-    padding: 7px 15px;
+    padding:7px 15px;
 }
 
 .light-up:hover{
@@ -53,14 +53,15 @@ body{
 }
 
 .main-text{
-    margin-top: 80px;
+    margin-top: 84px;
+    font-size: 320px;
 }
 
 .main-text h1{
-    font-size: 64px;
+    font-size: 72px;
     font-family: 'Open Sans';
     font-style: normal;
     color:#fff;
-    margin-left: 200px
+    margin-left: 120px;
+    line-height: 1.5;
 }
-
