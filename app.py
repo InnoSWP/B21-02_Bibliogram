@@ -17,6 +17,9 @@ def main_page():
 def index():
     return "Hello, world!"
 
+@app.route('/reload')
+def index():
+    return "Reload Button"
 
 @app.route('/aboutIU')
 def about_section():
