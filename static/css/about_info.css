@@ -1,0 +1,49 @@
+.panel-delimeter{
+    height: 240px;
+    background-image: url(../images/panel.png);
+    background-size: cover;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.panel-delimeter h2{
+    font-size: 64px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color:#fff;
+    margin-left: 200px;
+    margin-top: 0px;
+}
+
+.blank-pad{
+    margin-left: 300px;
+}
+
+.inline-statistics{
+    display: inline-block;
+}
+
+.block-info{
+    display: inline-block;
+    width: 260px;
+    margin-left: 100px;
+}
+
+.block-info h3{
+    text-align: center;
+    display: inline-block;
+    font-size: 60px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color:#004;
+    margin-left: 35%;
+}
+
+.block-info h4{
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color:#004;
+}
