@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 
-import data_parser
+import data
 
 app = Flask(__name__)
 
@@ -16,10 +16,10 @@ def main_page():
 @app.route('/aboutIU')
 def about_section():
     return render_template('about_page.html', title='About IU',
-                           amount_of_publications=data_parser.uni.num_publications,
-                           number_of_researches=data_parser.uni.num_researchers,
-                           pubications_per_person=data_parser.uni.public_per_person,
-                           citations_per_person=data_parser.uni.cit_per_person)
+                           amount_of_publications=data.uni.num_publications,
+                           number_of_researches=data.uni.num_researchers,
+                           pubications_per_person=data.uni.public_per_person,
+                           citations_per_person=data.uni.cit_per_person)
 
 
 if __name__ == '__main__':
