@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 
-import data_parser
+import data
 
 app = Flask(__name__)
 
