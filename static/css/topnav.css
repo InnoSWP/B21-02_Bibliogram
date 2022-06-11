@@ -1,6 +1,9 @@
 body{
     background-image: url(../images/background_main_page.jpg);
-    background-size: cover;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+
 }
 
 .main_logo_title img{
@@ -30,7 +33,7 @@ body{
 
 #nav {
     text-align:center;
-    width: 100%;
+    width: 90%;
 }
 
 #nav li{
@@ -50,6 +53,7 @@ body{
 .light-up:hover{
     background: #404040;
     color: #ccf;
+
 }
 
 .main-text{

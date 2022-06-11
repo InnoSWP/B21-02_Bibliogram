@@ -1,21 +1,26 @@
 .panel-delimeter{
-    height: 240px;
-    background-image: url(../images/panel.png);
-    background-size: cover;
+    height: 160px;
+    background-image: url(../images/panel2.png);
+    background-size: 100%;
+    background-position: center;
     padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
+    margin: -10px -10px -10px -10px;
+
 }
 
 .panel-delimeter h2{
     font-size: 64px;
     font-family: 'Open Sans';
     font-style: normal;
+    box-sizing: border-box;
+    padding-top: 30px;
     color:#fff;
-    margin-left: 200px;
+    margin-left: 120px;
     margin-top: 0px;
 }
 
 .blank-pad{
+    height: 150px;
     margin-left: 300px;
 }
 
@@ -25,18 +30,20 @@
 
 .block-info{
     display: inline-block;
-    width: 260px;
+    width: 200px;
+
     margin-left: 100px;
 }
 
 .block-info h3{
     text-align: center;
     display: inline-block;
-    font-size: 60px;
+    font-size: 100px;
     font-family: 'Open Sans';
     font-style: normal;
     color:#004;
     margin-left: 35%;
+    margin-bottom: -10px;
 }
 
 .block-info h4{
