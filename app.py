@@ -13,11 +13,6 @@ def main_page():
                            main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/index')
-def index():
-    return "Hello, world!"
-
-
 @app.route('/aboutIU')
 def about_section():
     return render_template('about_page.html', title='About IU',
