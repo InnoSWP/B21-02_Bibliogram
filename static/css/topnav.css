@@ -69,3 +69,12 @@ body{
     margin-left: 120px;
     line-height: 1.5;
 }
+
+.arrow{
+    height: 70px;
+    width: auto;
+}
+
+#object-position-1{
+    margin-top:200px;
+}
