@@ -38,7 +38,7 @@ body{
     display: inline-block;
     width: 200px;
     margin-left: 350px;
-    margin-top: -50px;
+    margin-top: -60px;
 }
 
 .block-info h3{
@@ -104,9 +104,9 @@ body{
 }
 
 #object-position-1{
-    margin-top:-160px;
+    margin-top:-11.5%;
 }
 #object-position-2{
 
-    margin-top:-150px;
+    margin-top:-11%;
 }
