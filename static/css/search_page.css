@@ -37,15 +37,19 @@ body{
     left: 0;
     background-color: #313147;
     overflow-x: hidden;
-    transition: all .8s;
+    transition: all .3s;
     max-width: 414px;
     margin-top: 8px;
     padding-top: 20px;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
 .sidebar.collapsed{
     max-width: 0;
     overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
 }
 
 .sidebar div {
