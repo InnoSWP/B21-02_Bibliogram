@@ -37,23 +37,22 @@ body{
 }
 
 #nav li{
-    display:inline-block;
+    display: inline-block;
 }
 
 #nav a{
     display: block;
-    text-decoration:none;
-    color:#fff;
+    text-decoration: none;
+    color: #fff;
     font-size: 24px;
     font-family: 'Open Sans';
     font-style: normal;
-    padding:7px 15px;
+    padding: 7px 15px;
 }
 
 .light-up:hover{
     background: #404040;
     color: #ccf;
-
 }
 
 .main-text{

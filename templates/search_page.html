@@ -5,40 +5,47 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no,
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/about_info.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <title>Title</title>
 </head>
 <body>
-
-    <div id="mySidebar" class="sidebar">
-    <div class="closebtn" onclick="closeNav()">×</div>
-    <div>About</div>
-    <div>Services</div>
-    <div>Clients</div>
+    <div class="panel-delimeter">
+        <button class="openbtn"
+                    onclick="toggleSidebar()">
+                <img src="{{ url_for('static', filename='images/menu.png') }}"
+                    alt="Icon not found" style="filter: invert(100%); width:80px; height:80px;">
+        </button>
+        <h2 style="margin-top: 20px;">
+            Find author
+        </h2>
     </div>
-
-    <div id="main">
-    <button class="openbtn" onclick="openNav()">Open Sidebar</button>
-    <p> (your body text here)) </p>
+    <div id="mySidebar" class="sidebar collapsed">
+    <!--    <div class="closebtn"-->
+    <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
+        <div>
+            <a href="/" class="light-up">
+                Main menu
+            </a>
+        </div>
+        <div>
+            <a href="/search" class="light-up">
+                Authors
+            </a>
+        </div>
+        <div>
+            <a href="/publications" class="light-up">
+                Publications
+            </a>
+        </div>
     </div>
 
     <script>
-    function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-    }
+        function toggleSidebar() {
+            document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
+            document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
+        }
     </script>
-    <div class="panel-delimeter">
-        <h2>
-            Publications in IU
-        </h2>
-    </div>
 </body>
 </html>

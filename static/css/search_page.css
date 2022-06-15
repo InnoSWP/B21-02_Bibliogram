@@ -13,50 +13,72 @@ body{
     margin: -10px -10px -10px -10px;
 }
 
+.panel-delimeter.sidebar-opened{
+    background-image: none;
+    background-color: #313147;
+}
+
 .panel-delimeter h2{
-    font-size: 64px;
+    font-size: 80px;
     font-family: 'Open Sans';
     font-style: normal;
     box-sizing: border-box;
-    padding-top: 30px;
+    padding-top: 10px;
     color:#fff;
-    margin-left: 120px;
-    margin-top: 0px;
+    margin-left: 20px;
+    outline: none;
+    display: inline-block;
 }
 
 .sidebar {
-height: 100%;
-width: 0;
-position: fixed;
-top: 0;
-left: 0;
-background-color: lightblue;
-overflow-x: hidden;
-transition: 0.5s;
-padding-top: 60px;
+    height: 660px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #313147;
+    overflow-x: hidden;
+    transition: all .8s;
+    max-width: 414px;
+    margin-top: 8px;
+    padding-top: 20px;
+}
+
+.sidebar.collapsed{
+    max-width: 0;
+    overflow: hidden;
 }
 
 .sidebar div {
-padding: 8px 8px 8px 30px;
-font-size: 24px;
-display: block;
-transition: 0.5s;
-cursor: pointer;
+    padding: 8px 8px 8px 41px;
+    font-size: 30px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    color: #fff;
+    display: block;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 .sidebar .closebtn {
-position: absolute;
-top: 0;
-right: 25px;
-font-size: 36px;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
 }
 
 .openbtn {
-font-size: 24px;
-cursor: pointer;
-background-color: lightblue;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    margin-left: 40px;
 }
 
-#main {
-transition: margin-left .5s;
+.light-up:hover{
+    background: #404040;
+    color: #ccf;
+}
+
+a.text{
+    text-decoration: none;
 }
