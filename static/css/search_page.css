@@ -1,0 +1,62 @@
+body{
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.panel-delimeter{
+    height: 160px;
+    background-image: url(../images/panel2.png);
+    background-size: 100%;
+    background-position: center;
+    padding: 0px 0px 0px 0px;
+    margin: -10px -10px -10px -10px;
+}
+
+.panel-delimeter h2{
+    font-size: 64px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    box-sizing: border-box;
+    padding-top: 30px;
+    color:#fff;
+    margin-left: 120px;
+    margin-top: 0px;
+}
+
+.sidebar {
+height: 100%;
+width: 0;
+position: fixed;
+top: 0;
+left: 0;
+background-color: lightblue;
+overflow-x: hidden;
+transition: 0.5s;
+padding-top: 60px;
+}
+
+.sidebar div {
+padding: 8px 8px 8px 30px;
+font-size: 24px;
+display: block;
+transition: 0.5s;
+cursor: pointer;
+}
+
+.sidebar .closebtn {
+position: absolute;
+top: 0;
+right: 25px;
+font-size: 36px;
+}
+
+.openbtn {
+font-size: 24px;
+cursor: pointer;
+background-color: lightblue;
+}
+
+#main {
+transition: margin-left .5s;
+}

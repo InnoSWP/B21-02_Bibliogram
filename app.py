@@ -18,10 +18,10 @@ def main_page():
 def about_section():
     arrowUp = url_for('static', filename='images/arrowUp.jpg')
     return render_template('about_page.html', title='About IU',
-                           amount_of_publications=data_parser.uni.num_publications,
-                           number_of_researches=data_parser.uni.num_researchers,
-                           pubications_per_person=data_parser.uni.public_per_person,
-                           citations_per_person=data_parser.uni.cit_per_person,
+                           amount_of_publications=data.uni.num_publications,
+                           number_of_researches=data.uni.num_researchers,
+                           pubications_per_person=data.uni.public_per_person,
+                           citations_per_person=data.uni.cit_per_person,
                            arrowUp=arrowUp)
 
 @app.route('/features')
@@ -39,7 +39,7 @@ def features_section():
                            number4=number4, arrowUp=arrowUp, arrowDown=arrowDown)
 
 @app.route('/search')
-def about_section():
+def about_section_page():
     arrowUp = url_for('static', filename='images/arrowUp.jpg')
     return render_template('search_page.html', title='Search for authors')
 
