@@ -7,53 +7,55 @@
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about_info.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <title>{{ title }}</title>
 </head>
 
 <body>
-    <div class="panel-delimeter">
-        <h2>
-            Innopolis University
-        </h2>
-    </div>
+<div class="panel-delimeter">
+    <h2>
+        Innopolis University
+    </h2>
+</div>
 
-    <div class="inline-statistics">
-        <div class="blank-pad"></div>
-        <div class="block-info">
-            <h3>
-                {{ amount_of_publications }}
-            </h3>
-            <h4>
-                Amount of publications
-            </h4>
-        </div>
-        <div class="block-info">
-            <h3>
-                {{ number_of_researches }}
-            </h3>
-            <h4>
-                Number of researchers
-            </h4>
-        </div>
-        <div></div>
-        <div class="block-info1">
-            <h3>
-                {{ pubications_per_person }}
-            </h3>
-            <h4>
-                Publications per person
-            </h4>
-        </div>
-        <div class="block-info1">
-            <h3>
-                {{ citations_per_person }}
-            </h3>
-            <h4>
-                Citations per person
-            </h4>
-        </div>
+<div class="inline-statistics">
+    <div class="blank-pad"></div>
+    <div class="block-info">
+        <h3>
+            {{ amount_of_publications }}
+        </h3>
+        <h4>
+            Amount of publications
+        </h4>
     </div>
+    <div class="block-info">
+        <h3>
+            {{ number_of_researches }}
+        </h3>
+        <h4>
+            Number of researchers
+        </h4>
+    </div>
+    <div></div>
+    <div class="block-info1">
+        <h3>
+            {{ pubications_per_person }}
+        </h3>
+        <h4>
+            Publications per person
+        </h4>
+    </div>
+    <div class="block-info1">
+        <h3>
+            {{ citations_per_person }}
+        </h3>
+        <h4>
+            Citations per person
+        </h4>
+    </div>
+</div>
+<div class="arrow">
+    <a href="/features"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right"></a>
+</div>
 </body>
 </html>

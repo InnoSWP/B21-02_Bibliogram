@@ -94,3 +94,12 @@ body{
     font-style: normal;
     color:#004;
 }
+
+.arrow{
+    height: 70px;
+    width: auto;
+}
+
+#object-position-1{
+    margin-top:-80px;
+}

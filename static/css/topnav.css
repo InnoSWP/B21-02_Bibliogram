@@ -55,16 +55,25 @@ body{
     color: #ccf;
 }
 
-.main-text{
+.main-text-page{
     margin-top: 84px;
     font-size: 320px;
 }
 
-.main-text h1{
+.main-text-page h1{
     font-size: 72px;
     font-family: 'Open Sans';
     font-style: normal;
-    color:#fff;
+    color: #fff;
     margin-left: 120px;
     line-height: 1.5;
+}
+
+.arrow{
+    height: 70px;
+    width: auto;
+}
+
+#object-position-1{
+    margin-top:200px;
 }
