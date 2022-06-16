@@ -50,7 +50,7 @@ def search_author():
 
 @app.route('/author_id:0')
 def author():
-    return
+    return render_template('author_page.html')
 
 
 if __name__ == '__main__':
