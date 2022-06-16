@@ -21,9 +21,10 @@
             Find author
         </h2>
     </div>
+
     <div id="mySidebar" class="sidebar collapsed">
-    <!--    <div class="closebtn"-->
-    <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
+        <!--    <div class="closebtn"-->
+        <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
         <div>
             <a href="/" class="light-up">
                 Main menu
@@ -41,10 +42,15 @@
         </div>
     </div>
 
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-info" type="submit">Find</button>
-    </form>
+    <div class="container-md">
+        <form class="d-flex search-bar" role="search">
+            <input class="form-control me-2" type="text"
+                   placeholder="Enter the name of the researcher" aria-label="Search">
+        </form>
+        <button class="find-button">
+            Find Mazzara!
+        </button>
+    </div>
 
     <script>
         function toggleSidebar() {
