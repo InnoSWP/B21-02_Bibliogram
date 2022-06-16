@@ -41,7 +41,8 @@ def features_section():
 @app.route('/search')
 def about_section_page():
     arrowUp = url_for('static', filename='images/arrowUp.jpg')
-    return render_template('search_page.html', title='Search for authors')
+    photos = [url_for('static', filename='images/author_photoholder.jpg')]
+    return render_template('search_page.html', title='Search for authors', photos=photos)
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
