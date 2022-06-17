@@ -13,31 +13,31 @@
 <body>
     <div class="panel-delimeter">
         <button class="openbtn"
-                    onclick="toggleSidebar()">
+                    onclick="toggleSidebar()" style="margin-top: 50px;">
                 <img src="{{ url_for('static', filename='images/menu.png') }}"
-                    alt="Icon not found" style="filter: invert(100%); width:80px; height:80px;">
+                    alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
         </button>
-        <h2 style="margin-top: 20px;">
+        <h2 style="margin-top: -100px;">
             Find author
         </h2>
     </div>
 
-    <div id="mySidebar" class="sidebar collapsed">
+    <div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
         <!--    <div class="closebtn"-->
         <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
-        <div>
+        <div style="font-family:'Open Sans'; text-decoration: none;">
             <a href="/" class="light-up">
-                Main menu
+                <font color="white">Main menu</font>
             </a>
         </div>
         <div>
             <a href="/search" class="light-up">
-                Authors
+                <font color="white">Authors</font>
             </a>
         </div>
         <div>
             <a href="/publications" class="light-up">
-                Publications
+                <font color="white">Publications</font>
             </a>
         </div>
     </div>
@@ -47,8 +47,8 @@
             <input class="form-control me-2" type="text"
                    placeholder="Enter the name of the researcher" aria-label="Search">
         </form>
-        <button class="find-button">
-            Find Mazzara!
+        <button class="find-button" style="margin-top: 45px; margin-left: 205px;">
+            Search
         </button>
     </div>
 
@@ -62,7 +62,7 @@
             <tr>
                 <th scope="row" class="avatar-column">
                     <a href="/author_id:0">
-                        <img src="{{ photos[0] }}" alt="Mazzara not found" class="round-photo margined-photo">
+                        <img src="{{ photos[0] }}" alt="Not found" class="round-photo margined-photo">
                     </a>
                 </th>
                 <td>
@@ -78,12 +78,12 @@
             </tr>
             <tr>
                 <th scope="row" class="avatar-column">
-                    <img src="{{ photos[1] }}" alt="Petr not found" class="round-photo margined-photo">
+                    <img src="{{ photos[1] }}" alt="Not found" class="round-photo margined-photo">
                 </th>
                 <td>
                     <div class="cluster-author">
                         <h2>
-                            <b>Petr Zhdanov</b>
+                            <b>Giancarlo Succi</b>
                         </h2>
                         Institute of Software Development and Engineering
                     </div>
@@ -91,14 +91,14 @@
             </tr>
             <tr>
                 <th scope="row" class="avatar-column">
-                    <img src="{{ photos[2] }}" alt="Vladislav not found" class="round-photo margined-photo">
+                    <img src="{{ photos[2] }}" alt="Not found" class="round-photo margined-photo">
                 </th>
                 <td>
                     <div class="cluster-author">
                         <h2>
-                            <b>Vladislav Spigin</b>
+                            <b>Alexander Tormasov</b>
                         </h2>
-                        Innopolis University Student
+                        Rector of Innopolis University
                     </div>
                 </td>
             </tr>
