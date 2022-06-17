@@ -24,7 +24,6 @@ def about_section():
                            citations_per_person=data.uni.cit_per_person,
                            arrowUp=arrowUp)
 
-
 @app.route('/features')
 def features_section():
     number1 = url_for('static', filename='images/1.jpg')
