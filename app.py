@@ -42,8 +42,8 @@ def features_section():
 @app.route('/search')
 def search_author():
     photos = [url_for('static', filename='images/author_photoholder.jpg'),
-              url_for('static', filename='images/holder2.png'),
-              url_for('static', filename='images/holder1.jpeg')]
+              url_for('static', filename='images/author_photoholder_2.jpg'),
+              url_for('static', filename='images/author_photoholder_1.jpg')]
     return render_template('search_page.html', title='Search for authors', photos=photos)
 
 
