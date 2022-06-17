@@ -53,5 +53,10 @@ def author():
     return render_template('author_page.html')
 
 
+@app.route('/publications')
+def publications():
+    return render_template('publications_page.html')
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
