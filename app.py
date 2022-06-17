@@ -44,7 +44,13 @@ def search_author():
     photos = [url_for('static', filename='images/author_photoholder.jpg'),
               url_for('static', filename='images/author_photoholder_2.jpg'),
               url_for('static', filename='images/author_photoholder_1.jpg')]
-    return render_template('search_page.html', title='Search for authors', photos=photos)
+    autors = ["Manuel Mazzara", "Giancarlo Succi", "Alexander Tormasov"]
+
+    affilations = ["Institute of Software Development and Engineering",
+                   "Institute of Software Development and Engineering",
+                   "Rector of Innopolis University"]
+    return render_template('search_page.html', title='Search for authors', photos=photos, authors = autors, affilations = affilations,
+                           size = len(autors))
 
 
 @app.route('/author_id:0')
