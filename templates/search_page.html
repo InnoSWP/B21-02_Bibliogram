@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,
+           initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="panel-delimeter">
+        <button class="openbtn"
+                    onclick="toggleSidebar()" style="margin-top: 50px;">
+                <img src="{{ url_for('static', filename='images/menu.png') }}"
+                    alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
+        </button>
+        <h2 style="margin-top: -100px;">
+            Find author
+        </h2>
+    </div>
+
+    <div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
+        <!--    <div class="closebtn"-->
+        <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
+        <div style="font-family:'Open Sans'; text-decoration: none;">
+            <a href="/" class="light-up">
+                <font color="white">Main menu</font>
+            </a>
+        </div>
+        <div>
+            <a href="/search" class="light-up">
+                <font color="white">Authors</font>
+            </a>
+        </div>
+        <div>
+            <a href="/publications" class="light-up">
+                <font color="white">Publications</font>
+            </a>
+        </div>
+    </div>
+
+    <div class="container-md">
+        <form class="d-flex search-bar" role="search">
+            <input class="form-control me-2" type="text"
+                   placeholder="Enter the name of the researcher" aria-label="Search">
+        </form>
+        <button class="find-button" style="margin-top: 45px; margin-left: 205px;">
+            Search
+        </button>
+    </div>
+
+    <div class="title-results">
+        <b>Search results</b>
+    </div>
+
+    <div class="container author-catalogue">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th scope="row" class="avatar-column">
+                    <a href="/author_id:0">
+                        <img src="{{ photos[0] }}" alt="Not found" class="round-photo margined-photo">
+                    </a>
+                </th>
+                <td>
+                    <a href="/author_id:0" style="text-decoration: none; color: #051742;">
+                        <div class="cluster-author">
+                            <h2>
+                                <b>Manuel Mazzara</b>
+                            </h2>
+                            Institute of Software Development and Engineering
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="avatar-column">
+                    <img src="{{ photos[1] }}" alt="Not found" class="round-photo margined-photo">
+                </th>
+                <td>
+                    <div class="cluster-author">
+                        <h2>
+                            <b>Giancarlo Succi</b>
+                        </h2>
+                        Institute of Software Development and Engineering
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row" class="avatar-column">
+                    <img src="{{ photos[2] }}" alt="Not found" class="round-photo margined-photo">
+                </th>
+                <td>
+                    <div class="cluster-author">
+                        <h2>
+                            <b>Alexander Tormasov</b>
+                        </h2>
+                        Rector of Innopolis University
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
+            document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
+        }
+    </script>
+</body>
+</html>

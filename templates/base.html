@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/topnav.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
     <title>{{ title }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
@@ -23,16 +25,16 @@
             <a href="/" class="light-up">Publications</a>
         </li>
         <li>
-            <a href="/" class="light-up">Authors</a>
+            <a href="/search" class="light-up">Authors</a>
         </li>
         <li>
             <a href="/aboutIU" class="light-up">About IU</a>
         </li>
     </ul>
 
-    <div class="main-text">
+    <div class="main-text-page">
         <h1>
-            Research in the field</br>
+            Research in the field<br>
             of IT and Robotics
         </h1>
     </div>

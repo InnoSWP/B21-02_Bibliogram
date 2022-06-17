@@ -37,35 +37,34 @@ body{
 }
 
 #nav li{
-    display:inline-block;
+    display: inline-block;
 }
 
 #nav a{
     display: block;
-    text-decoration:none;
-    color:#fff;
+    text-decoration: none;
+    color: #fff;
     font-size: 24px;
     font-family: 'Open Sans';
     font-style: normal;
-    padding:7px 15px;
+    padding: 7px 15px;
 }
 
 .light-up:hover{
     background: #404040;
     color: #ccf;
-
 }
 
-.main-text{
+.main-text-page{
     margin-top: 84px;
     font-size: 320px;
 }
 
-.main-text h1{
+.main-text-page h1{
     font-size: 72px;
     font-family: 'Open Sans';
     font-style: normal;
-    color:#fff;
+    color: #fff;
     margin-left: 120px;
     line-height: 1.5;
 }
