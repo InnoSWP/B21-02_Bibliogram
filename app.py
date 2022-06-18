@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
-
 import data
+
 
 app = Flask(__name__)
 
@@ -24,6 +24,7 @@ def about_section():
                            citations_per_person=data.uni.cit_per_person,
                            arrowUp = arrowUp)
 
+
 @app.route('/features')
 def features_section():
     number1 = url_for('static', filename='images/1.jpg')
@@ -37,6 +38,7 @@ def features_section():
                            number2=number2,
                            number3=number3,
                            number4=number4, arrowUp=arrowUp, arrowDown=arrowDown)
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
