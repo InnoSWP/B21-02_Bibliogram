@@ -1,4 +1,6 @@
-from flask import Flask, render_template, url_for, request, redirect
+import itertools
+
+from flask import Flask, render_template, url_for, request
 
 import data
 
@@ -23,6 +25,7 @@ def about_section():
                            pubications_per_person=data.uni.public_per_person,
                            citations_per_person=data.uni.cit_per_person,
                            arrowUp=arrowUp)
+
 
 @app.route('/features')
 def features_section():
@@ -64,7 +67,19 @@ def author():
 
 @app.route('/publications')
 def publications():
-    return render_template('publications_page.html', papers=data.papers)
+    papers = data.papers.rename(columns=lambda x: x[0].upper()+x[1:])
+    papers.rename(columns={"Publication_date": "Publication Date",
+                           "Doi": "DOI",
+                           "Source_type": "Source Type",
+                           "Work_type": "Work Type",
+                           "Source_quartile": "Quartile",
+                           "Authors_affils": "Authors Affiliation"}, inplace=True)
+    papers["Authors"] = papers["Authors Affiliation"].apply(lambda x: eval(x).keys())
+    papers["Authors"] = papers["Authors"].apply(lambda x: "\n".join(x))
+    papers["Affiliation"] = papers["Authors Affiliation"].apply(lambda x: eval(x).values())
+    #papers["Affiliation"] = papers["Affiliation"].apply(lambda x: i for i in itertools.chain.from_iterable(x))
+    papers.drop(columns="Authors Affiliation", inplace=True)
+    return render_template('publications_page.html', papers=papers)
 
 
 if __name__ == '__main__':
