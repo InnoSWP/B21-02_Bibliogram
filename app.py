@@ -73,6 +73,14 @@ def author():
 def publications():
     return render_template('publications_page.html')
 
+@app.route('/co-author')
+def co_authors():
+    return render_template('co-author.html')
+
+@app.route('/author_publications')
+def author_publications():
+    return render_template('author_publications.html')
+
 @app.route('/test_public')
 def test_public():
     main_logo = url_for('static', filename='images/dark_logo.png')
