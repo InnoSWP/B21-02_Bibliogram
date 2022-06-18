@@ -100,7 +100,7 @@ def listToInt(list):
 
 # data parsing
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
-authors = pd.DataFrame(data["authors"])
+authors = pd.DataFrame(data["authors"], index="id")
 papers = pd.read_csv("papers_full.csv", index_col="id")
 
 authors["id"] = authors["id"].apply(strToInt)

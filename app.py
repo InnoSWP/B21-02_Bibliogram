@@ -64,7 +64,7 @@ def author():
 
 @app.route('/publications')
 def publications():
-    return render_template('publications_page.html')
+    return render_template('publications_page.html', papers=data.papers)
 
 
 if __name__ == '__main__':
