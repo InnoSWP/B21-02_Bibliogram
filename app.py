@@ -9,14 +9,25 @@ app = Flask(__name__)
 def main_page():
     main_logo = url_for('static', filename='images/dark_logo.png')
     main_title = url_for('static', filename='images/innopolis_title.png')
-    arrow = url_for('static', filename='images/arrow_down.jpg')
+    arrow = url_for('static', filename='images/arrow_up.jpg')
+    number1 = url_for('static', filename='images/1.jpg')
+    number2 = url_for('static', filename='images/2.jpg')
+    number3 = url_for('static', filename='images/3.jpg')
+    number4 = url_for('static', filename='images/4.jpg')
     return render_template('base.html', title='Bibliogram',
-                           main_logo=main_logo, main_title=main_title, arrow=arrow)
+                           main_logo=main_logo, main_title=main_title, arrowUp=arrow, number1=number1,
+                           number2=number2,
+                           number3=number3,
+                           number4=number4,
+                           amount_of_publications=data.uni.num_publications,
+                           number_of_researches=data.uni.num_researchers,
+                           pubications_per_person=data.uni.public_per_person,
+                           citations_per_person=data.uni.cit_per_person)
 
 
 @app.route('/aboutIU')
 def about_section():
-    arrowUp = url_for('static', filename='images/arrow_up.jpg')
+    arrowUp = url_for('static', filename='images/arrow_down.jpg')
     return render_template('about_page.html', title='About IU',
                            amount_of_publications=data.uni.num_publications,
                            number_of_researches=data.uni.num_researchers,
@@ -62,6 +73,12 @@ def author():
 def publications():
     return render_template('publications_page.html')
 
+@app.route('/test_public')
+def test_public():
+    main_logo = url_for('static', filename='images/dark_logo.png')
+    main_title = url_for('static', filename='images/innopolis_title.png')
+    return render_template('test_public.html', title='Bibliogram',
+                           main_logo=main_logo, main_title=main_title)
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
