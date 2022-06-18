@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 
 import data
 
@@ -39,7 +39,7 @@ def features_section():
                            number4=number4, arrowUp=arrow_up, arrowDown=arrow_down)
 
 
-@app.route('/search')
+@app.route('/search', methods=['POST', 'GET'])
 def search_author():
     photos = [url_for('static', filename='images/author_photoholder.jpg'),
               url_for('static', filename='images/author_photoholder_2.jpg'),
@@ -49,6 +49,10 @@ def search_author():
     affilations = ["Institute of Software Development and Engineering",
                    "Institute of Software Development and Engineering",
                    "Rector of Innopolis University"]
+
+    if request.method == 'POST':
+        author_name = request.form['author']
+        print(author_name)
     return render_template('search_page.html', title='Search for authors', photos=photos, authors = autors, affilations = affilations,
                            size = len(autors))
 
