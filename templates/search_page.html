@@ -58,7 +58,7 @@
     <div class="container author-catalogue">
         <table class="table table-striped">
             <tbody>
-            {% for i in range(size) %}
+            {% for i in range(authors.shape[0]) %}
             <tr>
                 <th scope="row" class="avatar-column">
                     <a href="/author_id:{{authors.iloc[i]['Id']}}">

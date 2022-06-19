@@ -1,4 +1,3 @@
-import itertools
 import data
 from flask import Flask, render_template, url_for, request
 
@@ -54,21 +53,15 @@ def features_section():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search_author():
+
     authors = data.authors.rename(columns=lambda x: x[0].upper()+x[1:])
-    size = len(authors)
-    # photos = [url_for('static', filename='images/author_photoholder.jpg'),
-    #           url_for('static', filename='images/author_photoholder_2.jpg'),
-    #           url_for('static', filename='images/author_photoholder_1.jpg')]
-    # autors = ["Manuel Mazzara", "Giancarlo Succi", "Alexander Tormasov"]
-    #
-    # affilations = ["Institute of Software Development and Engineering",
-    #                "Institute of Software Development and Engineering",
-    #                "Rector of Innopolis University"]
 
     if request.method == 'POST':
         author_name = request.form['author']
-        print(author_name)
-    return render_template('search_page.html', title='Search for authors', authors=authors, size=size)
+        filt = authors["Name"].str.contains(author_name)
+        authors = authors.loc[filt]
+
+    return render_template('search_page.html', title='Search for authors', authors=authors)
 
 
 @app.route('/author_id:0')

@@ -130,8 +130,8 @@ papers["citations"] = papers["citations"].apply(dicValuesSum)
 
 # get statistics of IU
 uni = University()
-uni.num_researchers = len(authors)
-uni.num_publications = len(papers)
+uni.num_researchers = authors.shape[0]
+uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors['overall_citation'].sum() / uni.num_researchers
 
