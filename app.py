@@ -95,14 +95,22 @@ def publications():
     return render_template('publications_page.html', papers=papers)
 
 
-@app.route('/co-author')
-def co_authors():
-    return render_template('co-author.html')
+@app.route('/co-author=<int:id>')
+def co_authors(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+
+    return render_template('co-author.html', author=author_data, id=id, papers=data.papers)
 
 
-@app.route('/author_publications')
-def author_publications():
-    return render_template('author_publications.html')
+@app.route('/author_publications=<int:id>')
+def author_publications(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+
+    return render_template('author_publications.html', author=author_data, id=id, papers=data.papers)
 
 
 @app.route('/test_public')

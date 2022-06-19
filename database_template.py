@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from app import app
-import requests
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///publications.db'
