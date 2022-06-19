@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
-
 import data
+
 
 app = Flask(__name__)
 
@@ -34,6 +34,7 @@ def about_section():
                            pubications_per_person=data.uni.public_per_person,
                            citations_per_person=data.uni.cit_per_person,
                            arrowUp=arrowUp)
+
 
 @app.route('/features')
 def features_section():
@@ -87,6 +88,7 @@ def test_public():
     main_title = url_for('static', filename='images/innopolis_title.png')
     return render_template('test_public.html', title='Bibliogram',
                            main_logo=main_logo, main_title=main_title)
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')
