@@ -57,55 +57,22 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Authors</th>
-                <th scope="col">Year</th>
-                <th scope="col">Source</th>
-                <th scope="col">Quartile</th>
-                <th scope="col">DOI</th>
+                {% for title in papers.columns %}
+                    <th scope="col">{{ title }}</th>
+                {% endfor %}
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">Nothing to show yet!</th>
-                <td>Bibliogram team</td>
-                <td>2022</td>
-                <td>Soon here will be content!</td>
-                <td>Q1</td>
-                <td>-//-</td>
-            </tr>
-            <tr>
-                <th scope="row">Nothing to show yet!</th>
-                <td>Bibliogram team</td>
-                <td>2022</td>
-                <td>Soon here will be content!</td>
-                <td>Q1</td>
-                <td>-//-</td>
-            </tr>
-            <tr>
-                <th scope="row">Nothing to show yet!</th>
-                <td>Bibliogram team</td>
-                <td>2022</td>
-                <td>Soon here will be content!</td>
-                <td>Q1</td>
-                <td>-//-</td>
-            </tr>
-            <tr>
-                <th scope="row">Nothing to show yet!</th>
-                <td>Bibliogram team</td>
-                <td>2022</td>
-                <td>Soon here will be content!</td>
-                <td>Q1</td>
-                <td>-//-</td>
-            </tr>
-            <tr>
-                <th scope="row">Nothing to show yet!</th>
-                <td>Bibliogram team</td>
-                <td>2022</td>
-                <td>Soon here will be content!</td>
-                <td>Q1</td>
-                <td>-//-</td>
-            </tr>
+                {% for i in range(20) %}
+                <tr>
+                    {% for el in papers.iloc[i] %}
+                    <td>
+                        {{ el }}
+                    </td>
+                    {% endfor %}
+
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

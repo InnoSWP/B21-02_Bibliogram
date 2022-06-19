@@ -1,6 +1,7 @@
 import json
 import requests
 from datetime import datetime
+import pandas as pd
 
 
 # authors from IU
@@ -78,18 +79,56 @@ def refresh():
     return status
 
 
+# gg
+def strToInt(string):
+    return int(string)
+
+
+# wp
+def dicToInt(dictionary):
+    for key in dictionary.keys():
+        dictionary[key] = int(dictionary.get(key))
+    return dictionary
+
+
+# wp
+def dicToIntSum(dictionary):
+    df = eval(dictionary)
+    return sum(map(int, df.values()))
+
+
+# wp
+def listToInt(list):
+    for val in list:
+        list[val] = int(val)
+    return list
+
+
 # data parsing
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
-authors = data['authors']
-papers = data['papers']
+
+authors = pd.DataFrame(data["authors"])
+authors.set_index("id")
+papers = pd.read_csv("papers_full.csv", index_col="id")
+
+
+authors["overall_citation"] = authors["overall_citation"].apply(strToInt)
+authors["hirsch_ind"] = authors["hirsch_ind"].apply(strToInt)
+authors["citations"] = authors["citations"].apply(dicToInt)
+authors["papers_published"] = authors["papers_published"].apply(dicToInt)
+authors["paper_id"] = authors["paper_id"].apply(listToInt)
+
+
+papers["source_quartile"] = papers["source_quartile"].apply(strToInt)
+papers["citations"] = papers["citations"].apply(dicToIntSum)
+
 
 # get statistics of IU
 uni = University()
 uni.num_researchers = len(authors)
 uni.num_publications = len(papers)
 uni.public_per_person = uni.num_publications / uni.num_researchers
-for auth in authors:
-    uni.cit_per_person += int(auth['overall_citation'])
+uni.cit_per_person = authors['overall_citation'].sum()
 uni.cit_per_person /= uni.num_researchers
 
 # write(data, 'data_output.json')
