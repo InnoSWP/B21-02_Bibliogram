@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no,
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/co-author.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <title>Publications</title>
@@ -18,7 +18,7 @@
                     alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
         </button>
         <h2 style="margin-top: -100px;">
-            Publications in IU
+            Co-authors page
         </h2>
     </div>
 
@@ -39,44 +39,68 @@
             </a>
         </div>
     </div>
-    <div class="container-md">
-        <div class="d-flex">
-            <button class="button-sort" style="color:#fff; margin-top: 5%;">
-                Show parameters
-            </button>
-            <button class="button-sort" style="color:#fff; margin-top: 5%;">
-                Sort by
-            </button>
-            <button class="button-sort" style="color:#fff; margin-top: 5%;">
-                Download statistics
-            </button>
-        </div>
-    </div>
-
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="/author_id:0">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/co-author">Co-authors</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/author_publications">Publications</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled">Secret info</a>
+        </li>
+    </ul>
+<div style="margin-top: 10px; margin-left: 100px;">
+    <h1 style="font-size: 60px; font-family:'Open Sans';">Manuel Mazzara</h1>
+</div>
     <div class="container author-catalogue">
         <table class="table table-bordered">
             <thead>
             <tr>
-                {% for title in papers.columns %}
-                    <th scope="col">{{ title }}</th>
-                {% endfor %}
+                <th scope="col">Author</th>
+                <th scope="col">Quantity of publications</th>
+                <th scope="col">Affiliation</th>
             </tr>
             </thead>
             <tbody>
-                {% for i in range(20) %}
-                <tr>
-                    {% for el in papers.iloc[i] %}
-                    <td>
-                        {{ el }}
-                    </td>
-                    {% endfor %}
-
-                </tr>
-                {% endfor %}
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>3</td>
+                <td>IU</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>2</td>
+                <td>IU</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>4</td>
+                <td>Cambridge</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>1000000000000000</td>
+                <td>MIT</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>-1000000000000</td>
+                <td>KPI</td>
+            </tr>
             </tbody>
         </table>
     </div>
-
+    <div class="container-md">
+        <div class="d-flex">
+            <button class="button-sort" style="color:#fff; margin-top: 5%; margin-left:75%;">
+                Download statistics
+            </button>
+        </div>
+    </div>
     <script>
         function toggleSidebar() {
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');

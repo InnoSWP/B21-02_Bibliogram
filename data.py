@@ -112,6 +112,7 @@ def dicValuesSum(dictionary):
 
 # download data
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
+
 authors = pd.DataFrame(data["authors"])
 authors.set_index("id")
 papers = pd.read_csv("papers_full.csv", index_col="id")

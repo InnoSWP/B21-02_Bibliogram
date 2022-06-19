@@ -49,9 +49,6 @@
                    name="author" id="author">
             <input class="btn btn-success" type="submit" value="Search">
         </form>
-<!--        <button class="find-button" style="margin-top: 45px; margin-left: 205px;">-->
-<!--            Search-->
-<!--        </button>-->
     </div>
 
     <div class="title-results">
@@ -62,68 +59,24 @@
         <table class="table table-striped">
             <tbody>
             {% for i in range(size) %}
-                <tr>
+            <tr>
                 <th scope="row" class="avatar-column">
-                    <a href="/author_id:{{i}}">
-                        <img src="{{ photos[i] }}" alt="Not found" class="round-photo margined-photo">
+                    <a href="/author_id:{{authors.iloc[i]['Id']}}">
+                        <img src={{authors.iloc[i]['Photo_link']}} alt="Not found" class="round-photo margined-photo">
                     </a>
                 </th>
                 <td>
-                    <a href="/author_id:{{i}}" style="text-decoration: none; color: #051742;">
+                    <a href="/author_id:{{authors.iloc[i]['Id']}}" style="text-decoration: none; color: #051742;">
                         <div class="cluster-author">
                             <h2>
-                                <b>{{authors[i]}}</b>
+                                <b>{{ authors.iloc[i]['Name'] }}</b>
                             </h2>
-                            {{affilations[i]}}
+                            {{ authors.iloc[i]['Institution'] }}
                         </div>
                     </a>
                 </td>
             </tr>
             {% endfor %}
-
-<!--            <tr>-->
-<!--                <th scope="row" class="avatar-column">-->
-<!--                    <a href="/author_id:0">-->
-<!--                        <img src="{{ photos[0] }}" alt="Not found" class="round-photo margined-photo">-->
-<!--                    </a>-->
-<!--                </th>-->
-<!--                <td>-->
-<!--                    <a href="/author_id:0" style="text-decoration: none; color: #051742;">-->
-<!--                        <div class="cluster-author">-->
-<!--                            <h2>-->
-<!--                                <b>Manuel Mazzara</b>-->
-<!--                            </h2>-->
-<!--                            Institute of Software Development and Engineering-->
-<!--                        </div>-->
-<!--                    </a>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th scope="row" class="avatar-column">-->
-<!--                    <img src="{{ photos[1] }}" alt="Not found" class="round-photo margined-photo">-->
-<!--                </th>-->
-<!--                <td>-->
-<!--                    <div class="cluster-author">-->
-<!--                        <h2>-->
-<!--                            <b>Giancarlo Succi</b>-->
-<!--                        </h2>-->
-<!--                        Institute of Software Development and Engineering-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th scope="row" class="avatar-column">-->
-<!--                    <img src="{{ photos[2] }}" alt="Not found" class="round-photo margined-photo">-->
-<!--                </th>-->
-<!--                <td>-->
-<!--                    <div class="cluster-author">-->
-<!--                        <h2>-->
-<!--                            <b>Alexander Tormasov</b>-->
-<!--                        </h2>-->
-<!--                        Rector of Innopolis University-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </tr>-->
             </tbody>
         </table>
     </div>
