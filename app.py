@@ -9,20 +9,31 @@ app = Flask(__name__)
 def main_page():
     main_logo = url_for('static', filename='images/dark_logo.png')
     main_title = url_for('static', filename='images/innopolis_title.png')
-    arrow = url_for('static', filename = 'images/arrowDown.jpg')
+    arrow = url_for('static', filename='images/arrow_up.jpg')
+    number1 = url_for('static', filename='images/1.jpg')
+    number2 = url_for('static', filename='images/2.jpg')
+    number3 = url_for('static', filename='images/3.jpg')
+    number4 = url_for('static', filename='images/4.jpg')
     return render_template('base.html', title='Bibliogram',
-                           main_logo=main_logo, main_title=main_title, arrow=arrow)
+                           main_logo=main_logo, main_title=main_title, arrowUp=arrow, number1=number1,
+                           number2=number2,
+                           number3=number3,
+                           number4=number4,
+                           amount_of_publications=data.uni.num_publications,
+                           number_of_researches=data.uni.num_researchers,
+                           pubications_per_person=data.uni.public_per_person,
+                           citations_per_person=data.uni.cit_per_person)
 
 
 @app.route('/aboutIU')
 def about_section():
-    arrowUp = url_for('static', filename='images/arrowUp.jpg')
+    arrowUp = url_for('static', filename='images/arrow_down.jpg')
     return render_template('about_page.html', title='About IU',
                            amount_of_publications=data.uni.num_publications,
                            number_of_researches=data.uni.num_researchers,
                            pubications_per_person=data.uni.public_per_person,
                            citations_per_person=data.uni.cit_per_person,
-                           arrowUp = arrowUp)
+                           arrowUp=arrowUp)
 
 
 @app.route('/features')
@@ -31,13 +42,52 @@ def features_section():
     number2 = url_for('static', filename='images/2.jpg')
     number3 = url_for('static', filename='images/3.jpg')
     number4 = url_for('static', filename='images/4.jpg')
-    arrowUp = url_for('static', filename='images/arrowUp.jpg')
-    arrowDown = url_for('static', filename='images/arrowDown.jpg')
+    arrow_up = url_for('static', filename='images/arrow_up.jpg')
+    arrow_down = url_for('static', filename='images/arrow_down.jpg')
     return render_template('features_page.html', title='What to see here?',
                            number1=number1,
                            number2=number2,
                            number3=number3,
-                           number4=number4, arrowUp=arrowUp, arrowDown=arrowDown)
+                           number4=number4, arrowUp=arrow_up, arrowDown=arrow_down)
+
+
+@app.route('/search')
+def search_author():
+    photos = [url_for('static', filename='images/author_photoholder.jpg'),
+              url_for('static', filename='images/author_photoholder_2.jpg'),
+              url_for('static', filename='images/author_photoholder_1.jpg')]
+    autors = ["Manuel Mazzara", "Giancarlo Succi", "Alexander Tormasov"]
+
+    affilations = ["Institute of Software Development and Engineering",
+                   "Institute of Software Development and Engineering",
+                   "Rector of Innopolis University"]
+    return render_template('search_page.html', title='Search for authors', photos=photos, authors = autors, affilations = affilations,
+                           size = len(autors))
+
+
+@app.route('/author_id:0')
+def author():
+    return render_template('author_page.html')
+
+
+@app.route('/publications')
+def publications():
+    return render_template('publications_page.html')
+
+@app.route('/co-author')
+def co_authors():
+    return render_template('co-author.html')
+
+@app.route('/author_publications')
+def author_publications():
+    return render_template('author_publications.html')
+
+@app.route('/test_public')
+def test_public():
+    main_logo = url_for('static', filename='images/dark_logo.png')
+    main_title = url_for('static', filename='images/innopolis_title.png')
+    return render_template('test_public.html', title='Bibliogram',
+                           main_logo=main_logo, main_title=main_title)
 
 
 if __name__ == '__main__':

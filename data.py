@@ -79,7 +79,7 @@ def refresh():
 
 
 # data parsing
-data = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/data").json()
+data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 authors = data['authors']
 papers = data['papers']
 

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,
+           initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <title>Publications</title>
+</head>
+<body>
+    <div class="panel-delimeter">
+        <button class="openbtn"
+                    onclick="toggleSidebar()" style="margin-top: 50px;">
+                <img src="{{ url_for('static', filename='images/menu.png') }}"
+                    alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
+        </button>
+        <h2 style="margin-top: -100px;">
+            Publications in IU
+        </h2>
+    </div>
+
+    <div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
+        <div>
+            <a href="/" class="light-up">
+                Main menu
+            </a>
+        </div>
+        <div>
+            <a href="/search" class="light-up">
+                Authors
+            </a>
+        </div>
+        <div>
+            <a href="/publications" class="light-up">
+                Publications
+            </a>
+        </div>
+    </div>
+    <div class="container-md">
+        <div class="d-flex">
+            <button class="button-sort" style="color:#fff; margin-top: 5%;">
+                Show parameters
+            </button>
+            <button class="button-sort" style="color:#fff; margin-top: 5%;">
+                Sort by
+            </button>
+            <button class="button-sort" style="color:#fff; margin-top: 5%;">
+                Download statistics
+            </button>
+        </div>
+    </div>
+
+    <div class="container author-catalogue">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Authors</th>
+                <th scope="col">Year</th>
+                <th scope="col">Source</th>
+                <th scope="col">Quartile</th>
+                <th scope="col">DOI</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>Bibliogram team</td>
+                <td>2022</td>
+                <td>Soon here will be content!</td>
+                <td>Q1</td>
+                <td>-//-</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>Bibliogram team</td>
+                <td>2022</td>
+                <td>Soon here will be content!</td>
+                <td>Q1</td>
+                <td>-//-</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>Bibliogram team</td>
+                <td>2022</td>
+                <td>Soon here will be content!</td>
+                <td>Q1</td>
+                <td>-//-</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>Bibliogram team</td>
+                <td>2022</td>
+                <td>Soon here will be content!</td>
+                <td>Q1</td>
+                <td>-//-</td>
+            </tr>
+            <tr>
+                <th scope="row">Nothing to show yet!</th>
+                <td>Bibliogram team</td>
+                <td>2022</td>
+                <td>Soon here will be content!</td>
+                <td>Q1</td>
+                <td>-//-</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
+            document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
+        }
+    </script>
+
+</body>
+</html>

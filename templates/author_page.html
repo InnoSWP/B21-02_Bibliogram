@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,
+           initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <title>Author page</title>
+</head>
+<body>
+<div class="panel-delimeter">
+    <button class="openbtn"
+            onclick="toggleSidebar()" style="margin-top: 50px;">
+        <img src="{{ url_for('static', filename='images/menu.png') }}"
+             alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
+    </button>
+    <h2 style="margin-top: -100px;">
+        Manuel Mazzara
+    </h2>
+</div>
+
+<div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
+    <div>
+        <a href="/" class="light-up">
+            Main menu
+        </a>
+    </div>
+    <div>
+        <a href="/search" class="light-up">
+            Authors
+        </a>
+    </div>
+    <div>
+        <a href="/publications" class="light-up">
+            Publications
+        </a>
+    </div>
+</div>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/author_id:0">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/co-author">Co-authors</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/author_publications">Publications</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled">Secret info</a>
+    </li>
+</ul>
+<!--Wow, such empty! Soon here will be content about author. Now you can go-->
+<!--<a href="/" style="text-decoration: none;  color: #051742; font-size:40px;">-->
+<!--    Back to main page!-->
+<div class="infoAMM">
+    <img src="static/images/author_photoholder.jpg" width="450" height="auto"
+         style="margin-left: 120px; margin-top: 30px;"
+         class="round-photo1">
+</div>
+<div style="font-family:'Open Sans'; margin-left: 120px; margin-top: 25px;
+font-size:25px;" class="infoAMM">
+    <h3>Professor of Innopolis University</h3>
+    <h3>Institute of Software Development and Engineering</h3>
+</div>
+<div class="infoAMM2">
+    <ul type="square" style="font-family:'Open Sans'; margin-left: 120px; margin-top: 25px;
+font-size:25px;">
+        <li>Architecture</li>
+        <li>Microservices</li>
+        <li>Software Dependability</li>
+        <li>Software Engineering</li>
+        <li>Formal Methods</li>
+    </ul>
+</div>
+<div class="infoAMM2">
+    <div class="inline-statistics" style="margin-top: -200px;">
+        <div class="block-info">
+            <h3>
+                <!--            {{ amount_of_publications }}-->
+            181
+            </h3>
+            <h4 style="margin-top:20px; margin-left: 50px;">
+                Amount of publications
+            </h4>
+        </div>
+        <div class="block-info">
+            <h3>
+                1728
+            </h3>
+            <h4 style="margin-top:20px; margin-left:55px;">
+                Number of citations
+            </h4>
+        </div>
+        <div class="block-info">
+            <h3>
+                20
+            </h3>
+            <h4 style="margin-top:44px;">
+                H-index
+            </h4>
+        </div>
+        <div class="block-info">
+            <h3>
+                2004
+            </h3>
+            <h4 style="margin-left: 45px; width: 150px; margin-top:20px;">
+                Research beginning year
+            </h4>
+        </div>
+    </div>
+</div>
+</a>
+
+<script>
+        function toggleSidebar() {
+            document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
+            document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
+        }
+
+
+
+
+
+
+</script>
+</body>
+</html>
