@@ -3,6 +3,8 @@ import requests
 from datetime import datetime
 import pandas as pd
 
+# password for user update
+password = "IU"
 
 # authors from IU
 class Author:
@@ -78,6 +80,12 @@ def refresh():
         status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
     return status
 
+# update remote DB by user
+def update(input):
+    status = "denied"
+    if (password == input):
+        status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
+    return status
 
 # gg
 def strToInt(string):
