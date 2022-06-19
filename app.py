@@ -67,6 +67,8 @@ def author():
 
 @app.route('/publications')
 def publications():
+
+    # dataframe modification for further displaying
     papers = data.papers.rename(columns=lambda x: x[0].upper()+x[1:])
     papers.rename(columns={"Publication_date": "Publication Date",
                            "Doi": "DOI",
@@ -75,10 +77,14 @@ def publications():
                            "Source_quartile": "Quartile",
                            "Authors_affils": "Authors Affiliation"}, inplace=True)
     papers["Authors"] = papers["Authors Affiliation"].apply(lambda x: eval(x).keys())
-    papers["Authors"] = papers["Authors"].apply(lambda x: "\n".join(x))
+    papers["Authors"] = papers["Authors"].apply(lambda x: ",\n".join(x))
     papers["Affiliation"] = papers["Authors Affiliation"].apply(lambda x: eval(x).values())
-    #papers["Affiliation"] = papers["Affiliation"].apply(lambda x: i for i in itertools.chain.from_iterable(x))
+    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: set(sum(x, list())))
+    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: ", ".join(x))
     papers.drop(columns="Authors Affiliation", inplace=True)
+    papers = papers.reindex(columns=["Title", "Source Type", "Work Type", "Publisher", "Publication Date",
+                            "Authors", "Affiliation", "Quartile", "Citations", "DOI"])
+
     return render_template('publications_page.html', papers=papers)
 
 
