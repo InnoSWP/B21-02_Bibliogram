@@ -61,12 +61,12 @@
             {% for i in range(authors.shape[0]) %}
             <tr>
                 <th scope="row" class="avatar-column">
-                    <a href="/author_id:{{authors.iloc[i]['Id']}}">
+                    <a href="/author_id={{authors.iloc[i]['Id']}}">
                         <img src={{authors.iloc[i]['Photo_link']}} alt="Not found" class="round-photo margined-photo">
                     </a>
                 </th>
                 <td>
-                    <a href="/author_id:{{authors.iloc[i]['Id']}}" style="text-decoration: none; color: #051742;">
+                    <a href="/author_id={{authors.iloc[i]['Id']}}" style="text-decoration: none; color: #051742;">
                         <div class="cluster-author">
                             <h2>
                                 <b>{{ authors.iloc[i]['Name'] }}</b>

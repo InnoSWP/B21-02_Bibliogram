@@ -64,9 +64,12 @@ def search_author():
     return render_template('search_page.html', title='Search for authors', authors=authors)
 
 
-@app.route('/author_id:0')
-def author():
-    return render_template('author_page.html')
+@app.route('/author_id=<int:id>')
+def author(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+    return render_template('author_page.html', author=author_data, id=id)
 
 
 @app.route('/publications')
@@ -91,13 +94,16 @@ def publications():
 
     return render_template('publications_page.html', papers=papers)
 
+
 @app.route('/co-author')
 def co_authors():
     return render_template('co-author.html')
 
+
 @app.route('/author_publications')
 def author_publications():
     return render_template('author_publications.html')
+
 
 @app.route('/test_public')
 def test_public():

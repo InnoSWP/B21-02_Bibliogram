@@ -114,7 +114,6 @@ def dicValuesSum(dictionary):
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 
 authors = pd.DataFrame(data["authors"])
-authors.set_index("id")
 papers = pd.read_csv("papers_full.csv", index_col="id")
 
 # dataframes modification
@@ -123,6 +122,8 @@ authors["hirsch_ind"] = authors["hirsch_ind"].apply(strToInt)
 authors["citations"] = authors["citations"].apply(dicToInt)
 authors["papers_published"] = authors["papers_published"].apply(dicToInt)
 authors["paper_id"] = authors["paper_id"].apply(listToInt)
+authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
+authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
 
 papers["source_quartile"] = papers["source_quartile"].apply(strToInt)
 papers["citations"] = papers["citations"].apply(dicValuesSum)
