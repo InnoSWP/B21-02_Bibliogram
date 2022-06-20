@@ -76,7 +76,7 @@ def refresh():
     seconds = datetime.now().timetuple().tm_sec
     weekday = datetime.today().isoweekday()
     status = "denied"
-    if (weekday == 4 and hours == 3 and minutes == 0 and seconds == 0):
+    if weekday == 4 and hours == 3 and minutes == 0 and seconds == 0:
         status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
     return status
 
@@ -87,56 +87,55 @@ def update(input):
         status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
     return status
 
-# gg
+# convert String to Integer
 def str_to_int(string):
     return int(string)
 
-
-# wp
+# convert String keys to Integer keys in dictionary
 def dic_to_int(dictionary):
     for key in dictionary.keys():
         dictionary[key] = int(dictionary.get(key))
     return dictionary
 
 
-# wp
-def dic_to_int_sum(dictionary):
+# convert String elements to Integer elements in list
+def list_to_int(list):
+    return map(int, list)
+
+
+# count sum of all dictionary values
+def dic_values_sum(dictionary):
     df = eval(dictionary)
     return sum(map(int, df.values()))
 
 
-# wp
-def list_to_int(list):
-    for val in list:
-        list[val] = int(val)
-    return list
-
-
-# data parsing
+# download data
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 
 authors = pd.DataFrame(data["authors"])
-authors.set_index("id")
 papers = pd.read_csv("papers_full.csv", index_col="id")
 
 
+# dataframes modification
 authors["overall_citation"] = authors["overall_citation"].apply(str_to_int)
 authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
 authors["citations"] = authors["citations"].apply(dic_to_int)
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 authors["paper_id"] = authors["paper_id"].apply(list_to_int)
-
+authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
+authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
 
 papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
-papers["citations"] = papers["citations"].apply(dic_to_int_sum)
+papers["citations"] = papers["citations"].apply(dic_values_sum)
+
 
 
 # get statistics of IU
 uni = University()
-uni.num_researchers = len(authors)
-uni.num_publications = len(papers)
+uni.num_researchers = authors.shape[0]
+uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
-uni.cit_per_person = authors['overall_citation'].sum()
-uni.cit_per_person /= uni.num_researchers
+uni.cit_per_person = authors['overall_citation'].sum() / uni.num_researchers
+
 
 # write(data, 'data_output.json')

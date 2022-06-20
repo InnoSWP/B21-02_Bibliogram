@@ -21,7 +21,7 @@
              alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
     </button>
     <h2 style="margin-top: -100px;">
-        Manuel Mazzara
+        {{ author["name"] }}
     </h2>
 </div>
 
@@ -44,13 +44,13 @@
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/author_id:0">Profile</a>
+        <a class="nav-link active" aria-current="page" href="/author_id={{id}}">Profile</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/co-author">Co-authors</a>
+        <a class="nav-link" href="/co-author={{id}}">Co-authors</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/author_publications">Publications</a>
+        <a class="nav-link" href="/author_publications={{id}}">Publications</a>
     </li>
     <li class="nav-item">
         <a class="nav-link disabled">Secret info</a>
@@ -60,31 +60,28 @@
 <!--<a href="/" style="text-decoration: none;  color: #051742; font-size:40px;">-->
 <!--    Back to main page!-->
 <div class="infoAMM">
-    <img src="static/images/author_photoholder.jpg" width="450" height="auto"
+    <img src={{author["photo_link"]}} width="450" height="auto"
          style="margin-left: 120px; margin-top: 30px;"
          class="round-photo1">
 </div>
 <div style="font-family:'Open Sans'; margin-left: 120px; margin-top: 25px;
 font-size:25px;" class="infoAMM">
-    <h3>Professor of Innopolis University</h3>
-    <h3>Institute of Software Development and Engineering</h3>
+    <h3>Professor of {{ author["institution"] }}</h3>
+    <h3>{{ author["department"] }}</h3>
 </div>
 <div class="infoAMM2">
     <ul type="square" style="font-family:'Open Sans'; margin-left: 120px; margin-top: 25px;
 font-size:25px;">
-        <li>Architecture</li>
-        <li>Microservices</li>
-        <li>Software Dependability</li>
-        <li>Software Engineering</li>
-        <li>Formal Methods</li>
+        {% for discipline in author["disciplines"] %}
+        <li>{{ discipline }}</li>
+        {% endfor %}
     </ul>
 </div>
 <div class="infoAMM2">
     <div class="inline-statistics" style="margin-top: -200px;">
         <div class="block-info">
             <h3>
-                <!--            {{ amount_of_publications }}-->
-            181
+                {{ author["papers_number"] }}
             </h3>
             <h4 style="margin-top:20px; margin-left: 50px;">
                 Amount of publications
@@ -92,7 +89,7 @@ font-size:25px;">
         </div>
         <div class="block-info">
             <h3>
-                1728
+                {{ author["overall_citation"] }}
             </h3>
             <h4 style="margin-top:20px; margin-left:55px;">
                 Number of citations
@@ -100,7 +97,7 @@ font-size:25px;">
         </div>
         <div class="block-info">
             <h3>
-                20
+                {{ author["hirsch_ind"] }}
             </h3>
             <h4 style="margin-top:44px;">
                 H-index
@@ -108,7 +105,7 @@ font-size:25px;">
         </div>
         <div class="block-info">
             <h3>
-                2004
+                {{ author["start_date"] }}
             </h3>
             <h4 style="margin-left: 45px; width: 150px; margin-top:20px;">
                 Research beginning year
@@ -123,11 +120,6 @@ font-size:25px;">
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
-
-
-
-
-
 
 </script>
 </body>

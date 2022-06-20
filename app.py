@@ -1,4 +1,3 @@
-import itertools
 import data
 from flask import Flask, render_template, url_for, request
 
@@ -54,29 +53,29 @@ def features_section():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search_author():
-    photos = [url_for('static', filename='images/author_photoholder.jpg'),
-              url_for('static', filename='images/author_photoholder_2.jpg'),
-              url_for('static', filename='images/author_photoholder_1.jpg')]
-    autors = ["Manuel Mazzara", "Giancarlo Succi", "Alexander Tormasov"]
 
-    affilations = ["Institute of Software Development and Engineering",
-                   "Institute of Software Development and Engineering",
-                   "Rector of Innopolis University"]
+    authors = data.authors.rename(columns=lambda x: x[0].upper()+x[1:])
 
     if request.method == 'POST':
         author_name = request.form['author']
-        print(author_name)
-    return render_template('search_page.html', title='Search for authors', photos=photos, authors = autors, affilations = affilations,
-                           size = len(autors))
+        filt = authors["Name"].str.contains(author_name)
+        authors = authors.loc[filt]
+
+    return render_template('search_page.html', title='Search for authors', authors=authors)
 
 
-@app.route('/author_id:0')
-def author():
-    return render_template('author_page.html')
+@app.route('/author_id=<int:id>')
+def author(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+    return render_template('author_page.html', author=author_data, id=id)
 
 
 @app.route('/publications')
 def publications():
+
+    # dataframe modification for further displaying
     papers = data.papers.rename(columns=lambda x: x[0].upper()+x[1:])
     papers.rename(columns={"Publication_date": "Publication Date",
                            "Doi": "DOI",
@@ -85,19 +84,34 @@ def publications():
                            "Source_quartile": "Quartile",
                            "Authors_affils": "Authors Affiliation"}, inplace=True)
     papers["Authors"] = papers["Authors Affiliation"].apply(lambda x: eval(x).keys())
-    papers["Authors"] = papers["Authors"].apply(lambda x: "\n".join(x))
+    papers["Authors"] = papers["Authors"].apply(lambda x: ",\n".join(x))
     papers["Affiliation"] = papers["Authors Affiliation"].apply(lambda x: eval(x).values())
-    #papers["Affiliation"] = papers["Affiliation"].apply(lambda x: i for i in itertools.chain.from_iterable(x))
+    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: set(sum(x, list())))
+    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: ", ".join(x))
     papers.drop(columns="Authors Affiliation", inplace=True)
+    papers = papers.reindex(columns=["Title", "Source Type", "Work Type", "Publisher", "Publication Date",
+                            "Authors", "Affiliation", "Quartile", "Citations", "DOI"])
+
     return render_template('publications_page.html', papers=papers)
 
-@app.route('/co-author')
-def co_authors():
-    return render_template('co-author.html')
 
-@app.route('/author_publications')
-def author_publications():
-    return render_template('author_publications.html')
+@app.route('/co-author=<int:id>')
+def co_authors(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+
+    return render_template('co-author.html', author=author_data, id=id, papers=data.papers)
+
+
+@app.route('/author_publications=<int:id>')
+def author_publications(id):
+
+    author_data = data.authors.set_index("id")
+    author_data = author_data.loc[id]
+
+    return render_template('author_publications.html', author=author_data, id=id, papers=data.papers)
+
 
 @app.route('/test_public')
 def test_public():
