@@ -58,7 +58,7 @@ def search_author():
 
     if request.method == 'POST':
         author_name = request.form['author']
-        filt = authors["Name"].str.contains(author_name)
+        filt = authors["Name"].apply(lambda x: x.lower()).str.contains(author_name.lower())
         authors = authors.loc[filt]
 
     return render_template('search_page.html', title='Search for authors', authors=authors)
