@@ -44,11 +44,12 @@
 </div>
 <div class="container-md">
     <div class="d-flex">
-        <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#parameters"
                 style="color:#fff; margin-top: 5%;">
             Show parameters
         </button>
-        <button class="button-sort" style="color:#fff; margin-top: 5%;">
+        <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#sortByModal"
+                style="color:#fff; margin-top: 5%;">
             Sort by
         </button>
         <button class="button-sort" style="color:#fff; margin-top: 5%;">
@@ -56,64 +57,122 @@
         </button>
     </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="parameters" tabindex="-1" aria-labelledby="parametersLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">What parameters to show?</h5>
+                <h5 class="modal-title" id="parametersLabel">What parameters to show?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_source" name="show_source"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_source">Source type</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_date" name="show_date"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_date">Publication date</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_affiliation" name="show_affiliation"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_affiliation">Affiliation</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_quartile" name="show_quartile"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_quartile">Quartile</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_citations" name="show_citations"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_citations">Citations count</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_doi" name="show_doi"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_doi">DOI</label>
                 </div>
 
-                <div class="form-check form-switch" style="margin-left: 12px;">
+                <div class="form-check form-switch" style="margin-left: 36px;">
                     <input class="form-check-input" type="checkbox" role="switch" id="show_areas" name="show_areas"
                     disabled>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_areas">Subject Areas</label>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary">
                     <a href="/publications" style="text-decoration: none; color: #fff">
                         Apply
                     </a>
                 </button>
-                <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="sortByModal" tabindex="-1" aria-labelledby="sortByModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sortByModalLabel">Sort by</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_source" value="sortOption1" name="radioSortBy"
+                           checked>
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_source">Source type</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_date" value="sortOption2" name="radioSortBy"
+                    checked>
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_date">Publication date</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_affiliation" value="sortOption3" name="radioSortBy">
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_affiliation">Affiliation</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_quartile" value="sortOption4" name="radioSortBy">
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_quartile">Quartile</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_citations" value="sortOption5" name="radioSortBy">
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_citations">Citations count</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_doi" value="sortOption6" name="radioSortBy">
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_doi">DOI</label>
+                </div>
+
+                <div class="form-check" style="margin-left: 36px;">
+                    <input class="form-check-input" type="radio" id="sort_by_areas" value="sortOption7" name="radioSortBy"
+                    disabled>
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_areas">Subject Areas</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">
+                    <a href="/publications" style="text-decoration: none; color: #fff">
+                        Sort
+                    </a>
+                </button>
             </div>
         </div>
     </div>
