@@ -88,24 +88,23 @@ def update(input):
     return status
 
 # convert String to Integer
-def strToInt(string):
+def str_to_int(string):
     return int(string)
 
-
 # convert String keys to Integer keys in dictionary
-def dicToInt(dictionary):
+def dic_to_int(dictionary):
     for key in dictionary.keys():
         dictionary[key] = int(dictionary.get(key))
     return dictionary
 
 
 # convert String elements to Integer elements in list
-def listToInt(list):
+def list_to_int(list):
     return map(int, list)
 
 
 # count sum of all dictionary values
-def dicValuesSum(dictionary):
+def dic_values_sum(dictionary):
     df = eval(dictionary)
     return sum(map(int, df.values()))
 
@@ -116,17 +115,19 @@ data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/
 authors = pd.DataFrame(data["authors"])
 papers = pd.read_csv("papers_full.csv", index_col="id")
 
+
 # dataframes modification
-authors["overall_citation"] = authors["overall_citation"].apply(strToInt)
-authors["hirsch_ind"] = authors["hirsch_ind"].apply(strToInt)
-authors["citations"] = authors["citations"].apply(dicToInt)
-authors["papers_published"] = authors["papers_published"].apply(dicToInt)
-authors["paper_id"] = authors["paper_id"].apply(listToInt)
+authors["overall_citation"] = authors["overall_citation"].apply(str_to_int)
+authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
+authors["citations"] = authors["citations"].apply(dic_to_int)
+authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
+authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
 authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
 
-papers["source_quartile"] = papers["source_quartile"].apply(strToInt)
-papers["citations"] = papers["citations"].apply(dicValuesSum)
+papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
+papers["citations"] = papers["citations"].apply(dic_values_sum)
+
 
 
 # get statistics of IU
