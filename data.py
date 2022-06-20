@@ -88,25 +88,25 @@ def update(input):
     return status
 
 # gg
-def strToInt(string):
+def str_to_int(string):
     return int(string)
 
 
 # wp
-def dicToInt(dictionary):
+def dic_to_int(dictionary):
     for key in dictionary.keys():
         dictionary[key] = int(dictionary.get(key))
     return dictionary
 
 
 # wp
-def dicToIntSum(dictionary):
+def dic_to_int_sum(dictionary):
     df = eval(dictionary)
     return sum(map(int, df.values()))
 
 
 # wp
-def listToInt(list):
+def list_to_int(list):
     for val in list:
         list[val] = int(val)
     return list
@@ -120,15 +120,15 @@ authors.set_index("id")
 papers = pd.read_csv("papers_full.csv", index_col="id")
 
 
-authors["overall_citation"] = authors["overall_citation"].apply(strToInt)
-authors["hirsch_ind"] = authors["hirsch_ind"].apply(strToInt)
-authors["citations"] = authors["citations"].apply(dicToInt)
-authors["papers_published"] = authors["papers_published"].apply(dicToInt)
-authors["paper_id"] = authors["paper_id"].apply(listToInt)
+authors["overall_citation"] = authors["overall_citation"].apply(str_to_int)
+authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
+authors["citations"] = authors["citations"].apply(dic_to_int)
+authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
+authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 
 
-papers["source_quartile"] = papers["source_quartile"].apply(strToInt)
-papers["citations"] = papers["citations"].apply(dicToIntSum)
+papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
+papers["citations"] = papers["citations"].apply(dic_to_int_sum)
 
 
 # get statistics of IU
