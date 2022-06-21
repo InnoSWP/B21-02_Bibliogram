@@ -20,7 +20,7 @@ def main_page():
                            number4=number4,
                            amount_of_publications=data.uni.num_publications,
                            number_of_researches=data.uni.num_researchers,
-                           pubications_per_person=data.uni.public_per_person,
+                           publications_per_person=data.uni.public_per_person,
                            citations_per_person=data.uni.cit_per_person)
 
 
