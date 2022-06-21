@@ -86,7 +86,7 @@ def publications():
         if "checkbox" in request.form:
             data.filters = sum([["Title"], ["Authors"], request.form.getlist('show')], list())
 
-            if not data.sorting in data.filters:
+            if data.sorting not in data.filters:
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
@@ -94,7 +94,7 @@ def publications():
         elif "radio" in request.form:
             data.sorting = request.form["sort"]
 
-            if not data.sorting in data.filters:
+            if data.sorting not in data.filters:
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
