@@ -48,92 +48,112 @@
     </h2>
 </div>
 
-<div class="inline-statistics">
-    <div class="blank-pad"></div>
-    <div class="block-info">
-        <h3>
-            <img src="{{ number1 }}" alt="Logo not found" class="round logo" style="width: 300px; height: auto;">
-        </h3>
-        <h4 style="margin-left:5px;">
-            Monitor the progress of the IU in the research activities
-        </h4>
+<div class="container-xl row justify-content-center">
+        <table class="table table-bordered features-table">
+            <tbody>
+            <tr>
+                <th style="width: 50%">
+                    <img src="{{ number1 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                </th>
+                <th style="width: 50%">
+                    <img src="{{ number2 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                </th>
+            </tr>
+            <tr>
+                <th style="width: 50%">
+                    <h4 class="table-label-header">
+                        Monitor the progress of the IU in the research activities
+                    </h4>
+                </th>
+                <th style="width: 50%">
+                    <h4 class="table-label-header">
+                        Explore the statistics of the Innopolis University
+                    </h4>
+                </th>
+            </tr>
+            <tr>
+                <th style="width: 50%">
+                    <img src="{{ number3 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                </th>
+                <th style="width: 50%">
+                    <img src="{{ number4 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                </th>
+            </tr>
+            <tr>
+                <th style="width: 50%">
+                    <h4 class="table-label-header">
+                        Explore the statistics of a particular researcher
+                    </h4>
+                </th>
+                <th style="width: 50%">
+                    <h4 class="table-label-header">
+                        Explore the information about publications
+                    </h4>
+                </th>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="block-info">
-        <h3 style="margin-top:-10px;">
-            <div style="margin-top:-10px;">
-            <img src="{{ number2 }}" alt="Logo not found" class="round logo" style="width: 300px; height: auto;">
-                </div>
-        </h3>
-        <h4 style="margin-left:5px; margin-top: 10px;">
-            Explore the statistics of the Innopolis University
-        </h4>
-    </div>
-    <div></div>
-    <div class="block-info1">
-        <h3>
-            <img src="{{ number3 }}" alt="Logo not found" class="round logo" style="width: 300px; height: auto; margin-left:5px;">
-        </h3>
-        <h4 style="margin-left:-5px;">
-            Explore the statistics of a particular researcher
-        </h4>
-    </div>
-    <div class="block-info1">
-        <h3>
-             <div style="margin-top:-10px;">
-            <img src="{{ number4 }}" alt="Logo not found" class="round logo" style="width: 300px; height: auto;">
-                 </div>
-        </h3>
-        <h4 style="margin-left:-10px;">
-            Explore the information about publications
-        </h4>
-    </div>
-</div>
-<div class="arrow" id="scroll-to-top">
-    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right"></a>
-</div>
 
-
-<div class="panel-delimeter" style="margin-top: -50px;">
+<div class="panel-delimeter" style="margin-top: 0px;">
     <h2>
         Innopolis University
     </h2>
 </div>
 
-<div class="inline-statistics" id="bottom-block">
-    <div class="blank-pad"></div>
-    <div class="block-info">
-        <h3>
-            {{ amount_of_publications }}
-        </h3>
-        <h4 style="margin-left: -4px;">
-            Amount of publications
-        </h4>
-    </div>
-    <div class="block-info">
-        <h3>
-            {{ number_of_researches }}
-        </h3>
-        <h4>
-            Number of researchers
-        </h4>
-    </div>
-    <div></div>
-    <div class="block-info1">
-        <h3 style="margin-left: 35px;">
-            {{ pubications_per_person }}
-        </h3>
-        <h4 style="margin-left: 0px;">
-            Publications per person
-        </h4>
-    </div>
-    <div class="block-info1">
-        <h3 style="margin-left: 100px;">
-            {{ citations_per_person }}
-        </h3>
-        <h4 style="margin-left: 150px;">
-            Citations per person
-        </h4>
-    </div>
+<div class="container-xl row justify-content-center">
+    <table class="table table-bordered features-table">
+        <tbody>
+        <tr>
+            <th style="width: 50%">
+                <h2 class="table-label-numbers">
+                    {{ amount_of_publications }}
+                </h2>
+            </th>
+            <th style="width: 50%">
+                <h2 class="table-label-numbers">
+                    {{ number_of_researches }}
+                </h2>
+            </th>
+        </tr>
+        <tr>
+            <th style="width: 50%">
+                <h4 class="table-label-header">
+                    Amount of publications
+                </h4>
+            </th>
+            <th style="width: 50%">
+                <h4 class="table-label-header">
+                    Number of researchers
+                </h4>
+            </th>
+        </tr>
+        <tr>
+            <th style="width: 50%">
+                <h2 class="table-label-numbers">
+                    {{ publications_per_person }}
+                </h2>
+            </th>
+            <th style="width: 50%">
+                <h2 class="table-label-numbers">
+                    {{ citations_per_person }}
+                </h2>
+            </th>
+        </tr>
+        <tr>
+            <th style="width: 50%">
+                <h4 class="table-label-header">
+                    Publications per person
+                </h4>
+            </th>
+            <th style="width: 50%">
+                <h4 class="table-label-header">
+                    Citations per person
+                </h4>
+            </th>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script type="text/javascript">
