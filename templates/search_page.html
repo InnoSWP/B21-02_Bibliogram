@@ -43,14 +43,19 @@
     </div>
 </div>
 
-<div class="container-md">
-    <form class="d-flex search-bar" role="search" method="post">
-        <input class="form-control" type="text"
-               placeholder="Enter the name of the researcher" aria-label="Search"
-               name="author" id="author">
-        <input class="btn btn-success" type="submit" value="Search">
-    </form>
-</div>
+<form method="post">
+    <div class="container-md">
+        <div class="d-flex search-bar">
+            <input class="form-control" type="text"
+                   placeholder="Enter the name of the researcher" aria-label="Search"
+                   name="author" id="author">
+            <button type="submit" class="btn btn-success" style="color:#fff">
+                Search
+            </button>
+        </div>
+    </div>
+</form>
+
 
 <div class="title-results">
     <strong>Search results</strong>
