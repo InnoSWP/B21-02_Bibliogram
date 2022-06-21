@@ -31,7 +31,7 @@
             <a href="/search" class="light-up">Authors</a>
         </li>
         <li>
-            <a href="/aboutIU" class="light-up">About IU</a>
+            <a href="#bottom-block" class="light-up">About IU</a>
         </li>
     </ul>
 
@@ -89,7 +89,7 @@
     </div>
 </div>
 <div class="arrow" id="scroll-to-top">
-    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right">
+    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right"></a>
 </div>
 
 
@@ -99,7 +99,7 @@
     </h2>
 </div>
 
-<div class="inline-statistics">
+<div class="inline-statistics" id="bottom-block">
     <div class="blank-pad"></div>
     <div class="block-info">
         <h3>
@@ -136,17 +136,16 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
           $(function() {
               $(window).scroll(function() {
                   if($(this).scrollTop() != 0) {
-                    $('#scrollToTheTop').fadeIn();
+                    $('#scroll-to-top').fadeIn();
                   } else {
-                    $('#scrollToTheTop').fadeOut();
+                    $('#scroll-to-top').fadeOut();
                   }
               });
-              $('#scrollToTheTop').click(function() {
+              $('#scroll-to-top').click(function() {
                   $('body,html').animate({scrollTop:0},700);
               });
           });
