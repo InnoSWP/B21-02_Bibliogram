@@ -5,7 +5,7 @@ body {
   overflow-x: hidden;
 }
 
-.main_logo_title img {
+.main-logo-title img {
   max-width: 20%;
   max-height: auto;
 }
@@ -41,7 +41,7 @@ body {
   text-decoration: none;
   color: #fff;
   font-size: 24px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   padding: 7px 15px;
 }
@@ -58,7 +58,7 @@ body {
 
 .main-text-page h1 {
   font-size: 72px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #fff;
   margin-left: 120px;
@@ -70,23 +70,17 @@ body {
   width: auto;
 }
 
-#object-position-1 {
-  margin-top: 200px;
-}
-
-
 .panel-delimeter {
   height: 160px;
-  background-image: url(../images/panel2.png);
+  background-image: url("../images/panel2.png");
   background-size: 100%;
   background-position: center;
-  margin: 330px -10px -10px -10px;
-
+  margin: 330px -10px -10px;
 }
 
 .panel-delimeter h2 {
   font-size: 64px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   box-sizing: border-box;
   padding-top: 30px;
@@ -113,7 +107,7 @@ body {
   text-align: center;
   display: inline-block;
   font-size: 100px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;
   margin-left: 35%;
@@ -128,7 +122,7 @@ body {
   height: 100px;
   font-size: 20px;
   margin-top: 5px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;
 }
@@ -144,7 +138,7 @@ body {
   text-align: center;
   display: inline-block;
   font-size: 100px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;
   margin-left: 25%;
@@ -159,21 +153,16 @@ body {
   margin-top: 5px;
   height: 100px;
   font-size: 20px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;
-}
-
-.arrow {
-  height: 70px;
-  width: auto;
 }
 
 #scroll-to-top {
   position: fixed;
   right: 45px;
   bottom: 45px;
-  }
+}
 
 #object-position-1 {
   margin-top: -11.5%;
