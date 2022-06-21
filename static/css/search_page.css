@@ -137,6 +137,7 @@ a{
     width: 100px;
     height: 100px;
 }
+
 .round-photo1{
     border-radius: 50%;
     width: 250px;
@@ -185,8 +186,6 @@ a{
     display: inline-block;
 }
 
-
-
 .inline-statistics{
     display: inline-block;
 }
@@ -222,4 +221,11 @@ a{
     font-family: 'Open Sans';
     font-style: normal;
     color:#004;
+}
+
+label{
+    color: #003;
+    font-family: 'Open Sans';
+    text-decoration: none;
+    font-size: 24px;
 }
