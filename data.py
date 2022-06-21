@@ -6,6 +6,7 @@ import pandas as pd
 # password for user update
 password = "IU"
 
+
 # authors from IU
 class Author:
     id: int
@@ -80,6 +81,7 @@ def refresh():
         status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
     return status
 
+
 # update remote DB by user
 def update(input):
     status = "denied"
@@ -87,9 +89,11 @@ def update(input):
         status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
     return status
 
+
 # convert String to Integer
 def str_to_int(string):
     return int(string)
+
 
 # convert String keys to Integer keys in dictionary
 def dic_to_int(dictionary):
@@ -113,8 +117,7 @@ def dic_values_sum(dictionary):
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 
 authors = pd.DataFrame(data["authors"])
-papers = pd.read_csv("papers_full.csv", index_col="id")
-
+papers = pd.read_csv("papers_v1.csv", index_col="id")
 
 # dataframes modification
 authors["overall_citation"] = authors["overall_citation"].apply(str_to_int)
@@ -129,6 +132,27 @@ papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 
+sorting = ""
+filters = []
+page_name = ""
+publications = papers
+publications = publications.rename(columns=lambda x: x[0].upper() + x[1:])
+publications.rename(columns={"Publication_date": "Publication Date",
+                             "Doi": "DOI",
+                             "Source_type": "Source Type",
+                             "Work_type": "Work Type",
+                             "Source_quartile": "Quartile",
+                             "Authors_affils": "Authors Affiliation"}, inplace=True)
+publications["Authors"] = publications["Authors Affiliation"].apply(lambda x: eval(x).keys())
+publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+publications["Affiliation"] = publications["Authors Affiliation"].apply(lambda x: eval(x).values())
+publications["Affiliation"] = publications["Affiliation"].apply(lambda x: set(sum(x, list())))
+publications["Affiliation"] = publications["Affiliation"].apply(lambda x: ", ".join(x))
+publications.drop(columns="Authors Affiliation", inplace=True)
+publications = publications.reindex(columns=["Title", "Source Type", "Work Type", "Publisher",
+                                             "Publication Date", "Authors", "Affiliation",
+                                             "Quartile", "Citations", "DOI"])
+
 
 # get statistics of IU
 uni = University()
@@ -136,6 +160,5 @@ uni.num_researchers = authors.shape[0]
 uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors['overall_citation'].sum() / uni.num_researchers
-
 
 # write(data, 'data_output.json')

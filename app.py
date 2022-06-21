@@ -1,7 +1,6 @@
 import data
 from flask import Flask, render_template, url_for, request
 
-
 app = Flask(__name__)
 
 
@@ -53,8 +52,7 @@ def features_section():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search_author():
-
-    authors = data.authors.rename(columns=lambda x: x[0].upper()+x[1:])
+    authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
 
     if request.method == 'POST':
         author_name = request.form['author']
@@ -66,38 +64,46 @@ def search_author():
 
 @app.route('/author_id=<int:id>')
 def author(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
     return render_template('author_page.html', author=author_data, id=id)
 
 
-@app.route('/publications')
+@app.route('/publications', methods=['POST', 'GET'])
 def publications():
 
     # dataframe modification for further displaying
-    papers = data.papers.rename(columns=lambda x: x[0].upper()+x[1:])
-    papers.rename(columns={"Publication_date": "Publication Date",
-                           "Doi": "DOI",
-                           "Source_type": "Source Type",
-                           "Work_type": "Work Type",
-                           "Source_quartile": "Quartile",
-                           "Authors_affils": "Authors Affiliation"}, inplace=True)
-    papers["Authors"] = papers["Authors Affiliation"].apply(lambda x: eval(x).keys())
-    papers["Authors"] = papers["Authors"].apply(lambda x: ",\n".join(x))
-    papers["Affiliation"] = papers["Authors Affiliation"].apply(lambda x: eval(x).values())
-    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: set(sum(x, list())))
-    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: ", ".join(x))
-    papers.drop(columns="Authors Affiliation", inplace=True)
-    papers = papers.reindex(columns=["Title", "Source Type", "Work Type", "Publisher", "Publication Date",
-                            "Authors", "Affiliation", "Quartile", "Citations", "DOI"])
+    if data.page_name != "general_publications":
+        data.page_name = "general_publications"
+        data.sorting = "Title"
+        data.filters = ["Title", "Source Type", "Work Type", "Publisher",
+                        "Publication Date", "Authors", "Affiliation",
+                        "Quartile", "Citations", "DOI"]
+
+    papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+    if request.method == 'POST':
+        if "checkbox" in request.form:
+            data.filters = sum([["Title"], ["Authors"], request.form.getlist('show')], list())
+
+            if not data.sorting in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+        elif "radio" in request.form:
+            data.sorting = request.form["sort"]
+
+            if not data.sorting in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template('publications_page.html', papers=papers)
 
 
 @app.route('/co-author=<int:id>')
 def co_authors(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
@@ -106,7 +112,6 @@ def co_authors(id):
 
 @app.route('/author_publications=<int:id>')
 def author_publications(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
