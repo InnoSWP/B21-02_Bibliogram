@@ -8,47 +8,47 @@ password = "IU"
 
 
 # authors from IU
-class Author:
-    id: int
-    name: str
-    photo_link: str
-    overall_citation: int
-    citations: {}
-    papers_published: {}
-    institution: str
-    department: str
-    hirsch_ind: int
-    disciplines: []
-    papers_id: []
-
-    def __init__(self, author):
-        self.id = author.id
-        self.name = author.name
-        self.photo_link = author.photo_link
-        self.overall_citation = author.overall_citation
-        self.citations = author.citations
-        self.papers_published = author.papers_published
-        self.institution = author.institution
-        self.department = author.department
-        self.hirsch_ind = author.hirsch_ind
-        self.disciplines = author.disciplines
-        self.papers_id = author.paper_id  # name of class object differs from name of JSON object
-
-
-# papers published in IU
-class Paper:
-    id: int
-    title: str
-    publication_year: int
-    authors_id: []
-    citations: {}
-
-    def __init__(self, paper):
-        self.id = paper.id
-        self.title = paper.title
-        self.publication_year = paper.publication_year
-        self.authors_id = paper.authors  # name of class object differs from name of JSON object
-        self.citations = paper.citations
+# class Author:
+#     id: int
+#     name: str
+#     photo_link: str
+#     overall_citation: int
+#     citations: {}
+#     papers_published: {}
+#     institution: str
+#     department: str
+#     hirsch_ind: int
+#     disciplines: []
+#     papers_id: []
+#
+#     def __init__(self, author):
+#         self.id = author.id
+#         self.name = author.name
+#         self.photo_link = author.photo_link
+#         self.overall_citation = author.overall_citation
+#         self.citations = author.citations
+#         self.papers_published = author.papers_published
+#         self.institution = author.institution
+#         self.department = author.department
+#         self.hirsch_ind = author.hirsch_ind
+#         self.disciplines = author.disciplines
+#         self.papers_id = author.paper_id  # name of class object differs from name of JSON object
+#
+#
+# # papers published in IU
+# class Paper:
+#     id: int
+#     title: str
+#     publication_year: int
+#     authors_id: []
+#     citations: {}
+#
+#     def __init__(self, paper):
+#         self.id = paper.id
+#         self.title = paper.title
+#         self.publication_year = paper.publication_year
+#         self.authors_id = paper.authors  # name of class object differs from name of JSON object
+#         self.citations = paper.citations
 
 
 # general statistics of IU
