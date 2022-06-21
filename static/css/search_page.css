@@ -56,7 +56,7 @@ body {
 .sidebar div {
   padding: 8px 8px 8px 41px;
   font-size: 30px;
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #fff;
   display: block;
@@ -102,7 +102,7 @@ a {
   left: 0;
   top: 0;
   border-radius: 8px;
-  padding: 12px 16px 12px 16px;
+  padding: 12px 16px;
   margin-top: 35px;
   border: 2px solid #072653;
   position: center;
@@ -114,7 +114,6 @@ a {
   justify-content: center;
   align-items: center;
   padding: 0 16px;
-
   margin-left: 180px;
   margin-top: 25px;
   position: absolute;
@@ -122,10 +121,8 @@ a {
   height: 48px;
   left: 1059px;
   top: 150px;
-
   background: #072653;
   border-radius: 5px;
-
   color: #fff;
 }
 
@@ -200,9 +197,10 @@ a {
   font-size: 45px;
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
-  color:#004;
+  color: #004;
   margin-left: 35%;
-  margin-bottom: -10px;}
+  margin-bottom: -10px;
+}
 
 .block-info h4 {
   text-align: center;
@@ -211,7 +209,6 @@ a {
   margin-left: 35px;
   height: 100px;
   font-size: 20px;
-
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;

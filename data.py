@@ -117,6 +117,8 @@ def dic_values_sum(dictionary):
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 
 authors = pd.DataFrame(data["authors"])
+# authors = pd.read_json("authors_info.json")
+# authors_add = pd.read_json("authors_info.json")
 papers = pd.read_csv("papers_v1.csv", index_col="id")
 
 # dataframes modification
