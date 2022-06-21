@@ -5,7 +5,7 @@ body{
 }
 
 .panel-delimeter{
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     height: 160px;
     background-image: url(../images/panel2.png);
     background-size: 100%;
@@ -21,7 +21,7 @@ body{
 
 .panel-delimeter h2{
     font-size: 64px;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     font-style: normal;
     box-sizing: border-box;
     padding-top: 30px;
@@ -57,7 +57,7 @@ body{
 .sidebar div {
     padding: 8px 8px 8px 41px;
     font-size: 30px;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     font-style: normal;
     color: #fff;
     display: block;
@@ -81,7 +81,7 @@ body{
 }
 
 .light-up{
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     color: #fff;
     text-decoration: none;
 }
@@ -89,7 +89,7 @@ body{
 .light-up:hover{
     background: #404040;
     color: #fff;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     text-decoration: none;
 }
 
@@ -201,7 +201,7 @@ a{
     text-align: center;
     display: inline-block;
     font-size: 45px;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     font-style: normal;
     color:#004;
     margin-left: 35%;
@@ -218,14 +218,14 @@ a{
     height: 100px;
     font-size: 20px;
 
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     font-style: normal;
     color:#004;
 }
 
 label{
     color: #003;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', arial;
     text-decoration: none;
     font-size: 24px;
 }
