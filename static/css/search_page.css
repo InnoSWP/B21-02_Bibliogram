@@ -116,15 +116,13 @@ a{
     align-items: center;
     padding: 0px 16px;
 
-    margin-top: 25px;
+    margin-top: 45px;
     margin-left: 180px;
     position: absolute;
     width: 180px;
     height: 48px;
     left: 1059px;
     top: 150px;
-
-    z-index: -1;
 
     background: #072653;
     border-radius: 5px;
