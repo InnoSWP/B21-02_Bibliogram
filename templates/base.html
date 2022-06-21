@@ -89,7 +89,7 @@
     </div>
 </div>
 <div class="arrow" id="scroll-to-top">
-    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right">
+    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right"></a>
 </div>
 
 
@@ -141,12 +141,12 @@
           $(function() {
               $(window).scroll(function() {
                   if($(this).scrollTop() != 0) {
-                    $('#scrollToTheTop').fadeIn();
+                    $('#scroll-to-top').fadeIn();
                   } else {
-                    $('#scrollToTheTop').fadeOut();
+                    $('#scroll-to-top').fadeOut();
                   }
               });
-              $('#scrollToTheTop').click(function() {
+              $('#scroll-to-top').click(function() {
                   $('body,html').animate({scrollTop:0},700);
               });
           });
