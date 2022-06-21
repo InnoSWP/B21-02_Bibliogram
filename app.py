@@ -66,7 +66,10 @@ def search_author():
 def author(id):
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
-    return render_template('author_page.html', author=author_data, id=id)
+    author_add_data = data.authors_add.set_index("name")
+    author_add_data = author_add_data.loc[author_data["name"]]
+
+    return render_template('author_page.html', author=author_data, id=id, add_data=author_add_data)
 
 
 @app.route('/publications', methods=['POST', 'GET'])
@@ -106,14 +109,44 @@ def publications():
 def co_authors(id):
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
+    author_add_data = data.authors_add.set_index("name")
+    author_add_data = author_add_data.loc[author_data["name"]]
 
-    return render_template('co-author.html', author=author_data, id=id, papers=data.papers)
+    return render_template('co-author.html', author=author_data, id=id, add_data=author_add_data, papers=data.papers)
 
 
 @app.route('/author_publications=<int:id>')
 def author_publications(id):
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
+
+    # dataframe modification for further displaying
+    if data.page_name != author_data["name"]:
+        data.page_name = author_data["name"]
+        data.sorting = "Title"
+        data.filters = ["Title", "Source Type", "Work Type", "Publisher",
+                        "Publication Date", "Authors", "Affiliation",
+                        "Quartile", "Citations", "DOI"]
+
+    filt = data.publications["Authors"].str.contains(id)
+    papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
+
+    if request.method == 'POST':
+        if "checkbox" in request.form:
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
+
+        elif "radio" in request.form:
+            data.sorting = request.form["sort"]
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
 
     return render_template('author_publications.html', author=author_data, id=id, papers=data.papers)
 

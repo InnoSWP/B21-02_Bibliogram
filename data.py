@@ -1,7 +1,11 @@
-import json
-import requests
 from datetime import datetime
+from random import randint
+
 import pandas as pd
+import json
+import string
+import requests
+
 
 # password for user update
 password = "IU"
@@ -55,8 +59,8 @@ password = "IU"
 class University:
     num_publications: int
     num_researchers: int
-    public_per_person: int
-    cit_per_person: int
+    public_per_person: float
+    cit_per_person: float
 
     def __init__(self):
         self.cit_per_person = 0
@@ -91,8 +95,8 @@ def update(input):
 
 
 # convert String to Integer
-def str_to_int(string):
-    return int(string)
+def str_to_int(string_word):
+    return int(string_word)
 
 
 # convert String keys to Integer keys in dictionary
@@ -113,29 +117,43 @@ def dic_values_sum(dictionary):
     return sum(map(int, df.values()))
 
 
+def ind_to_name(data_authors, authors_names):
+
+    name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
+    surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
+
+    for i in range(len(authors_names)):
+        if authors_names[i] in list(data_authors["id"].values):
+            authors_names[i] = data_authors.set_index("id").loc[authors_names[i], "name"]
+        else:
+            authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
+    return authors_names
+
+
 # download data
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
 
-authors = pd.DataFrame(data["authors"])
-# authors = pd.read_json("authors_info.json")
-# authors_add = pd.read_json("authors_info.json")
+# authors = pd.DataFrame(data["authors"])
+authors = pd.read_json("authors_info.json")
+authors_add = pd.read_json("authors_add_info.json")
 papers = pd.read_csv("papers_v1.csv", index_col="id")
 
 # dataframes modification
-authors["overall_citation"] = authors["overall_citation"].apply(str_to_int)
-authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
 authors["citations"] = authors["citations"].apply(dic_to_int)
+authors['hirsch_ind'] = authors['hirsch_ind'].apply(str_to_int)
+authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
+
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
-authors["paper_id"] = authors["paper_id"].apply(list_to_int)
+# authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
 authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
 
-papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
+papers["source_quartile"] = papers["source_quartile"].apply(lambda x: abs(str_to_int(x)))
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 
 sorting = ""
-filters = []
+filters = list[string]
 page_name = ""
 publications = papers
 word = "Authors Affiliation"
@@ -146,8 +164,8 @@ publications.rename(columns={"Publication_date": "Publication Date",
                              "Work_type": "Work Type",
                              "Source_quartile": "Quartile",
                              "Authors_affils": word}, inplace=True)
-publications["Authors"] = publications[word].apply(lambda x: eval(x).keys())
-publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
+# publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 publications["Affiliation"] = publications[word].apply(lambda x: eval(x).values())
 publications["Affiliation"] = publications["Affiliation"].apply(lambda x: set(sum(x, list())))
 publications["Affiliation"] = publications["Affiliation"].apply(lambda x: ", ".join(x))
@@ -155,6 +173,10 @@ publications.drop(columns=word, inplace=True)
 publications = publications.reindex(columns=["Title", "Source Type", "Work Type", "Publisher",
                                              "Publication Date", "Authors", "Affiliation",
                                              "Quartile", "Citations", "DOI"])
+
+author_data = authors
+publications["Authors Names"] = publications["Authors"].apply(lambda x: ind_to_name(author_data, x))
+publications["Authors Names"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 
 
 # get statistics of IU
