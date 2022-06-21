@@ -1,31 +1,30 @@
-body{
+body {
     background-image: url(../images/background_main_page.jpg);
     background-size: 100% 760px;
     background-repeat: no-repeat;
     overflow-x: hidden;
-
 }
 
-.main_logo_title img{
+.main_logo_title img {
     max-width: 20%;
     max-height: auto;
     margin-left: 0px;
 }
 
-.round{
+.round {
     border-radius: 50%;
     max-width: 70px;
     max-height: auto;
 }
 
-.logo{
+.logo {
     width: 25%;
     height: auto;
     margin-left: 0px;
     margin-bottom: 5px;
 }
 
-.logomargin{
+.logomargin {
     margin-left: 0px;
     margin-top: 10px;
     text-align: left;
@@ -36,11 +35,11 @@ body{
     width: 90%;
 }
 
-#nav li{
+#nav li {
     display: inline-block;
 }
 
-#nav a{
+#nav a {
     display: block;
     text-decoration: none;
     color: #fff;
@@ -50,17 +49,17 @@ body{
     padding: 7px 15px;
 }
 
-.light-up:hover{
+.light-up:hover {
     background: #404040;
     color: #ccf;
 }
 
-.main-text-page{
+.main-text-page {
     margin-top: 84px;
     font-size: 320px;
 }
 
-.main-text-page h1{
+.main-text-page h1 {
     font-size: 72px;
     font-family: 'Open Sans', arial, sans-serif;
     font-style: normal;
@@ -69,17 +68,17 @@ body{
     line-height: 1.5;
 }
 
-.arrow{
+.arrow {
     height: 70px;
     width: auto;
 }
 
-#object-position-1{
+#object-position-1 {
     margin-top:200px;
 }
 
 
-.panel-delimeter{
+.panel-delimeter {
     height: 160px;
     background-image: url(../images/panel2.png);
     background-size: 100%;
@@ -89,7 +88,7 @@ body{
 
 }
 
-.panel-delimeter h2{
+.panel-delimeter h2 {
     font-size: 64px;
     font-family: 'Open Sans', arial, sans-serif;
     font-style: normal;
@@ -100,24 +99,23 @@ body{
     margin-top: 0px;
 }
 
-.blank-pad{
+.blank-pad {
     height: 0px;
     margin-left: 300px;
 }
 
-.inline-statistics{
+.inline-statistics {
     display: inline-block;
 }
 
-.block-info{
+.block-info {
     display: inline-block;
     width: 200px;
-
     margin-left: 350px;
     margin-top: -60px;
 }
 
-.block-info h3{
+.block-info h3 {
     text-align: center;
     display: inline-block;
     font-size: 100px;
@@ -128,7 +126,7 @@ body{
     margin-bottom: -10px;
 }
 
-.block-info h4{
+.block-info h4 {
     text-align: center;
     display: inline-block;
     width: 200px;
@@ -136,20 +134,19 @@ body{
     height: 100px;
     font-size: 20px;
     margin-top: 5px;
-
     font-family: 'Open Sans', arial, sans-serif;
     font-style: normal;
     color:#004;
 }
 
-.block-info1{
+.block-info1 {
     display: inline-block;
     width: 200px;
     margin-left: 365px;
     margin-top: -70px;
 }
 
-.block-info1 h3{
+.block-info1 h3 {
     text-align: center;
     display: inline-block;
     font-size: 100px;
@@ -160,7 +157,7 @@ body{
     margin-bottom: -10px;
 }
 
-.block-info1 h4{
+.block-info1 h4 {
     text-align: center;
     display: inline-block;
     width: 200px;
@@ -168,13 +165,12 @@ body{
     margin-top: 5px;
     height: 100px;
     font-size: 20px;
-
     font-family: 'Open Sans', arial, sans-serif;
     font-style: normal;
     color:#004;
 }
 
-.arrow{
+.arrow {
     height: 70px;
     width: auto;
 }
@@ -185,10 +181,10 @@ body{
 	bottom: 45px;
   }
 
-#object-position-1{
+#object-position-1 {
     margin-top:-11.5%;
 }
 
-#object-position-2{
+#object-position-2 {
     margin-top:-11%;
 }
