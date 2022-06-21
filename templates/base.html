@@ -13,20 +13,6 @@
 
 <!--      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
 
-      <script type="text/javascript">
-          $(function() {
-              $(window).scroll(function() {
-                  if($(this).scrollTop() != 0) {
-                    $('#scrollToTheTop').fadeIn();
-                  } else {
-                    $('#scrollToTheTop').fadeOut();
-                  }
-              });
-              $('#scrollToTheTop').click(function() {
-                  $('body,html').animate({scrollTop:0},700);
-              });
-          });
-      </script>
 </head>
 
 <body>
@@ -103,8 +89,7 @@
     </div>
 </div>
 <div class="arrow" id="scroll-to-top">
-    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
-                             align="right">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right">
 </div>
 
 
@@ -150,5 +135,21 @@
         </h4>
     </div>
 </div>
+
+
+<script type="text/javascript">
+          $(function() {
+              $(window).scroll(function() {
+                  if($(this).scrollTop() != 0) {
+                    $('#scrollToTheTop').fadeIn();
+                  } else {
+                    $('#scrollToTheTop').fadeOut();
+                  }
+              });
+              $('#scrollToTheTop').click(function() {
+                  $('body,html').animate({scrollTop:0},700);
+              });
+          });
+</script>
 </body>
 </html>
