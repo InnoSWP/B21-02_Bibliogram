@@ -6,86 +6,93 @@
           content="width=device-width, user-scalable=no,
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Title</title>
 </head>
 <body>
-    <div class="panel-delimeter">
-        <button class="openbtn"
-                    onclick="toggleSidebar()" style="margin-top: 50px;">
-                <img src="{{ url_for('static', filename='images/menu.png') }}"
-                    alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
-        </button>
-        <h2 style="margin-top: -100px;">
-            Find author
-        </h2>
-    </div>
+<div class="panel-delimeter">
+    <button class="openbtn"
+            onclick="toggleSidebar()" style="margin-top: 50px;">
+        <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Icon not found"
+             style="filter: invert(100%); width:50px; height:50px;">
+    </button>
+    <h2 style="margin-top: -100px;">
+        Find author
+    </h2>
+</div>
 
-    <div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
-        <!--    <div class="closebtn"-->
-        <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
-        <div style="font-family:'Open Sans'; text-decoration: none;">
-            <a href="/" class="light-up">
-                <font color="white">Main menu</font>
-            </a>
-        </div>
-        <div>
-            <a href="/search" class="light-up">
-                <font color="white">Authors</font>
-            </a>
-        </div>
-        <div>
-            <a href="/publications" class="light-up">
-                <font color="white">Publications</font>
-            </a>
-        </div>
+<div id="my-sidebar" class="sidebar collapsed"
+     style="font-family:'Open Sans', arial, sans-serif; text-decoration: none;">
+    <!--    <div class="closebtn"-->
+    <!--         onclick="document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed')">×</div>-->
+    <div style="font-family:'Open Sans', arial, sans-serif; text-decoration: none;">
+        <a href="/" class="light-up">
+            <font color="white">Main menu</font>
+        </a>
     </div>
-
-    <div class="container-md">
-        <form class="d-flex search-bar" role="search" method="post">
-            <input class="form-control" type="text"
-                   placeholder="Enter the name of the researcher" aria-label="Search"
-                   name="author" id="author">
-            <input class="btn btn-success" type="submit" value="Search">
-        </form>
+    <div>
+        <a href="/search" class="light-up">
+            <font color="white">Authors</font>
+        </a>
     </div>
-
-    <div class="title-results">
-        <strong>Search results</strong>
+    <div>
+        <a href="/publications" class="light-up">
+            <font color="white">Publications</font>
+        </a>
     </div>
+</div>
 
-    <div class="container author-catalogue">
-        <table class="table table-striped">
-            <tbody>
-            {% for i in range(authors.shape[0]) %}
-            <tr>
-                <th scope="row" class="avatar-column">
-                    <a href="/author_id={{authors.iloc[i]['Id']}}">
-                        <img src={{authors.iloc[i]['Photo_link']}} alt="Not found" class="round-photo margined-photo">
-                    </a>
-                </th>
-                <td>
-                    <a href="/author_id={{authors.iloc[i]['Id']}}" style="text-decoration: none; color: #051742;">
-                        <div class="cluster-author">
-                            <h2>
-                                <strong>{{ authors.iloc[i]['Name'] }}</strong>
-                            </h2>
-                            {{ authors.iloc[i]['Institution'] }}
-                        </div>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="container-md">
+    <form class="d-flex search-bar" role="search" method="post">
+        <input class="form-control" type="text"
+               placeholder="Enter the name of the researcher" aria-label="Search"
+               name="author" id="author">
+        <input class="btn btn-success" type="submit" value="Search">
+    </form>
+</div>
 
-    <script>
+<div class="title-results">
+    <strong>Search results</strong>
+</div>
+
+<div class="container author-catalogue">
+    <table class="table table-striped">
+        <tbody>
+        {% for i in range(authors.shape[0]) %}
+        <tr>
+            <th scope="row" class="avatar-column">
+                <a href="/author_id={{authors.iloc[i]['Id']}}"><img src="{{authors.iloc[i]['Photo_link']}}"
+                         onerror="this.src='https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0'"
+                         alt="Not found" class="round-photo margined-photo"></a>
+            </th>
+            <td>
+                <a href="/author_id={{authors.iloc[i]['Id']}}" style="text-decoration: none; color: #051742;">
+                    <div class="cluster-author">
+                        <h2>
+                            <strong>{{ authors.iloc[i]['Name'] }}</strong>
+                        </h2>
+                        {{ authors.iloc[i]['Institution'] }}
+                    </div>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script>
         function toggleSidebar() {
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
-    </script>
+
+
+
+
+</script>
 </body>
 </html>

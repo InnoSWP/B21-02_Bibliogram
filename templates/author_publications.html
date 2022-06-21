@@ -8,24 +8,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"></script>
     <title>Publications</title>
 </head>
 <body>
 <div class="panel-delimeter">
     <button class="openbtn"
             onclick="toggleSidebar()" style="margin-top: 50px;">
-        <img src="{{ url_for('static', filename='images/menu.png') }}"
-             alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
+        <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
     </button>
     <h2 style="margin-top: -100px;">
         Author publications
     </h2>
 </div>
 
-<div id="mySidebar" class="sidebar collapsed" style="font-family:'Open Sans'; text-decoration: none;">
+<div id="my-sidebar" class="sidebar collapsed" style="font-family:'Open Sans', arial, sans-serif; text-decoration: none;">
     <div>
         <a href="/" class="light-up">
             Main menu
@@ -57,7 +53,7 @@
     </li>
 </ul>
 <div style="margin-top: 10px; margin-left: 100px; margin-bottom: -50Fpx;">
-    <h1 style="font-size: 60px; font-family:'Open Sans';">Manuel Mazzara</h1>
+    <h1 style="font-size: 60px; font-family:'Open Sans', arial, sans-serif;">Manuel Mazzara</h1>
 </div>
 <div class="container-md">
     <div class="d-flex">
@@ -78,59 +74,59 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="parametersLabel">What parameters to show?</h5>
+                <h5 class="modal-title" id="parameters-label">What parameters to show?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_source" name="show_source"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-source" name="show_source"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_source">Source
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-source">Source
                         type</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_date" name="show_date"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-date" name="show_date"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_date">Publication
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-date">Publication
                         date</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_affiliation"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-affiliation"
                            name="show_affiliation"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="show_affiliation">Affiliation</label>
+                           for="show-affiliation">Affiliation</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_quartile"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-quartile"
                            name="show_quartile"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_quartile">Quartile</label>
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-quartile">Quartile</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_citations"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-citations"
                            name="show_citations"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_citations">Citations
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-citations">Citations
                         count</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_doi" name="show_doi"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-doi" name="show_doi"
                            checked>
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="show_doi">DOI</label>
+                           for="show-doi">DOI</label>
                 </div>
 
                 <div class="form-check form-switch" style="margin-left: 36px;">
-                    <input class="form-check-input" type="checkbox" role="switch" id="show_areas" name="show_areas"
+                    <input class="form-check-input" type="checkbox" role="switch" id="show-areas" name="show_areas"
                            disabled>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show_areas">Subject
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-areas">Subject
                         Areas</label>
                 </div>
             </div>
@@ -146,64 +142,64 @@
     </div>
 </div>
 
-<div class="modal fade" id="sortByModal" tabindex="-1" aria-labelledby="sortByModalLabel" aria-hidden="true">
+<div class="modal fade" id="sort-by-modal" tabindex="-1" aria-labelledby="sortByModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="sortByModalLabel">Sort by</h5>
+                <h5 class="modal-title" id="sort-by-modal-label">Sort by</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_source" value="sortOption1"
+                    <input class="form-check-input" type="radio" id="sort-by-source" value="sortOption1"
                            name="radioSortBy"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_source">Source
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-source">Source
                         type</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_date" value="sortOption2"
+                    <input class="form-check-input" type="radio" id="sort-by-date" value="sortOption2"
                            name="radioSortBy"
                            checked>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_date">Publication
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-date">Publication
                         date</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_affiliation" value="sortOption3"
+                    <input class="form-check-input" type="radio" id="sort-by-affiliation" value="sortOption3"
                            name="radioSortBy">
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="sort_by_affiliation">Affiliation</label>
+                           for="sort-by-affiliation">Affiliation</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_quartile" value="sortOption4"
+                    <input class="form-check-input" type="radio" id="sort-by-quartile" value="sortOption4"
                            name="radioSortBy">
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="sort_by_quartile">Quartile</label>
+                           for="sort-by-quartile">Quartile</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_citations" value="sortOption5"
+                    <input class="form-check-input" type="radio" id="sort-by-citations" value="sortOption5"
                            name="radioSortBy">
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="sort_by_citations">Citations count</label>
+                           for="sort-by-citations">Citations count</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_doi" value="sortOption6"
+                    <input class="form-check-input" type="radio" id="sort-by-doi" value="sortOption6"
                            name="radioSortBy">
                     <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                           for="sort_by_doi">DOI</label>
+                           for="sort-by-doi">DOI</label>
                 </div>
 
                 <div class="form-check" style="margin-left: 36px;">
-                    <input class="form-check-input" type="radio" id="sort_by_areas" value="sortOption7"
+                    <input class="form-check-input" type="radio" id="sort-by-areas" value="sortOption7"
                            name="radioSortBy"
                            disabled>
-                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort_by_areas">Subject
+                    <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-areas">Subject
                         Areas</label>
                 </div>
             </div>
@@ -275,6 +271,9 @@
     </table>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
 <script>
         function toggleSidebar() {
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
