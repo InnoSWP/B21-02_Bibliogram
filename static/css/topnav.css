@@ -1,12 +1,12 @@
 body {
-    background-image: url(../images/background_main_page.jpg);
-    background-size: 100% 760px;
-    background-repeat: no-repeat;
-    overflow-x: hidden;
+  background-image: url("../images/background_main_page.jpg");
+  background-size: 100% 760px;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
 }
 
 .main_logo_title img {
-    max-width: 20%;
+  max-width: 20%;
     max-height: auto;
     margin-left: 0px;
 }
