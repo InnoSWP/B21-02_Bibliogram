@@ -116,7 +116,7 @@ def co_authors(id):
     return render_template('co-author.html', author=author_data, id=id, add_data=author_add_data, papers=data.papers)
 
 
-@app.route('/author_publications=<int:id>')
+@app.route('/author_publications=<int:id>', methods=['POST', 'GET'])
 def author_publications(id):
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
