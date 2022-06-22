@@ -1,7 +1,6 @@
 import data
 from flask import Flask, render_template, url_for, request
 
-
 app = Flask(__name__)
 
 
@@ -53,64 +52,108 @@ def features_section():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search_author():
-
-    authors = data.authors.rename(columns=lambda x: x[0].upper()+x[1:])
+    authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
+    add_data = data.authors_add.set_index("name")
 
     if request.method == 'POST':
         author_name = request.form['author']
-        filt = authors["Name"].str.contains(author_name)
+        filt = authors["Name"].apply(lambda x: x.lower()).str.contains(author_name.lower())
         authors = authors.loc[filt]
 
-    return render_template('search_page.html', title='Search for authors', authors=authors)
+    return render_template('search_page.html', title='Search for authors', authors=authors, add_data=add_data)
 
 
 @app.route('/author_id=<int:id>')
 def author(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
-    return render_template('author_page.html', author=author_data, id=id)
+    author_add_data = data.authors_add.set_index("name")
+    author_add_data = author_add_data.loc[author_data["name"]]
+
+    return render_template('author_page.html', author=author_data, id=id, add_data=author_add_data)
 
 
-@app.route('/publications')
+@app.route('/publications', methods=['POST', 'GET'])
 def publications():
 
     # dataframe modification for further displaying
-    papers = data.papers.rename(columns=lambda x: x[0].upper()+x[1:])
-    papers.rename(columns={"Publication_date": "Publication Date",
-                           "Doi": "DOI",
-                           "Source_type": "Source Type",
-                           "Work_type": "Work Type",
-                           "Source_quartile": "Quartile",
-                           "Authors_affils": "Authors Affiliation"}, inplace=True)
-    papers["Authors"] = papers["Authors Affiliation"].apply(lambda x: eval(x).keys())
-    papers["Authors"] = papers["Authors"].apply(lambda x: ",\n".join(x))
-    papers["Affiliation"] = papers["Authors Affiliation"].apply(lambda x: eval(x).values())
-    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: set(sum(x, list())))
-    papers["Affiliation"] = papers["Affiliation"].apply(lambda x: ", ".join(x))
-    papers.drop(columns="Authors Affiliation", inplace=True)
-    papers = papers.reindex(columns=["Title", "Source Type", "Work Type", "Publisher", "Publication Date",
-                            "Authors", "Affiliation", "Quartile", "Citations", "DOI"])
+    if data.page_name != "general_publications":
+        data.page_name = "general_publications"
+        data.sorting = "Title"
+        data.filters = ["Title", "Source Type", "Work Type", "Publisher",
+                        "Publication Date", "Authors Names","Affiliation",
+                        "Quartile", "Citations", "DOI"]
+
+    papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+    if request.method == 'POST':
+        if "checkbox" in request.form:
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+        elif "radio" in request.form:
+            data.sorting = request.form["sort"]
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template('publications_page.html', papers=papers)
 
 
 @app.route('/co-author=<int:id>')
 def co_authors(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
+    author_add_data = data.authors_add.set_index("name")
+    author_add_data = author_add_data.loc[author_data["name"]]
 
-    return render_template('co-author.html', author=author_data, id=id, papers=data.papers)
+    return render_template('co-author.html', author=author_data, id=id, add_data=author_add_data, papers=data.papers)
 
 
 @app.route('/author_publications=<int:id>')
 def author_publications(id):
-
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
-    return render_template('author_publications.html', author=author_data, id=id, papers=data.papers)
+    # dataframe modification for further displaying
+    if data.page_name != author_data["name"]:
+        data.page_name = author_data["name"]
+        data.sorting = "Title"
+        data.filters = ["Title", "Source Type", "Work Type", "Publisher",
+                        "Publication Date", "Authors Names", "Affiliation",
+                        "Quartile", "Citations", "DOI"]
+
+    # filt = data.publications["Authors"].str.contains(id)
+
+    papers = data.publications[data.filters].sort_values(by=data.sorting)
+    papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
+
+    if request.method == 'POST':
+        if "checkbox" in request.form:
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
+
+        elif "radio" in request.form:
+            data.sorting = request.form["sort"]
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
+
+    return render_template('author_publications.html', author=author_data, id=id, papers=papers)
 
 
 @app.route('/test_public')
