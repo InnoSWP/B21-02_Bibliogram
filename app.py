@@ -53,13 +53,14 @@ def features_section():
 @app.route('/search', methods=['POST', 'GET'])
 def search_author():
     authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
+    add_data = data.authors_add.set_index("name")
 
     if request.method == 'POST':
         author_name = request.form['author']
         filt = authors["Name"].apply(lambda x: x.lower()).str.contains(author_name.lower())
         authors = authors.loc[filt]
 
-    return render_template('search_page.html', title='Search for authors', authors=authors)
+    return render_template('search_page.html', title='Search for authors', authors=authors, add_data=add_data)
 
 
 @app.route('/author_id=<int:id>')
@@ -80,14 +81,14 @@ def publications():
         data.page_name = "general_publications"
         data.sorting = "Title"
         data.filters = ["Title", "Source Type", "Work Type", "Publisher",
-                        "Publication Date", "Authors", "Affiliation",
+                        "Publication Date", "Authors Names","Affiliation",
                         "Quartile", "Citations", "DOI"]
 
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == 'POST':
         if "checkbox" in request.form:
-            data.filters = sum([["Title"], ["Authors"], request.form.getlist('show')], list())
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -125,11 +126,13 @@ def author_publications(id):
         data.page_name = author_data["name"]
         data.sorting = "Title"
         data.filters = ["Title", "Source Type", "Work Type", "Publisher",
-                        "Publication Date", "Authors", "Affiliation",
+                        "Publication Date", "Authors Names", "Affiliation",
                         "Quartile", "Citations", "DOI"]
 
-    filt = data.publications["Authors"].str.contains(id)
-    papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
+    # filt = data.publications["Authors"].str.contains(id)
+
+    papers = data.publications[data.filters].sort_values(by=data.sorting)
+    papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
     if request.method == 'POST':
         if "checkbox" in request.form:
@@ -138,7 +141,8 @@ def author_publications(id):
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
-            papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
         elif "radio" in request.form:
             data.sorting = request.form["sort"]
@@ -146,9 +150,10 @@ def author_publications(id):
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
-            papers = data.publications[filt, data.filters].sort_values(by=data.sorting)
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
-    return render_template('author_publications.html', author=author_data, id=id, papers=data.papers)
+    return render_template('author_publications.html', author=author_data, id=id, papers=papers)
 
 
 @app.route('/test_public')

@@ -66,7 +66,7 @@
         {% for i in range(authors.shape[0]) %}
         <tr>
             <th scope="row" class="avatar-column">
-                <a href="/author_id={{authors.iloc[i]['Id']}}"><img src="{{authors.iloc[i]['Photo_link']}}"
+                <a href="/author_id={{authors.iloc[i]['Id']}}"><img src="{{add_data.iloc[i + 11]['photo_link']}}"
                          onerror="this.src='https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0'"
                          alt="Not found" class="round-photo margined-photo"></a>
             </th>
@@ -76,7 +76,7 @@
                         <h2>
                             <strong>{{ authors.iloc[i]['Name'] }}</strong>
                         </h2>
-                        {{ authors.iloc[i]['Institution'] }}
+                        {{ authors.iloc[i]['Institution'][0] }}
                     </div>
                 </a>
             </td>

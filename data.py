@@ -121,6 +121,7 @@ def ind_to_name(data_authors, authors_names):
 
     name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
     surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
+    # temp_array = []
 
     for i in range(len(authors_names)):
         if authors_names[i] in list(data_authors["id"].values):
@@ -165,7 +166,7 @@ publications.rename(columns={"Publication_date": "Publication Date",
                              "Source_quartile": "Quartile",
                              "Authors_affils": word}, inplace=True)
 publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
-# publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+
 publications["Affiliation"] = publications[word].apply(lambda x: eval(x).values())
 publications["Affiliation"] = publications["Affiliation"].apply(lambda x: set(sum(x, list())))
 publications["Affiliation"] = publications["Affiliation"].apply(lambda x: ", ".join(x))
@@ -175,8 +176,10 @@ publications = publications.reindex(columns=["Title", "Source Type", "Work Type"
                                              "Quartile", "Citations", "DOI"])
 
 author_data = authors
-publications["Authors Names"] = publications["Authors"].apply(lambda x: ind_to_name(author_data, x))
-publications["Authors Names"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+publications["Authors Names"] = publications["Authors"]
+publications["Authors Names"] = publications["Authors Names"].apply(lambda x: ind_to_name(author_data, x))
+publications["Authors Names"] = publications["Authors Names"].apply(lambda x: ",\n".join(x))
+publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 
 
 # get statistics of IU
