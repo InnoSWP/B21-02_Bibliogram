@@ -1,5 +1,7 @@
+from flask import Flask, render_template, url_for, request, send_file
+from os import path
+
 import data
-from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
@@ -75,19 +77,18 @@ def author(id):
 
 @app.route('/publications', methods=['POST', 'GET'])
 def publications():
-
     # dataframe modification for further displaying
     if data.page_name != "general_publications":
         data.page_name = "general_publications"
         data.sorting = "Title"
         data.filters = ["Title", "Source Type", "Work Type", "Publisher",
-                        "Publication Date", "Authors Names","Affiliation",
+                        "Publication Date", "Authors Names", "Affiliation",
                         "Quartile", "Citations", "DOI"]
 
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == 'POST':
-        if "checkbox" in request.form:
+        if "filtration" in request.form:
             data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
 
             if data.sorting not in data.filters:
@@ -95,13 +96,27 @@ def publications():
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-        elif "radio" in request.form:
+        elif "sorting" in request.form:
             data.sorting = request.form["sort"]
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+        elif "downloading" in request.form:
+            file_type = request.form["download"]
+
+            if file_type == "csv":
+                papers.to_csv("downloads/download.csv")
+            elif file_type == "tsv":
+                papers.to_csv("downloads/download.tsv", sep="\t")
+            elif file_type == "xlsx":
+                papers.to_excel("downloads/download.xlsx")
+            elif file_type == "json":
+                papers.to_csv("downloads/download.json")
+
+            return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template('publications_page.html', papers=papers)
 
@@ -134,7 +149,7 @@ def author_publications(id):
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == 'POST':
-        if "checkbox" in request.form:
+        if "filtration" in request.form:
             data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
 
             if data.sorting not in data.filters:
@@ -142,13 +157,27 @@ def author_publications(id):
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-        elif "radio" in request.form:
+        elif "sorting" in request.form:
             data.sorting = request.form["sort"]
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
+
+        elif "downloading" in request.form:
+            file_type = request.form["download"]
+
+            if file_type == "csv":
+                papers.to_csv("downloads/download.csv")
+            elif file_type == "tsv":
+                papers.to_csv("downloads/download.tsv", sep="\t")
+            elif file_type == "xlsx":
+                papers.to_excel("downloads/download.xlsx")
+            elif file_type == "json":
+                papers.to_csv("downloads/download.json")
+
+            return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template('author_publications.html', author=author_data, id=id, papers=papers)
 
