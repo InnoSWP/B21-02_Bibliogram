@@ -132,7 +132,6 @@ def author_publications(id):
     # filt = data.publications["Authors"].str.contains(id)
 
     papers = data.publications[data.filters].sort_values(by=data.sorting)
-    papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
     if request.method == 'POST':
         if "checkbox" in request.form:
@@ -142,7 +141,6 @@ def author_publications(id):
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
-            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
         elif "radio" in request.form:
             data.sorting = request.form["sort"]
@@ -151,7 +149,6 @@ def author_publications(id):
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
-            papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
     return render_template('author_publications.html', author=author_data, id=id, papers=papers)
 

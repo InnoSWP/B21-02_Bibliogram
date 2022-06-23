@@ -147,7 +147,7 @@ authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values(
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 # authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
-authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
+authors["start_date"] = authors["papers_published"].apply(lambda x: min([y for y in x.keys() if x[y] != 0]))
 
 papers["source_quartile"] = papers["source_quartile"].apply(lambda x: abs(str_to_int(x)))
 papers["citations"] = papers["citations"].apply(dic_values_sum)
