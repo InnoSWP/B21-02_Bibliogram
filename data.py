@@ -135,6 +135,7 @@ def ind_to_name(data_authors, authors_names):
             authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
     return authors_names
 
+
 # download data
 data = requests.get(
     "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
@@ -173,9 +174,9 @@ publications.rename(
         "Source_type": "Source Type",
         "Work_type": "Work Type",
         "Source_quartile": "Quartile",
-        "Authors_affils": word
-             },
-    inplace=True
+        "Authors_affils": word,
+    },
+    inplace=True,
 )
 publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
 
@@ -196,7 +197,7 @@ publications = publications.reindex(
         "Affiliation",
         "Quartile",
         "Citations",
-        "DOI"
+        "DOI",
     ]
 )
 
@@ -255,12 +256,12 @@ axes.plot(x, y, "#004", lw=2)
 axes.grid(False)
 axes.bar(x, y, color="#036e8e", width=0.08)
 plt.ylim(ymin=0, ymax=2200)
-plt.rc("axes", labelsize=1000)    # fontsize of the x and y labels
+plt.rc("axes", labelsize=1000)
 
-fig.savefig("static/images/graphic.png")   # save the figure to file
+fig.savefig("static/images/graphic.png")
 plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
-im1 = im.crop((150, 130, width-150, height-100))
+im1 = im.crop((150, 130, width - 150, height - 100))
 im1.save("static/images/graphic.png")
