@@ -163,7 +163,6 @@ papers["source_quartile"] = papers["source_quartile"].apply(
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 sorting = ""
-filters = list[string]
 page_name = ""
 publications = papers
 word = "Authors Affiliation"
