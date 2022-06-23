@@ -1,11 +1,10 @@
-from datetime import datetime
-from random import randint
-
-import pandas as pd
 import json
 import string
-import requests
+from datetime import datetime
+from random import randint
 import matplotlib.pyplot as plt
+import pandas as pd
+import requests
 from PIL import Image
 
 # password for user update
@@ -71,7 +70,7 @@ class University:
 def write(dt, filename):
     dt = json.dumps(dt)
     dt = json.loads(str(dt))
-    with open(filename, 'w', encoding='utf-8') as file:
+    with open(filename, "w", encoding="utf-8") as file:
         json.dump(dt, file, indent=3)
 
 
@@ -83,15 +82,19 @@ def refresh():
     weekday = datetime.today().isoweekday()
     status = "denied"
     if weekday == 4 and hours == 3 and minutes == 0 and seconds == 0:
-        status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
+        status = requests.get(
+            "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
+        ).json()["state"]
     return status
 
 
 # update remote DB by user
 def update(input):
     status = "denied"
-    if (password == input):
-        status = requests.get("https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update").json()['state']
+    if password == input:
+        status = requests.get(
+            "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
+        ).json()["state"]
     return status
 
 
@@ -125,15 +128,17 @@ def ind_to_name(data_authors, authors_names):
 
     for i in range(len(authors_names)):
         if authors_names[i] in list(data_authors["id"].values):
-            authors_names[i] = data_authors.set_index("id").loc[authors_names[i], "name"]
+            authors_names[i] = data_authors.set_index("id").loc[
+                authors_names[i], "name"
+            ]
         else:
             authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
     return authors_names
 
-
-
 # download data
-data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
+data = requests.get(
+    "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
+).json()
 
 # authors = pd.DataFrame(data["authors"])
 authors = pd.read_json("authors_info.json")
@@ -142,7 +147,7 @@ papers = pd.read_csv("papers_v1.csv", index_col="id")
 
 # dataframes modification
 authors["citations"] = authors["citations"].apply(dic_to_int)
-authors['hirsch_ind'] = authors['hirsch_ind'].apply(str_to_int)
+authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
 authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
 
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
@@ -150,7 +155,9 @@ authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
 authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
 
-papers["source_quartile"] = papers["source_quartile"].apply(lambda x: abs(str_to_int(x)))
+papers["source_quartile"] = papers["source_quartile"].apply(
+    lambda x: abs(str_to_int(x))
+)
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 sorting = ""
@@ -159,34 +166,58 @@ page_name = ""
 publications = papers
 word = "Authors Affiliation"
 publications = publications.rename(columns=lambda x: x[0].upper() + x[1:])
-publications.rename(columns={"Publication_date": "Publication Date",
-                             "Doi": "DOI",
-                             "Source_type": "Source Type",
-                             "Work_type": "Work Type",
-                             "Source_quartile": "Quartile",
-                             "Authors_affils": word}, inplace=True)
+publications.rename(
+    columns={
+        "Publication_date": "Publication Date",
+        "Doi": "DOI",
+        "Source_type": "Source Type",
+        "Work_type": "Work Type",
+        "Source_quartile": "Quartile",
+        "Authors_affils": word
+             },
+    inplace=True
+)
 publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
 
 publications["Affiliation"] = publications[word].apply(lambda x: eval(x).values())
-publications["Affiliation"] = publications["Affiliation"].apply(lambda x: set(sum(x, list())))
+publications["Affiliation"] = publications["Affiliation"].apply(
+    lambda x: set(sum(x, list()))
+)
 publications["Affiliation"] = publications["Affiliation"].apply(lambda x: ", ".join(x))
 publications.drop(columns=word, inplace=True)
-publications = publications.reindex(columns=["Title", "Source Type", "Work Type", "Publisher",
-                                             "Publication Date", "Authors", "Affiliation",
-                                             "Quartile", "Citations", "DOI"])
+publications = publications.reindex(
+    columns=[
+        "Title",
+        "Source Type",
+        "Work Type",
+        "Publisher",
+        "Publication Date",
+        "Authors",
+        "Affiliation",
+        "Quartile",
+        "Citations",
+        "DOI"
+    ]
+)
 
 author_data = authors
 publications["Authors Names"] = publications["Authors"]
-publications["Authors Names"] = publications["Authors Names"].apply(lambda x: ind_to_name(author_data, x))
-publications["Authors Names"] = publications["Authors Names"].apply(lambda x: ",\n".join(x))
-publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+publications["Authors Names"] = publications["Authors Names"].apply(
+    lambda x: ind_to_name(author_data, x)
+)
+publications["Authors Names"] = publications["Authors Names"].apply(
+    lambda x: ",\n".join(x)
+)
+publications["Authors"] = publications["Authors"].apply(
+    lambda x: ",\n".join(x)
+)
 
 # get statistics of IU
 uni = University()
 uni.num_researchers = authors.shape[0]
 uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
-uni.cit_per_person = authors['overall_citation'].sum() / uni.num_researchers
+uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
 
 
 # write(data, 'data_output.json')
@@ -199,9 +230,13 @@ def date_citation():
     dict = {}
     for ind in publications.index:
         if publications["Publication Date"][ind][0:4] not in dict:
-            dict[publications["Publication Date"][ind][0:4]] = publications["Citations"][ind]
+            dict[publications["Publication Date"][ind][0:4]] = publications[
+                "Citations"
+            ][ind]
         else:
-            dict[publications["Publication Date"][ind][0:4]] += publications["Citations"][ind]
+            dict[publications["Publication Date"][ind][0:4]] += publications[
+                "Citations"
+            ][ind]
 
     # return sorted(dict.items())
     return dict
@@ -216,16 +251,16 @@ x, y = zip(*myList)
 
 fig, axes = plt.subplots(1, 1, figsize=(16, 12))
 
-axes.plot(x, y, '#004', lw=2)
+axes.plot(x, y, "#004", lw=2)
 axes.grid(False)
-axes.bar(x, y, color='#036e8e', width=0.08)
+axes.bar(x, y, color="#036e8e", width=0.08)
 plt.ylim(ymin=0, ymax=2200)
-plt.rc('axes', labelsize=1000)    # fontsize of the x and y labels
+plt.rc("axes", labelsize=1000)    # fontsize of the x and y labels
 
-fig.savefig('static/images/graphic.png')   # save the figure to file
+fig.savefig("static/images/graphic.png")   # save the figure to file
 plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
 im1 = im.crop((150, 130, width-150, height-100))
-im1.save('static/images/graphic.png')
+im1.save("static/images/graphic.png")
