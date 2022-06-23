@@ -11,32 +11,26 @@
 </head>
 <body>
     <div class="panel-delimeter">
-        <button class="openbtn"
-                    onclick="toggleSidebar()" style="margin-top: 50px;">
-                <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
-        </button>
-        <h2 style="margin-top: -100px;">
-            Co-authors page
-        </h2>
-    </div>
+    <ul id="nav">
+        <li><a class="active" href="/">
+            <div class="logomargin">
+                <img src="{{ main_logo }}" alt="Logo not found" class="round logo">
+                <img src="{{ main_title }}" alt="Title not found" class="logo">
+            </div>
+        </a>
+        </li>
+        <li>
+            <a href="/publications" class="light-up">Publications</a>
+        </li>
+        <li>
+            <a href="/search" class="light-up">Authors</a>
+        </li>
+        <li>
+            <a href="/aboutIU" class="light-up">About IU</a>
+        </li>
+    </ul>
 
-    <div id="my-sidebar" class="sidebar collapsed" style="font-family:'Open Sans', arial, sans-serif; text-decoration: none;">
-        <div>
-            <a href="/" class="light-up">
-                Main menu
-            </a>
-        </div>
-        <div>
-            <a href="/search" class="light-up">
-                Authors
-            </a>
-        </div>
-        <div>
-            <a href="/publications" class="light-up">
-                Publications
-            </a>
-        </div>
-    </div>
+</div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href="/author_id={{id}}">Profile</a>
@@ -51,8 +45,8 @@
             <a class="nav-link disabled">Secret info</a>
         </li>
     </ul>
-<div style="margin-top: 10px; margin-left: 100px;">
-    <h1 style="font-size: 60px; font-family:'Open Sans', arial, sans-serif;">{{ author["name"] }}</h1>
+<div style="margin-top: 10px; margin-left: 120px;">
+    <h1 style="font-size: 50px; font-family:'Open Sans', arial, sans-serif;">Co-authors of {{ author["name"] }}</h1>
 </div>
     <div class="container author-catalogue">
         <table class="table table-bordered">
