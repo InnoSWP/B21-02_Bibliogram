@@ -185,8 +185,6 @@ a{
     display: inline-block;
 }
 
-
-
 .inline-statistics{
     display: inline-block;
 }
@@ -264,7 +262,7 @@ a{
   text-decoration: none;
   color: #fff;
   font-size: 24px;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', arial, sans-serif;;
   font-style: normal;
   padding: 30px 16px;
 }
@@ -281,7 +279,7 @@ a{
 
 .main-text-page h1{
   font-size: 72px;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', arial, sans-serif;;
   font-style: normal;
   color: #fff;
   margin-left: 120px;

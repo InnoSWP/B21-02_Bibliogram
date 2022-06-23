@@ -260,7 +260,7 @@ label {
   text-decoration: none;
   color: #fff;
   font-size: 24px;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', arial, sans-serif;;
   font-style: normal;
   padding: 30px 16px;
 }
@@ -277,7 +277,7 @@ label {
 
 .main-text-page h1{
   font-size: 72px;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', arial, sans-serif;;
   font-style: normal;
   color: #fff;
   margin-left: 120px;
