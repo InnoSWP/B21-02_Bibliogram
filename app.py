@@ -116,7 +116,7 @@ def publications():
             "DOI",
         ]
 
-    papers = data.publications[data.filters].sort_values(by=data.sorting)
+    all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == "POST":
         if "filtration" in request.form:
@@ -127,19 +127,19 @@ def publications():
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
-            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
 
             if file_type == "tsv":
-                papers.to_csv("downloads/download.tsv", sep="\t")
+                all_papers.to_csv("downloads/download.tsv", sep="\t")
             elif file_type == "csv":
-                papers.to_csv("downloads/download.csv")
+                all_papers.to_csv("downloads/download.csv")
             elif file_type == "json":
-                papers.to_csv("downloads/download.json")
+                all_papers.to_csv("downloads/download.json")
             elif file_type == "xlsx":
-                papers.to_excel("downloads/download.xlsx")
+                all_papers.to_excel("downloads/download.xlsx")
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
@@ -149,9 +149,9 @@ def publications():
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
-            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=papers)
+    return render_template("publications_page.html", papers=all_papers)
 
 
 @app.route("/co-author=<int:id>")
