@@ -208,11 +208,9 @@ publications["Authors Names"] = publications["Authors Names"].apply(
     lambda x: ind_to_name(author_data, x)
 )
 publications["Authors Names"] = publications["Authors Names"].apply(
-    lambda x: ",\n"
-"".join(x)
+    lambda x: ",\n".join(x)
 )
-publications["Authors"] = publications["Authors"].apply(lambda x: ",\n"
-"".join(x))
+publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 
 # get statistics of IU
 uni = University()
