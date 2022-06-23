@@ -6,8 +6,6 @@ import json
 import string
 import requests
 import matplotlib.pyplot as plt
-import numpy as np
-from wordcloud import WordCloud
 from PIL import Image
 
 # password for user update
@@ -133,22 +131,6 @@ def ind_to_name(data_authors, authors_names):
     return authors_names
 
 
-# wordcloud generator
-# def create_wordcloud():
-#     review = "ComputerScience Chemistry Engineering Economics Econometrics Finance Mathematics Energy Physics Astronomy Multidisciplinary DecisionSciences " \
-#              "EarthPlanetarySciences MaterialsScience Arts Humanities Medicine Agricultural BiologicalSciences SocialSciences EnvironmentalScience " \
-#              "Neuroscience Psychology ChemicalEngineering HealthProfessions Business Management Accounting Immunology Microbiology Biochemistry Genetics MolecularBiology " \
-#              "Pharmacology Toxicology Pharmaceutics"
-#
-#     wordcloud = WordCloud(width=1240,
-#                           height=720,
-#                           background_color="rgba(237, 243, 248,0)",
-#                           colormap="tab10",
-#                           prefer_horizontal=0.01
-#                           ).generate(review)
-#
-#     # draw_wordcloud(wordcloud, (12,8))
-#     wordcloud.to_file('/static/image/wordcloud.png')
 
 # download data
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
@@ -237,7 +219,7 @@ fig, axes = plt.subplots(1, 1, figsize=(16, 12))
 axes.plot(x, y, '#004', lw=2)
 axes.grid(False)
 axes.bar(x, y, color='#036e8e', width=0.08)
-plt.ylim(ymin=0,ymax=2200)
+plt.ylim(ymin=0, ymax=2200)
 plt.rc('axes', labelsize=1000)    # fontsize of the x and y labels
 
 fig.savefig('static/images/graphic.png')   # save the figure to file
