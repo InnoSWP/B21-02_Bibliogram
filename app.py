@@ -121,7 +121,7 @@ def publications():
     if request.method == "POST":
         if "filtration" in request.form:
             data.filters = sum(
-                [["Title"], ["Authors Names"], request.form.getlist("show")], list()
+                [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
 
             if data.sorting not in data.filters:

@@ -3,7 +3,6 @@ from random import randint
 
 import pandas as pd
 import json
-import string
 import requests
 
 
@@ -154,7 +153,7 @@ papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 
 sorting = ""
-filters = list[string]
+filters = list()
 page_name = ""
 publications = papers
 word = "Authors Affiliation"
