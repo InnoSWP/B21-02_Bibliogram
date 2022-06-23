@@ -1,6 +1,5 @@
 import data
-from flask import Flask, render_template, url_for, request, send_file
-
+from flask import Flask, render_template, request, send_file, url_for
 
 app = Flask(__name__)
 
@@ -27,7 +26,7 @@ def main_page():
         amount_of_publications=data.uni.num_publications,
         number_of_researches=data.uni.num_researchers,
         publications_per_person=data.uni.public_per_person,
-        citations_per_person=data.uni.cit_per_person
+        citations_per_person=data.uni.cit_per_person,
     )
 
 
@@ -41,7 +40,7 @@ def about_section():
         number_of_researches=data.uni.num_researchers,
         pubications_per_person=data.uni.public_per_person,
         citations_per_person=data.uni.cit_per_person,
-        arrowUp=arrow_up
+        arrowUp=arrow_up,
     )
 
 
@@ -61,7 +60,7 @@ def features_section():
         number3=number3,
         number4=number4,
         arrowUp=arrow_up,
-        arrowDown=arrow_down
+        arrowDown=arrow_down,
     )
 
 
@@ -81,7 +80,7 @@ def search_author():
         "search_page.html",
         title="Search for authors",
         authors=authors,
-        add_data=add_data
+        add_data=add_data,
     )
 
 
@@ -93,10 +92,7 @@ def author(id):
     author_add_data = author_add_data.loc[author_data["name"]]
 
     return render_template(
-        "author_page.html",
-        author=author_data,
-        id=id,
-        add_data=author_add_data
+        "author_page.html", author=author_data, id=id, add_data=author_add_data
     )
 
 
@@ -124,7 +120,9 @@ def publications():
 
     if request.method == "POST":
         if "filtration" in request.form:
-            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
+            data.filters = sum(
+                [["Title"], ["Authors Names"], request.form.getlist("show")], list()
+            )
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -153,9 +151,7 @@ def publications():
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
-    return render_template(
-        "publications_page.html", papers=papers
-    )
+    return render_template("publications_page.html", papers=papers)
 
 
 @app.route("/co-author=<int:id>")
@@ -201,8 +197,25 @@ def author_publications(id):
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == "POST":
-        if "filtration" in request.form:
-            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
+
+        if "downloading" in request.form:
+            file_type = request.form["download"]
+
+            if file_type == "csv":
+                papers.to_csv("downloads/download.csv")
+            elif file_type == "tsv":
+                papers.to_csv("downloads/download.tsv", sep="\t")
+            elif file_type == "xlsx":
+                papers.to_excel("downloads/download.xlsx")
+            elif file_type == "json":
+                papers.to_csv("downloads/download.json")
+
+            return send_file(app.root_path + "\\downloads\\download." + file_type)
+
+        elif "filtration" in request.form:
+            data.filters = sum(
+                [["Title"], ["Authors Names"], request.form.getlist("show")], list()
+            )
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -217,19 +230,6 @@ def author_publications(id):
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-        elif "downloading" in request.form:
-            file_type = request.form["download"]
-
-            if file_type == "csv":
-                papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "xlsx":
-                papers.to_excel("downloads/download.xlsx")
-            elif file_type == "json":
-                papers.to_csv("downloads/download.json")
-
-            return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "author_publications.html", author=author_data, id=id, papers=papers
