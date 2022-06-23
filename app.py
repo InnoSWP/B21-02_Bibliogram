@@ -1,19 +1,19 @@
 import data
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request, url_for
 
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def main_page():
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
-    arrow = url_for('static', filename='images/arrow_up.jpg')
-    number1 = url_for('static', filename='images/1.jpg')
-    number2 = url_for('static', filename='images/2.jpg')
-    number3 = url_for('static', filename='images/3.jpg')
-    number4 = url_for('static', filename='images/4.jpg')
-    return render_template('base.html', title='Bibliogram',
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow = url_for("static", filename="images/arrow_up.jpg")
+    number1 = url_for("static", filename="images/1.jpg")
+    number2 = url_for("static", filename="images/2.jpg")
+    number3 = url_for("static", filename="images/3.jpg")
+    number4 = url_for("static", filename="images/4.jpg")
+    return render_template("base.html", title="Bibliogram",
                            main_logo=main_logo, main_title=main_title, arrowUp=arrow, number1=number1,
                            number2=number2,
                            number3=number3,
@@ -24,10 +24,10 @@ def main_page():
                            citations_per_person=data.uni.cit_per_person)
 
 
-@app.route('/aboutIU')
+@app.route("/aboutIU")
 def about_section():
-    arrowUp = url_for('static', filename='images/arrow_down.jpg')
-    return render_template('about_page.html', title='About IU',
+    arrowUp = url_for("static", filename="images/arrow_down.jpg")
+    return render_template("about_page.html", title="About IU",
                            amount_of_publications=data.uni.num_publications,
                            number_of_researches=data.uni.num_researchers,
                            pubications_per_person=data.uni.public_per_person,
@@ -35,54 +35,54 @@ def about_section():
                            arrowUp=arrowUp)
 
 
-@app.route('/features')
+@app.route("/features")
 def features_section():
-    number1 = url_for('static', filename='images/1.jpg')
-    number2 = url_for('static', filename='images/2.jpg')
-    number3 = url_for('static', filename='images/3.jpg')
-    number4 = url_for('static', filename='images/4.jpg')
-    arrow_up = url_for('static', filename='images/arrow_up.jpg')
-    arrow_down = url_for('static', filename='images/arrow_down.jpg')
-    return render_template('features_page.html', title='What to see here?',
+    number1 = url_for("static", filename="images/1.jpg")
+    number2 = url_for("static", filename="images/2.jpg")
+    number3 = url_for("static", filename="images/3.jpg")
+    number4 = url_for("static", filename="images/4.jpg")
+    arrow_up = url_for("static", filename="images/arrow_up.jpg")
+    arrow_down = url_for("static", filename="images/arrow_down.jpg")
+    return render_template("features_page.html", title="What to see here?",
                            number1=number1,
                            number2=number2,
                            number3=number3,
                            number4=number4, arrowUp=arrow_up, arrowDown=arrow_down)
 
 
-@app.route('/search', methods=['POST', 'GET'])
+@app.route("/search", methods=["POST", "GET"])
 def search_author():
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
     authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
     add_data = data.authors_add.set_index("name")
 
-    if request.method == 'POST':
-        author_name = request.form['author']
+    if request.method == "POST":
+        author_name = request.form["author"]
         filt = authors["Name"].apply(lambda x: x.lower()).str.contains(author_name.lower())
         authors = authors.loc[filt]
 
-    return render_template('search_page.html', title='Search for authors', authors=authors, add_data=add_data,
+    return render_template("search_page.html", title="Search for authors", authors=authors, add_data=add_data,
                            main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/author_id=<int:id>')
+@app.route("/author_id=<int:id>")
 def author(id):
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
     author_add_data = data.authors_add.set_index("name")
     author_add_data = author_add_data.loc[author_data["name"]]
 
-    return render_template('author_page.html', author=author_data, id=id, add_data=author_add_data,
+    return render_template("author_page.html", author=author_data, id=id, add_data=author_add_data,
                            main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/publications', methods=['POST', 'GET'])
+@app.route("/publications", methods=["POST", "GET"])
 def publications():
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
 
     # dataframe modification for further displaying
     if data.page_name != "general_publications":
@@ -94,9 +94,9 @@ def publications():
 
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         if "checkbox" in request.form:
-            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -111,26 +111,26 @@ def publications():
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template('publications_page.html', papers=papers, main_logo=main_logo, main_title=main_title)
+    return render_template("publications_page.html", papers=papers, main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/co-author=<int:id>')
+@app.route("/co-author=<int:id>")
 def co_authors(id):
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
     author_add_data = data.authors_add.set_index("name")
     author_add_data = author_add_data.loc[author_data["name"]]
 
-    return render_template('co-author.html', author=author_data, id=id, add_data=author_add_data, papers=data.papers,
+    return render_template("co-author.html", author=author_data, id=id, add_data=author_add_data, papers=data.papers,
                            main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/author_publications=<int:id>', methods=['POST', 'GET'])
+@app.route("/author_publications=<int:id>", methods=["POST", "GET"])
 def author_publications(id):
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
@@ -147,9 +147,9 @@ def author_publications(id):
     papers = data.publications[data.filters].sort_values(by=data.sorting)
     papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
-    if request.method == 'POST':
+    if request.method == "POST":
         if "checkbox" in request.form:
-            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist('show')], list())
+            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -166,17 +166,17 @@ def author_publications(id):
             papers = data.publications[data.filters].sort_values(by=data.sorting)
             papers["Authors Names"] = papers["Authors Names"].apply(lambda x: x + ", Maksim Rassabin")
 
-    return render_template('author_publications.html', author=author_data, id=id, papers=papers,
+    return render_template("author_publications.html", author=author_data, id=id, papers=papers,
                            main_logo=main_logo, main_title=main_title)
 
 
-@app.route('/test_public')
+@app.route("/test_public")
 def test_public():
-    main_logo = url_for('static', filename='images/dark_logo.png')
-    main_title = url_for('static', filename='images/innopolis_title.png')
-    return render_template('test_public.html', title='Bibliogram',
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+    return render_template("test_public.html", title="Bibliogram",
                            main_logo=main_logo, main_title=main_title)
 
 
-if __name__ == '__main__':
-    app.run(port=8080, host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(port=8080, host="0.0.0.0")
