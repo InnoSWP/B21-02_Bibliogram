@@ -5,7 +5,10 @@ import pandas as pd
 import json
 import string
 import requests
-
+import matplotlib.pyplot as plt
+import numpy as np
+from wordcloud import WordCloud
+from PIL import Image
 
 # password for user update
 password = "IU"
@@ -118,7 +121,6 @@ def dic_values_sum(dictionary):
 
 
 def ind_to_name(data_authors, authors_names):
-
     name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
     surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
     # temp_array = []
@@ -130,6 +132,23 @@ def ind_to_name(data_authors, authors_names):
             authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
     return authors_names
 
+
+# wordcloud generator
+# def create_wordcloud():
+#     review = "ComputerScience Chemistry Engineering Economics Econometrics Finance Mathematics Energy Physics Astronomy Multidisciplinary DecisionSciences " \
+#              "EarthPlanetarySciences MaterialsScience Arts Humanities Medicine Agricultural BiologicalSciences SocialSciences EnvironmentalScience " \
+#              "Neuroscience Psychology ChemicalEngineering HealthProfessions Business Management Accounting Immunology Microbiology Biochemistry Genetics MolecularBiology " \
+#              "Pharmacology Toxicology Pharmaceutics"
+#
+#     wordcloud = WordCloud(width=1240,
+#                           height=720,
+#                           background_color="rgba(237, 243, 248,0)",
+#                           colormap="tab10",
+#                           prefer_horizontal=0.01
+#                           ).generate(review)
+#
+#     # draw_wordcloud(wordcloud, (12,8))
+#     wordcloud.to_file('/static/image/wordcloud.png')
 
 # download data
 data = requests.get("https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data").json()
@@ -151,7 +170,6 @@ authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()
 
 papers["source_quartile"] = papers["source_quartile"].apply(lambda x: abs(str_to_int(x)))
 papers["citations"] = papers["citations"].apply(dic_values_sum)
-
 
 sorting = ""
 filters = list[string]
@@ -181,7 +199,6 @@ publications["Authors Names"] = publications["Authors Names"].apply(lambda x: in
 publications["Authors Names"] = publications["Authors Names"].apply(lambda x: ",\n".join(x))
 publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 
-
 # get statistics of IU
 uni = University()
 uni.num_researchers = authors.shape[0]
@@ -189,4 +206,44 @@ uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors['overall_citation'].sum() / uni.num_researchers
 
+
 # write(data, 'data_output.json')
+
+# creating a wordcloud
+# create_wordcloud()
+
+
+def date_citation():
+    dict = {}
+    for ind in publications.index:
+        if publications["Publication Date"][ind][0:4] not in dict:
+            dict[publications["Publication Date"][ind][0:4]] = publications["Citations"][ind]
+        else:
+            dict[publications["Publication Date"][ind][0:4]] += publications["Citations"][ind]
+
+    # return sorted(dict.items())
+    return dict
+
+
+tuple = date_citation()
+
+# print(tuple)
+myList = tuple.items()
+myList = sorted(myList)
+x, y = zip(*myList)
+
+fig, axes = plt.subplots(1, 1, figsize=(16, 12))
+
+axes.plot(x, y, '#004', lw=2)
+axes.grid(False)
+axes.bar(x, y, color='#036e8e', width=0.08)
+plt.ylim(ymin=0,ymax=2200)
+plt.rc('axes', labelsize=1000)    # fontsize of the x and y labels
+
+fig.savefig('static/images/graphic.png')   # save the figure to file
+plt.close(fig)
+
+im = Image.open("static/images/graphic.png")
+width, height = im.size
+im1 = im.crop((150, 130, width-150, height-100))
+im1.save('static/images/graphic.png')
