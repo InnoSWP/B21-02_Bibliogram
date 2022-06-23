@@ -129,14 +129,6 @@ def publications():
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-        elif "sorting" in request.form:
-            data.sorting = request.form["sort"]
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
-            papers = data.publications[data.filters].sort_values(by=data.sorting)
-
         elif "downloading" in request.form:
             file_type = request.form["download"]
 
@@ -150,6 +142,14 @@ def publications():
                 papers.to_excel("downloads/download.xlsx")
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
+
+        elif "sorting" in request.form:
+            data.sorting = request.form["sort"]
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
+            papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template("publications_page.html", papers=papers)
 
@@ -229,7 +229,6 @@ def author_publications(id):
                 data.sorting = "Title"
 
             papers = data.publications[data.filters].sort_values(by=data.sorting)
-
 
     return render_template(
         "author_publications.html", author=author_data, id=id, papers=papers
