@@ -176,9 +176,9 @@ data = requests.get(
 ).json()
 
 # authors = pd.DataFrame(data["authors"])
-authors = pd.read_json("data/authors_info.json")
-authors_add = pd.read_json("data/authors_4_0.json")
-papers = pd.read_csv("data/papers_v1.csv", index_col="id")
+authors = pd.read_json("../data/authors_info.json")
+authors_add = pd.read_json("../data/authors_4_0.json")
+papers = pd.read_csv("../data/papers_v1.csv", index_col="id")
 
 # dataframes modification
 authors["citations"] = authors["citations"].apply(dic_to_int)
@@ -315,7 +315,7 @@ plt.rc("axes", labelsize=1000)
 fig.savefig("static/images/graphic.png")
 plt.close(fig)
 
-im = Image.open("static/images/graphic.png")
+im = Image.open("../static/images/graphic.png")
 width, height = im.size
 im1 = im.crop((150, 130, width - 150, height - 100))
 im1.save("static/images/graphic.png")
