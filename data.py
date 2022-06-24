@@ -1,8 +1,10 @@
 import json
 from datetime import datetime
 from random import randint
+import matplotlib.pyplot as plt
 import pandas as pd
 import requests
+from PIL import Image
 
 # password for user update
 password = "IU"
@@ -119,7 +121,6 @@ def dic_values_sum(dictionary):
 
 
 def ind_to_name(data_authors, authors_names):
-
     name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
     surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
     # temp_array = []
@@ -161,7 +162,6 @@ papers["source_quartile"] = papers["source_quartile"].apply(
 )
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
-
 sorting = ""
 filters = [
     "Title",
@@ -188,7 +188,7 @@ publications.rename(
         "Source_quartile": "Quartile",
         "Authors_affils": word,
     },
-    inplace=True
+    inplace=True,
 )
 publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
 
@@ -223,7 +223,6 @@ publications["Authors Names"] = publications["Authors Names"].apply(
 )
 publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
 
-
 # get statistics of IU
 uni = University()
 uni.num_researchers = authors.shape[0]
@@ -231,4 +230,47 @@ uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
 
-# write(data, "data_output.json")
+# write(data, 'data_output.json')
+
+# creating a wordcloud
+# create_wordcloud()
+
+
+def date_citation():
+    dict = {}
+    for ind in publications.index:
+        if publications["Publication Date"][ind][0:4] not in dict:
+            dict[publications["Publication Date"][ind][0:4]] = publications[
+                "Citations"
+            ][ind]
+        else:
+            dict[publications["Publication Date"][ind][0:4]] += publications[
+                "Citations"
+            ][ind]
+
+    # return sorted(dict.items())
+    return dict
+
+
+tuple = date_citation()
+
+# print(tuple)
+myList = tuple.items()
+myList = sorted(myList)
+x, y = zip(*myList)
+
+fig, axes = plt.subplots(1, 1, figsize=(16, 12))
+
+axes.plot(x, y, "#004", lw=2)
+axes.grid(False)
+axes.bar(x, y, color="#036e8e", width=0.08)
+plt.ylim(ymin=0, ymax=2200)
+plt.rc("axes", labelsize=1000)
+
+fig.savefig("static/images/graphic.png")
+plt.close(fig)
+
+im = Image.open("static/images/graphic.png")
+width, height = im.size
+im1 = im.crop((150, 130, width - 150, height - 100))
+im1.save("static/images/graphic.png")
