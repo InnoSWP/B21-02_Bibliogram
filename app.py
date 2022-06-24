@@ -99,22 +99,7 @@ def author(id):
 @app.route("/publications", methods=["POST", "GET"])
 def publications():
     # dataframe modification for further displaying
-    if data.page_name != "general_publications":
-        data.page_name = "general_publications"
-        data.sorting = "Title"
-
-        data.filters = [
-            "Title",
-            "Source Type",
-            "Work Type",
-            "Publisher",
-            "Publication Date",
-            "Authors Names",
-            "Affiliation",
-            "Quartile",
-            "Citations",
-            "DOI",
-        ]
+    data.page_check("general_publications")
 
     all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
@@ -123,10 +108,7 @@ def publications():
             data.filters = sum(
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check()
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "downloading" in request.form:
@@ -144,11 +126,7 @@ def publications():
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "sorting" in request.form:
-            data.sorting = request.form["sort"]
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check_with(request.form["sort"])
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template("publications_page.html", papers=all_papers)
@@ -176,21 +154,7 @@ def author_publications(id):
     author_data = author_data.loc[id]
 
     # dataframe modification for further displaying
-    if data.page_name != author_data["name"]:
-        data.page_name = author_data["name"]
-        data.sorting = "Title"
-        data.filters = [
-            "Title",
-            "Source Type",
-            "Work Type",
-            "Publisher",
-            "Publication Date",
-            "Authors Names",
-            "Affiliation",
-            "Quartile",
-            "Citations",
-            "DOI",
-        ]
+    data.page_check(author_data["name"])
 
     # filt = data.publications["Authors"].str.contains(id)
 
@@ -216,18 +180,11 @@ def author_publications(id):
             data.filters = sum(
                 [["Title"], ["Authors Names"], request.form.getlist("show")], list()
             )
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check()
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "sorting" in request.form:
-            data.sorting = request.form["sort"]
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check_with(request.form["sort"])
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template(
