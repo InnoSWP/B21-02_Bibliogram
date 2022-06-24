@@ -2,8 +2,10 @@ import json
 from datetime import datetime
 from random import randint
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import requests
+from PIL import Image
 
 # password for user update
 password = "IU"
@@ -229,9 +231,13 @@ publications.rename(
     },
     inplace=True,
 )
-publications[authors_id] = publications[authors_affiliation].apply(lambda x: list(eval(x).keys()))
+publications[authors_id] = publications[authors_affiliation].apply(
+    lambda x: list(eval(x).keys())
+)
 
-publications[affiliation] = publications[authors_affiliation].apply(lambda x: eval(x).values())
+publications[affiliation] = publications[authors_affiliation].apply(
+    lambda x: eval(x).values()
+)
 publications[affiliation] = publications[affiliation].apply(
     lambda x: set(sum(x, list()))
 )
@@ -257,9 +263,7 @@ publications[authors_names] = publications[authors_id]
 publications[authors_names] = publications[authors_names].apply(
     lambda x: ind_to_name(author_data, x)
 )
-publications[authors_names] = publications[authors_names].apply(
-    lambda x: ",\n".join(x)
-)
+publications[authors_names] = publications[authors_names].apply(lambda x: ",\n".join(x))
 publications[authors_id] = publications[authors_id].apply(lambda x: ",\n".join(x))
 
 
