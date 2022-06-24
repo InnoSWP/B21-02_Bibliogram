@@ -83,13 +83,6 @@ body {
   text-decoration: none;
 }
 
-.light-up:hover {
-  background: #404040;
-  color: #fff;
-  font-family: "Open Sans", arial, sans-serif;
-  text-decoration: none;
-}
-
 a {
   text-decoration: none;
 }
@@ -159,17 +152,6 @@ a {
   margin-left: 120px;
 }
 
-.button-sort {
-  display: inline-block;
-  background-color: #072653;
-  min-width: 30%;
-  max-width: 30%;
-  height: 50px;
-  margin-left: 1.5%;
-  margin-right: 1.5%;
-  font-size: 27px;
-}
-
 .info-amm {
   display: inline-block;
 }
@@ -219,81 +201,79 @@ label {
   font-size: 24px;
 }
 
-
-.main_logo_title img{
+.main_logo_title img {
   max-width: 20%;
   max-height: auto;
   margin-left: 0px;
 }
 
-.round{
+.round {
   border-radius: 50%;
   max-width: 70px;
   max-height: auto;
 }
 
-.logo{
+.logo {
   width: 25%;
   height: auto;
-  margin-left: 0px;
   margin-bottom: 5px;
 }
 
-.logomargin{
+.logomargin {
   margin-left: 70px;
   margin-top: 10px;
   text-align: left;
 }
 
 #nav {
-  text-align:center;
+  text-align: center;
   width: 90%;
 }
 
-#nav li{
+#nav li {
   display: inline-block;
   margin-left: -20px;
 }
 
-#nav a{
+#nav a {
   display: block;
   text-decoration: none;
   color: #fff;
   font-size: 24px;
-  font-family: 'Open Sans', arial, sans-serif;;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   padding: 30px 16px;
 }
 
-.light-up:hover{
+.light-up:hover {
   background: #404040;
   color: #ccf;
 }
 
-.main-text-page{
+.main-text-page {
   margin-top: 84px;
   font-size: 320px;
 }
 
-.main-text-page h1{
+.main-text-page h1 {
   font-size: 72px;
-  font-family: 'Open Sans', arial, sans-serif;;
+  font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #fff;
   margin-left: 120px;
   line-height: 1.5;
 }
 
-.arrow{
+.arrow {
   height: 70px;
   width: auto;
 }
 
-#object-position-1{
-  margin-top:200px;
+#object-position-1 {
+  margin-top: 200px;
 }
 
-.button-sort{
+.button-sort {
   display: inline-block;
   background-color: #072653;
   min-width: 30%;
