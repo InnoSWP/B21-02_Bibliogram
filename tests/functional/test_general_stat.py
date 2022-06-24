@@ -1,4 +1,4 @@
-from app.data import uni
+from data import uni
 
 
 def test_main_page_info(test_client):

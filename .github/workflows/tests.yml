@@ -32,4 +32,4 @@ jobs:
           pip install -e .
 
       - name: Run tests
-        run: python -m pytest --cov -v --import-mode=append tests/
+        run: python -m pytest --cov cov-v --import-mode=append tests/
