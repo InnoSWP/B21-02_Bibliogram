@@ -171,7 +171,7 @@ def publications():
 
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=papers, main_logo=main_logo, main_title=main_title)
+    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo, main_title=main_title)
 
 
 
@@ -274,8 +274,6 @@ def test_public():
         "test_public.html",
         title="Bibliogram",
         main_logo=main_logo,
-        main_title=main_title,
-        main_logo=main_logo, 
         main_title=main_title,
     )
 
