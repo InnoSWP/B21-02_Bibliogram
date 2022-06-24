@@ -64,11 +64,8 @@ def features_section():
     )
 
 
-
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
     authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
     add_data = data.authors_add.set_index("name")
 
@@ -84,53 +81,25 @@ def search_author():
         title="Search for authors",
         authors=authors,
         add_data=add_data,
-        main_logo=main_logo, 
-        main_title=main_title,
     )
 
 
 @app.route("/author_id=<int:id>")
 def author(id):
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
     author_add_data = data.authors_add.set_index("name")
     author_add_data = author_add_data.loc[author_data["name"]]
 
     return render_template(
-        "author_page.html", 
-        author=author_data, 
-        id=id, 
-        add_data=author_add_data,
-        main_logo=main_logo, 
-        main_title=main_title,
+        "author_page.html", author=author_data, id=id, add_data=author_add_data
     )
-
 
 
 @app.route("/publications", methods=["POST", "GET"])
 def publications():
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
-
     # dataframe modification for further displaying
-    if data.page_name != "general_publications":
-        data.page_name = "general_publications"
-        data.sorting = "Title"
-
-        data.filters = [
-            "Title",
-            "Source Type",
-            "Work Type",
-            "Publisher",
-            "Publication Date",
-            "Authors Names",
-            "Affiliation",
-            "Quartile",
-            "Citations",
-            "DOI",
-        ]
+    data.page_check("general_publications")
 
     all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
@@ -139,14 +108,7 @@ def publications():
             data.filters = sum(
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
-#    if request.method == "POST":
-#        if "checkbox" in request.form:
-#            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
-
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check()
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "downloading" in request.form:
@@ -164,21 +126,14 @@ def publications():
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "sorting" in request.form:
-            data.sorting = request.form["sort"]
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check_with(request.form["sort"])
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo, main_title=main_title)
-
+    return render_template("publications_page.html", papers=all_papers)
 
 
 @app.route("/co-author=<int:id>")
 def co_authors(id):
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
     author_add_data = data.authors_add.set_index("name")
@@ -190,40 +145,23 @@ def co_authors(id):
         id=id,
         add_data=author_add_data,
         papers=data.papers,
-        main_logo=main_logo, 
-        main_title=main_title,
     )
 
 
 @app.route("/author_publications=<int:id>", methods=["POST", "GET"])
 def author_publications(id):
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
     # dataframe modification for further displaying
-    if data.page_name != author_data["name"]:
-        data.page_name = author_data["name"]
-        data.sorting = "Title"
-        data.filters = [
-            "Title",
-            "Source Type",
-            "Work Type",
-            "Publisher",
-            "Publication Date",
-            "Authors Names",
-            "Affiliation",
-            "Quartile",
-            "Citations",
-            "DOI",
-        ]
+    data.page_check(author_data["name"])
 
     # filt = data.publications["Authors"].str.contains(id)
 
     papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     if request.method == "POST":
+
         if "downloading" in request.form:
             file_type = request.form["download"]
 
@@ -242,27 +180,15 @@ def author_publications(id):
             data.filters = sum(
                 [["Title"], ["Authors Names"], request.form.getlist("show")], list()
             )
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check()
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "sorting" in request.form:
-            data.sorting = request.form["sort"]
-
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
-
+            data.sorting = data.sorting_check_with(request.form["sort"])
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template(
-        "author_publications.html", 
-        author=author_data, 
-        id=id, 
-        papers=papers,
-        main_logo=main_logo, 
-        main_title=main_title,
+        "author_publications.html", author=author_data, id=id, papers=papers
     )
 
 

@@ -1,10 +1,9 @@
 import json
 from datetime import datetime
 from random import randint
-import matplotlib.pyplot as plt
+
 import pandas as pd
 import requests
-from PIL import Image
 
 # password for user update
 password = "IU"
@@ -121,6 +120,7 @@ def dic_values_sum(dictionary):
 
 
 def ind_to_name(data_authors, authors_names):
+
     name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
     surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
     # temp_array = []
@@ -133,6 +133,39 @@ def ind_to_name(data_authors, authors_names):
         else:
             authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
     return authors_names
+
+
+def page_check(page):
+    global page_name
+    global filters
+    global sorting
+    if page_name != page:
+        page_name = page
+        sorting = "Title"
+        filters = [
+            "Title",
+            "Source Type",
+            "Work Type",
+            "Publisher",
+            "Publication Date",
+            "Authors Names",
+            "Affiliation",
+            "Quartile",
+            "Citations",
+            "DOI",
+        ]
+
+
+def sorting_check_with(new_sort):
+    if sorting not in filters:
+        return "Title"
+    return new_sort
+
+
+def sorting_check():
+    if sorting not in filters:
+        return "Title"
+    return sorting
 
 
 # download data
@@ -162,51 +195,57 @@ papers["source_quartile"] = papers["source_quartile"].apply(
 )
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
+source_type = "Source Type"
+work_type = "Work Type"
+authors_id = "Authors"
+authors_names = "Authors Names"
+public_date = "Publication Date"
+affiliation = "Affiliation"
+authors_affiliation = "Authors Affiliation"
 sorting = ""
 filters = [
     "Title",
-    "Source Type",
-    "Work Type",
     "Publisher",
-    "Publication Date",
-    "Authors Names",
-    "Affiliation",
     "Quartile",
     "Citations",
     "DOI",
+    source_type,
+    work_type,
+    authors_names,
+    affiliation,
+    public_date,
 ]
 page_name = ""
 publications = papers
-word = "Authors Affiliation"
 publications = publications.rename(columns=lambda x: x[0].upper() + x[1:])
 publications.rename(
     columns={
-        "Publication_date": "Publication Date",
+        "Publication_date": public_date,
         "Doi": "DOI",
-        "Source_type": "Source Type",
-        "Work_type": "Work Type",
+        "Source_type": source_type,
+        "Work_type": work_type,
         "Source_quartile": "Quartile",
-        "Authors_affils": word,
+        "Authors_affils": authors_affiliation,
     },
     inplace=True,
 )
-publications["Authors"] = publications[word].apply(lambda x: list(eval(x).keys()))
+publications[authors_id] = publications[authors_affiliation].apply(lambda x: list(eval(x).keys()))
 
-publications["Affiliation"] = publications[word].apply(lambda x: eval(x).values())
-publications["Affiliation"] = publications["Affiliation"].apply(
+publications[affiliation] = publications[authors_affiliation].apply(lambda x: eval(x).values())
+publications[affiliation] = publications[affiliation].apply(
     lambda x: set(sum(x, list()))
 )
-publications["Affiliation"] = publications["Affiliation"].apply(lambda x: ", ".join(x))
-publications.drop(columns=word, inplace=True)
+publications[affiliation] = publications[affiliation].apply(lambda x: ", ".join(x))
+publications.drop(columns=authors_affiliation, inplace=True)
 publications = publications.reindex(
     columns=[
         "Title",
-        "Source Type",
-        "Work Type",
+        source_type,
+        work_type,
         "Publisher",
-        "Publication Date",
-        "Authors",
-        "Affiliation",
+        public_date,
+        authors_id,
+        affiliation,
         "Quartile",
         "Citations",
         "DOI",
@@ -214,14 +253,15 @@ publications = publications.reindex(
 )
 
 author_data = authors
-publications["Authors Names"] = publications["Authors"]
-publications["Authors Names"] = publications["Authors Names"].apply(
+publications[authors_names] = publications[authors_id]
+publications[authors_names] = publications[authors_names].apply(
     lambda x: ind_to_name(author_data, x)
 )
-publications["Authors Names"] = publications["Authors Names"].apply(
+publications[authors_names] = publications[authors_names].apply(
     lambda x: ",\n".join(x)
 )
-publications["Authors"] = publications["Authors"].apply(lambda x: ",\n".join(x))
+publications[authors_id] = publications[authors_id].apply(lambda x: ",\n".join(x))
+
 
 # get statistics of IU
 uni = University()
@@ -230,7 +270,8 @@ uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
 
-# write(data, 'data_output.json')
+# write(data, "data_output.json")
+
 
 # creating a wordcloud
 # create_wordcloud()
