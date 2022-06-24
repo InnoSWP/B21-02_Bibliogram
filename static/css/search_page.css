@@ -5,12 +5,10 @@ body {
 
 .panel-delimeter {
   font-family: "Open Sans", arial, sans-serif;
-  height: 160px;
-  background-image: url("../images/panel2.png");
+  height: 140px;
+  background-image: url("../images/background_main_page_panel.jpg");
   background-size: 100%;
   background-position: center;
-  padding: 0;
-  margin: 0;
 }
 
 .panel-delimeter.sidebar-opened {
@@ -85,13 +83,6 @@ body {
   text-decoration: none;
 }
 
-.light-up:hover {
-  background: #404040;
-  color: #fff;
-  font-family: "Open Sans", arial, sans-serif;
-  text-decoration: none;
-}
-
 a {
   text-decoration: none;
 }
@@ -158,18 +149,7 @@ a {
 .title-results {
   margin-top: 1.5%;
   font-size: 48px;
-  margin-left: 20%;
-}
-
-.button-sort {
-  display: inline-block;
-  background-color: #072653;
-  min-width: 30%;
-  max-width: 30%;
-  height: 50px;
-  margin-left: 1.5%;
-  margin-right: 1.5%;
-  font-size: 27px;
+  margin-left: 120px;
 }
 
 .info-amm {
@@ -219,4 +199,82 @@ label {
   font-family: "Open Sans", arial, sans-serif;
   text-decoration: none;
   font-size: 24px;
+}
+
+.round {
+  border-radius: 50%;
+  max-width: 70px;
+  max-height: auto;
+}
+
+.logo {
+  width: 25%;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+.logomargin {
+  margin-left: 70px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+#nav {
+  text-align: center;
+  width: 90%;
+}
+
+#nav li {
+  display: inline-block;
+  margin-left: -20px;
+}
+
+#nav a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-family: "Open Sans", arial, sans-serif;
+  font-style: normal;
+  padding: 30px 16px;
+}
+
+.light-up:hover {
+  background: #404040;
+  color: #ccf;
+}
+
+.main-text-page {
+  margin-top: 84px;
+  font-size: 320px;
+}
+
+.main-text-page h1 {
+  font-size: 72px;
+  font-family: "Open Sans", arial, sans-serif;
+  font-style: normal;
+  color: #fff;
+  margin-left: 120px;
+  line-height: 1.5;
+}
+
+.arrow {
+  height: 70px;
+  width: auto;
+}
+
+#object-position-1 {
+  margin-top: 200px;
+}
+
+.button-sort {
+  display: inline-block;
+  background-color: #072653;
+  min-width: 30%;
+  max-width: 30%;
+  height: 50px;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  margin-bottom: 1.5%;
+  font-size: 27px;
 }

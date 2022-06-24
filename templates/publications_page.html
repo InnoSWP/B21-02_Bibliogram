@@ -11,32 +11,19 @@
 </head>
 <body>
 <div class="panel-delimeter">
-    <button class="openbtn"
-            onclick="toggleSidebar()" style="margin-top: 50px;">
-        <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Icon not found" style="filter: invert(100%); width:50px; height:50px;">
-    </button>
-    <h2 style="margin-top: -100px;">
-        Publications in IU
-    </h2>
+    <ul id="nav">
+        <li><a class="active" href="/"><div class="logomargin">
+                <img src="{{ main_logo }}" alt="Logo not found" class="round logo" id="button876765">
+                <img src="{{ main_title }}" alt="Title not found" class="logo">
+        </div></a></li>
+        <li><a href="/publications" class="light-up">Publications</a></li>
+        <li><a href="/search" class="light-up">Authors</a></li>
+        <li><a href="/aboutIU" class="light-up">About IU</a></li>
+    </ul>
 </div>
-
-<div id="my-sidebar" class="sidebar collapsed" style="font-family:'Open Sans', arial, sans-serif; text-decoration: none;">
-    <div>
-        <a href="/" class="light-up">
-            Main menu
-        </a>
-    </div>
-    <div>
-        <a href="/search" class="light-up">
-            Authors
-        </a>
-    </div>
-    <div>
-        <a href="/publications" class="light-up">
-            Publications
-        </a>
-    </div>
-</div>
+<h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: -0.5%; ">
+    Publications in IU
+</h1>
 
 <form method="post">
     <div class="container-md">
@@ -124,12 +111,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="sort-by-modal-label">Sort by</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
+                    <button type="button" class="btn-close button-class2131" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body div-class213123">
 
-                <div class="modal-body">
-                    <div class="form-check" style="margin-left: 36px;">
+                    <div class="form-check div-class123125" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="sort-by-doi" value="Title" name="sort">
                         <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-doi">Title</label>
                     </div>
