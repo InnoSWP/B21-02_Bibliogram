@@ -1,7 +1,6 @@
 import json
 from datetime import datetime
 from random import randint
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
@@ -154,7 +153,9 @@ authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values(
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 # authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
-authors["start_date"] = authors["papers_published"].apply(lambda x: min(x.keys()))
+authors["start_date"] = authors["papers_published"].apply(
+    lambda x: min([y for y in x.keys() if x[y] != 0])
+)
 
 papers["source_quartile"] = papers["source_quartile"].apply(
     lambda x: abs(str_to_int(x))
@@ -162,6 +163,18 @@ papers["source_quartile"] = papers["source_quartile"].apply(
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 sorting = ""
+filters = [
+    "Title",
+    "Source Type",
+    "Work Type",
+    "Publisher",
+    "Publication Date",
+    "Authors Names",
+    "Affiliation",
+    "Quartile",
+    "Citations",
+    "DOI",
+]
 page_name = ""
 publications = papers
 word = "Authors Affiliation"
@@ -216,7 +229,6 @@ uni.num_researchers = authors.shape[0]
 uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
-
 
 # write(data, 'data_output.json')
 
