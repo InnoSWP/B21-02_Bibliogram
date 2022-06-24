@@ -11,36 +11,36 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-<!--      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+    <!--      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
 
 </head>
 
 <body>
-    <ul id="nav">
-        <li><a class="active" href="/">
-                <div class="logomargin">
-                    <img src="{{ main_logo }}" alt="Logo not found" class="round logo">
-                    <img src="{{ main_title }}" alt="Title not found" class="logo">
-                </div>
-            </a>
-        </li>
-        <li>
-            <a href="/publications" class="light-up">Publications</a>
-        </li>
-        <li>
-            <a href="/search" class="light-up">Authors</a>
-        </li>
-        <li>
-            <a href="#bottom-block" class="light-up">About IU</a>
-        </li>
-    </ul>
+<ul id="nav">
+    <li><a class="active" href="/">
+        <div class="logomargin">
+            <img src="{{ main_logo }}" alt="Logo not found" class="round logo">
+            <img src="{{ main_title }}" alt="Title not found" class="logo">
+        </div>
+    </a>
+    </li>
+    <li>
+        <a href="/publications" class="light-up">Publications</a>
+    </li>
+    <li>
+        <a href="/search" class="light-up">Authors</a>
+    </li>
+    <li>
+        <a href="#bottom-block" class="light-up">About IU</a>
+    </li>
+</ul>
 
-    <div class="main-text-page">
-        <h1>
-            Research in the field<br>
-            of IT and Robotics
-        </h1>
-    </div>
+<div class="main-text-page">
+    <h1>
+        Research in the field<br>
+        of IT and Robotics
+    </h1>
+</div>
 
 <div class="panel-delimeter">
     <h2>
@@ -53,10 +53,12 @@
         <tbody>
         <tr>
             <th style="width: 50%" id="num1">
-                <img src="{{ number1 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                <img src="{{ number1 }}" alt="Logo not found" class="round logo table-label-image"
+                     style="width: 300px; height: auto;">
             </th>
             <th style="width: 50%" id="num2">
-                <img src="{{ number2 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                <img src="{{ number2 }}" alt="Logo not found" class="round logo table-label-image"
+                     style="width: 300px; height: auto;">
             </th>
         </tr>
         <tr>
@@ -73,10 +75,12 @@
         </tr>
         <tr>
             <th style="width: 50%" id="num3">
-                <img src="{{ number3 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                <img src="{{ number3 }}" alt="Logo not found" class="round logo table-label-image"
+                     style="width: 300px; height: auto;">
             </th>
             <th style="width: 50%" id="num4">
-                <img src="{{ number4 }}" alt="Logo not found" class="round logo table-label-image" style="width: 300px; height: auto;">
+                <img src="{{ number4 }}" alt="Logo not found" class="round logo table-label-image"
+                     style="width: 300px; height: auto;">
             </th>
         </tr>
         <tr>
@@ -96,13 +100,50 @@
 </div>
 
 <div class="arrow" id="scroll-to-top">
-    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"  align="right"></a>
+    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right"></a>
 </div>
 
 <div class="panel-delimeter" style="margin-top: 0px;" id="bottom-block">
     <h2>
         Innopolis University
     </h2>
+</div>
+
+<div class="container-xl row justify-content-center">
+    <table class="table table-bordered features-table" summary="Statistics of the University">
+        <tbody>
+        <tr>
+            <th style="width: 35%" id="num6564">
+                <h2 class="table-label-numbers">
+
+                    <img src="/static/images/wordcloud.png" alt="Missing" width="350px" height="auto"
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Research fields</h2>
+                </h2>
+            </th>
+            <th style="width: 35%" id="num34255">
+                <h2 class="table-label-numbers">
+                    <img src="/static/images/graphic.png" alt="Missing" width="600px" height="383px"
+                         style="border: 5px solid #004; margin-bottom: -100px; margin-top: -15px;">
+                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Citations by year</h2>
+                </h2>
+            </th>
+        </tr>
+        <!--        <tr>-->
+        <!--            <th style="width: 30%; padding-top:-10px;" id="label5123">-->
+        <!--                <h4 class="table-label-header">-->
+        <!--                    Research areas-->
+        <!--                </h4>-->
+        <!--            </th>-->
+        <!--            <th style="width: 30%;  padding-top:-10px;" id="label6423">-->
+        <!--                <h4 class="table-label-header">-->
+        <!--                    Number of researchers-->
+        <!--                </h4>-->
+        <!--            </th>-->
+        <!--        </tr>-->
+        </tbody>
+    </table>
 </div>
 
 <div class="container-xl row justify-content-center">
@@ -173,6 +214,8 @@
                   $('body,html').animate({scrollTop:0},700);
               });
           });
+
+
 </script>
 </body>
 </html>
