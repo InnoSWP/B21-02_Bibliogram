@@ -176,9 +176,9 @@ data = requests.get(
 ).json()
 
 # authors = pd.DataFrame(data["authors"])
-authors = pd.read_json("authors_info.json")
-authors_add = pd.read_json("authors_4_0.json")
-papers = pd.read_csv("papers_v1.csv", index_col="id")
+authors = pd.read_json("data/authors_info.json")
+authors_add = pd.read_json("data/authors_4_0.json")
+papers = pd.read_csv("data/papers_v1.csv", index_col="id")
 
 # dataframes modification
 authors["citations"] = authors["citations"].apply(dic_to_int)
