@@ -66,36 +66,36 @@ class University:
         self.cit_per_person = 0
 
 
-# write JSON file
-def write(dt, filename):
-    dt = json.dumps(dt)
-    dt = json.loads(str(dt))
-    with open(filename, "w", encoding="utf-8") as file:
-        json.dump(dt, file, indent=3)
+# # write JSON file
+# def write(dt, filename):
+#     dt = json.dumps(dt)
+#     dt = json.loads(str(dt))
+#     with open(filename, "w", encoding="utf-8") as file:
+#         json.dump(dt, file, indent=3)
 
 
-# automatic refresh of the remote DB
-def refresh():
-    hours = datetime.now().timetuple().tm_hour
-    minutes = datetime.now().timetuple().tm_min
-    seconds = datetime.now().timetuple().tm_sec
-    weekday = datetime.today().isoweekday()
-    status = "denied"
-    if weekday == 4 and hours == 3 and minutes == 0 and seconds == 0:
-        status = requests.get(
-            "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
-        ).json()["state"]
-    return status
+# # automatic refresh of the remote DB
+# def refresh():
+#     hours = datetime.now().timetuple().tm_hour
+#     minutes = datetime.now().timetuple().tm_min
+#     seconds = datetime.now().timetuple().tm_sec
+#     weekday = datetime.today().isoweekday()
+#     status = "denied"
+#     if weekday == 4 and hours == 3 and minutes == 0 and seconds == 0:
+#         status = requests.get(
+#             "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
+#         ).json()["state"]
+#     return status
 
 
-# update remote DB by user
-def update(input):
-    status = "denied"
-    if password == input:
-        status = requests.get(
-            "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
-        ).json()["state"]
-    return status
+# # update remote DB by user
+# def update(input):
+#     status = "denied"
+#     if password == input:
+#         status = requests.get(
+#             "https://2f163d15-91eb-4a19-bb02-eee0c23503a5.mock.pstmn.io/update"
+#         ).json()["state"]
+#     return status
 
 
 # convert String to Integer
@@ -281,7 +281,7 @@ uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
 # create_wordcloud()
 
 
-def date_citation():
+def date_citation():  # pragma: no cover
     dict = {}
     for ind in publications.index:
         if publications["Publication Date"][ind][0:4] not in dict:

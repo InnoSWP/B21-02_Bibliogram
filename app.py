@@ -44,24 +44,24 @@ def about_section():
     )
 
 
-@app.route("/features")
-def features_section():
-    number1 = url_for("static", filename="images/1.jpg")
-    number2 = url_for("static", filename="images/2.jpg")
-    number3 = url_for("static", filename="images/3.jpg")
-    number4 = url_for("static", filename="images/4.jpg")
-    arrow_up = url_for("static", filename="images/arrow_up.jpg")
-    arrow_down = url_for("static", filename="images/arrow_down.jpg")
-    return render_template(
-        "features_page.html",
-        title="What to see here?",
-        number1=number1,
-        number2=number2,
-        number3=number3,
-        number4=number4,
-        arrowUp=arrow_up,
-        arrowDown=arrow_down,
-    )
+# @app.route("/features")
+# def features_section():
+#     number1 = url_for("static", filename="images/1.jpg")
+#     number2 = url_for("static", filename="images/2.jpg")
+#     number3 = url_for("static", filename="images/3.jpg")
+#     number4 = url_for("static", filename="images/4.jpg")
+#     arrow_up = url_for("static", filename="images/arrow_up.jpg")
+#     arrow_down = url_for("static", filename="images/arrow_down.jpg")
+#     return render_template(
+#         "features_page.html",
+#         title="What to see here?",
+#         number1=number1,
+#         number2=number2,
+#         number3=number3,
+#         number4=number4,
+#         arrowUp=arrow_up,
+#         arrowDown=arrow_down,
+#     )
 
 
 @app.route("/search", methods=["POST", "GET"])
@@ -97,7 +97,7 @@ def author(id):
 
 
 @app.route("/publications", methods=["POST", "GET"])
-def publications():
+def publications():  # pragma: no cover
     # dataframe modification for further displaying
     data.page_check("general_publications")
 
@@ -149,7 +149,7 @@ def co_authors(id):
 
 
 @app.route("/author_publications=<int:id>", methods=["POST", "GET"])
-def author_publications(id):
+def author_publications(id):  # pragma: no cover
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
@@ -192,16 +192,16 @@ def author_publications(id):
     )
 
 
-@app.route("/test_public")
-def test_public():
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
-    return render_template(
-        "test_public.html",
-        title="Bibliogram",
-        main_logo=main_logo,
-        main_title=main_title,
-    )
+# @app.route("/test_public")
+# def test_public():
+#     main_logo = url_for("static", filename="images/dark_logo.png")
+#     main_title = url_for("static", filename="images/innopolis_title.png")
+#     return render_template(
+#         "test_public.html",
+#         title="Bibliogram",
+#         main_logo=main_logo,
+#         main_title=main_title,
+#     )
 
 
 if __name__ == "__main__":
