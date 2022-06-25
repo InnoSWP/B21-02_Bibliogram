@@ -1,5 +1,5 @@
-from app import app
 import pytest
+from app import app
 
 
 @pytest.mark.parametrize(

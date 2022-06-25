@@ -23,7 +23,7 @@ def test_coauthors_info(test_client, label):
         "Adil Mehood Khan",
     ]
 )
-def test_coauthors_info(test_client, name):
+def test_coauthors_data(test_client, name):
     response = test_client.post("/search", data={"author": name})
     assert response.status_code == 200
     assert bytes(name, "utf-8") in response.data

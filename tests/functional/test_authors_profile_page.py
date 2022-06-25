@@ -1,5 +1,5 @@
-from data import authors
 import pytest
+from data import authors
 
 
 @pytest.mark.parametrize(
