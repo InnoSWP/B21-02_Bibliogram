@@ -10,7 +10,7 @@ from data import uni
         b"Publications per person",
         b"Citations per person",
         b"Innopolis University",
-    ]
+    ],
 )
 def test_main_page_gen_stat(test_client, label):
     response = test_client.get("/")
@@ -25,7 +25,7 @@ def test_main_page_gen_stat(test_client, label):
         b"800000",
         b"1000000",
         b"7005003",
-    ]
+    ],
 )
 def test_main_page_gen_stat_content(test_client, uni_parameter):
     uni.num_researchers = 1457
@@ -46,7 +46,7 @@ def test_main_page_gen_stat_content(test_client, uni_parameter):
         b"What to see here?",
         b"Explore the statistics of a particular researcher",
         b"Explore the information about publications",
-    ]
+    ],
 )
 def test_main_page_info(test_client, label):
     response = test_client.get("/")
@@ -62,7 +62,7 @@ def test_main_page_info(test_client, label):
         b"What to see here?",
         b"Explore the statistics of a particular researcher",
         b"Explore the information about publications",
-    ]
+    ],
 )
 def test_main_page_error(test_client, label):
     response = test_client.post("/")

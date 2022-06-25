@@ -11,7 +11,7 @@ import pytest
         b"Peter Johnson",
         b"Caleb Blackgate",
         b"Alexey Petrov",
-    ]
+    ],
 )
 def test_coauthors_info(test_client, label):
     response = test_client.get("/co-author=57186538600")

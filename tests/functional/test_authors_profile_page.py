@@ -9,7 +9,7 @@ from data import authors
         b"Number of citations",
         b"H-index",
         b"Research beginning year",
-    ]
+    ],
 )
 def test_author_info(test_client, label):
     response = test_client.get("/author_id=57186538600")
@@ -23,7 +23,7 @@ def test_author_info(test_client, label):
         "papers_number",
         "overall_citation",
         "hirsch_ind",
-    ]
+    ],
 )
 def test_author_data_error(test_client, parameter):
     with pytest.raises(AssertionError):

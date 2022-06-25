@@ -21,7 +21,7 @@ def test_coauthors_info(test_client, label):
         "Maksim Rassabin",
         "Mohamad Kassab",
         "Adil Mehood Khan",
-    ]
+    ],
 )
 def test_coauthors_data(test_client, name):
     response = test_client.post("/search", data={"author": name})

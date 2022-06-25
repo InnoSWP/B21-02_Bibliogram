@@ -11,7 +11,7 @@ from app import app
         "Citations",
         "Work Type",
         "Source Type",
-    ]
+    ],
 )
 def test_authors_publications_sorting(test_client, sort_type):
     app.test_client().post(
@@ -26,7 +26,7 @@ def test_authors_publications_sorting(test_client, sort_type):
     [
         ["Publication Date", "Quartile", "Citations", "Work Type", "Source Type"],
         ["Publication Date", "Quartile", "Citations", "Work Type", "Source Type"],
-    ]
+    ],
 )
 def test_authors_publications_filtration(test_client, filtration):
     app.test_client().post(
@@ -42,7 +42,7 @@ def test_authors_publications_filtration(test_client, filtration):
     [
         ["Publication Date", "Quartile", "Citations", "Work Type", "Source Type"],
         ["Publication Date", "Quartile", "Citations", "Work Type", "Source Type"],
-    ]
+    ],
 )
 def test_authors_publications_filtration_error(test_client, filtration):
     app.test_client().post(
@@ -61,7 +61,7 @@ def test_authors_publications_filtration_error(test_client, filtration):
         "TSV",
         "JSON",
         "XLSX",
-    ]
+    ],
 )
 def test_authors_publications_downloading(test_client, file_type):
     app.test_client().post(
