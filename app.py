@@ -63,6 +63,7 @@ def features_section():
         arrowDown=arrow_down,
     )
 
+
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -105,6 +106,7 @@ def author(id):
         main_title=mains_title,
     )
 
+
 @app.route("/publications", methods=["POST", "GET"])
 def publications():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -137,9 +139,9 @@ def publications():
             data.filters = sum(
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
-#    if request.method == "POST":
-#        if "checkbox" in request.form:
-#            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
+            #    if request.method == "POST":
+            #        if "checkbox" in request.form:
+            #            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -168,9 +170,16 @@ def publications():
 
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo,
-                           main_title=main_title, arrow_left=arrow_left, arrow_right=arrow_right,
-                           number=1,)
+    return render_template(
+        "publications_page.html",
+        papers=all_papers,
+        main_logo=main_logo,
+        main_title=main_title,
+        arrow_left=arrow_left,
+        arrow_right=arrow_right,
+        number=1,
+    )
+
 
 @app.route("/co-author=<int:id>")
 def co_authors(id):
