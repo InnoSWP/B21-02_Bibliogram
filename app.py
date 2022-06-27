@@ -30,40 +30,6 @@ def main_page():
     )
 
 
-@app.route("/aboutIU")
-def about_section():
-    arrow_up = url_for("static", filename="images/arrow_down.jpg")
-    return render_template(
-        "about_page.html",
-        title="About IU",
-        amount_of_publications=data.uni.num_publications,
-        number_of_researches=data.uni.num_researchers,
-        pubications_per_person=data.uni.public_per_person,
-        citations_per_person=data.uni.cit_per_person,
-        arrowUp=arrow_up,
-    )
-
-
-@app.route("/features")
-def features_section():
-    number1 = url_for("static", filename="images/1.jpg")
-    number2 = url_for("static", filename="images/2.jpg")
-    number3 = url_for("static", filename="images/3.jpg")
-    number4 = url_for("static", filename="images/4.jpg")
-    arrow_up = url_for("static", filename="images/arrow_up.jpg")
-    arrow_down = url_for("static", filename="images/arrow_down.jpg")
-    return render_template(
-        "features_page.html",
-        title="What to see here?",
-        number1=number1,
-        number2=number2,
-        number3=number3,
-        number4=number4,
-        arrowUp=arrow_up,
-        arrowDown=arrow_down,
-    )
-
-
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -272,13 +238,13 @@ def author_publications(id):
     )
 
 
-@app.route("/test_public")
-def test_public():
+@app.route("/refresh")
+def refresh():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+
     return render_template(
-        "test_public.html",
-        title="Bibliogram",
+        "refresh_page.html",
         main_logo=main_logo,
         main_title=main_title,
     )
