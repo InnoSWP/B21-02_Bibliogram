@@ -278,3 +278,18 @@ label {
   margin-bottom: 1.5%;
   font-size: 27px;
 }
+
+.arrow-switch {
+  display: inline-block;
+}
+
+#page {
+  width: 3%;
+  display: inline-block;
+  text-align: center;
+}
+
+.page-switch {
+  text-align: center;
+  margin-bottom: 1%;
+}

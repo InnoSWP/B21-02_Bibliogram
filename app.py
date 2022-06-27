@@ -64,7 +64,6 @@ def features_section():
     )
 
 
-
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -84,35 +83,36 @@ def search_author():
         title="Search for authors",
         authors=authors,
         add_data=add_data,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
 
 @app.route("/author_id=<int:id>")
 def author(id):
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
-    author_data = data.authors.set_index("id")
-    author_data = author_data.loc[id]
-    author_add_data = data.authors_add.set_index("name")
-    author_add_data = author_add_data.loc[author_data["name"]]
+    mains_logo = url_for("static", filename="images/dark_logo.png")
+    mains_title = url_for("static", filename="images/innopolis_title.png")
+    authors_data = data.authors.set_index("id")
+    authors_data = authors_data.loc[id]
+    authors_add_data = data.authors_add.set_index("name")
+    authors_add_data = authors_add_data.loc[authors_data["name"]]
 
     return render_template(
-        "author_page.html", 
-        author=author_data, 
-        id=id, 
-        add_data=author_add_data,
-        main_logo=main_logo, 
-        main_title=main_title,
+        "author_page.html",
+        author=authors_data,
+        id=id,
+        add_data=authors_add_data,
+        main_logo=mains_logo,
+        main_title=mains_title,
     )
-
 
 
 @app.route("/publications", methods=["POST", "GET"])
 def publications():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow_left = url_for("static", filename="images/arrow_left.jpg")
+    arrow_right = url_for("static", filename="images/arrow_right.jpg")
 
     # dataframe modification for further displaying
     if data.page_name != "general_publications":
@@ -139,10 +139,9 @@ def publications():
             data.filters = sum(
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
-#    if request.method == "POST":
-#        if "checkbox" in request.form:
-#            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
-
+            #    if request.method == "POST":
+            #        if "checkbox" in request.form:
+            #            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
 
             if data.sorting not in data.filters:
                 data.sorting = "Title"
@@ -171,8 +170,15 @@ def publications():
 
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo, main_title=main_title)
-
+    return render_template(
+        "publications_page.html",
+        papers=all_papers,
+        main_logo=main_logo,
+        main_title=main_title,
+        arrow_left=arrow_left,
+        arrow_right=arrow_right,
+        number=1,
+    )
 
 
 @app.route("/co-author=<int:id>")
@@ -190,7 +196,7 @@ def co_authors(id):
         id=id,
         add_data=author_add_data,
         papers=data.papers,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
@@ -257,11 +263,11 @@ def author_publications(id):
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template(
-        "author_publications.html", 
-        author=author_data, 
-        id=id, 
+        "author_publications.html",
+        author=author_data,
+        id=id,
         papers=papers,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
