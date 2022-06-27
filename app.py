@@ -91,20 +91,20 @@ def search_author():
 
 @app.route("/author_id=<int:id>")
 def author(id):
-    main_logo = url_for("static", filename="images/dark_logo.png")
-    main_title = url_for("static", filename="images/innopolis_title.png")
-    author_data = data.authors.set_index("id")
-    author_data = author_data.loc[id]
-    author_add_data = data.authors_add.set_index("name")
-    author_add_data = author_add_data.loc[author_data["name"]]
+    mains_logo = url_for("static", filename="images/dark_logo.png")
+    mains_title = url_for("static", filename="images/innopolis_title.png")
+    authors_data = data.authors.set_index("id")
+    authors_data = authors_data.loc[id]
+    authors_add_data = data.authors_add.set_index("name")
+    authors_add_data = authors_add_data.loc[authors_data["name"]]
 
     return render_template(
         "author_page.html", 
-        author=author_data, 
+        author=authors_data,
         id=id, 
-        add_data=author_add_data,
-        main_logo=main_logo, 
-        main_title=main_title,
+        add_data=authors_add_data,
+        main_logo=mains_logo,
+        main_title=mains_title,
     )
 
 
