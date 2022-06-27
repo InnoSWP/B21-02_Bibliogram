@@ -16,7 +16,13 @@ The repository includes:
 
 ![image](https://user-images.githubusercontent.com/71354878/175936571-aa44bd08-656b-4b65-ab17-3792be6b6d04.png)
 
-Bibliogram License
+
+Лицензия с открытым исходным кодом защищает участников и пользователей. Компании и опытные разработчики не будут трогать проект без этой защиты.
+A short and simple permissive license with conditions only requiring preservation of copyright and license notices. 
+Лицензия MIT кратка и по делу. Это позволяет людям делать с вашим проектом практически все, что они хотят
+We chose MIT because we want it simple and permissive, не паримся насчет work in a community nor sharing improvements like in other types of licenses.
+
+MIT License
 
 Copyright (c) 2022 Shulepin D.A.
               2022 Sokolov Y.
