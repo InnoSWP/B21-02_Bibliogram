@@ -63,8 +63,6 @@ def features_section():
         arrowDown=arrow_down,
     )
 
-
-
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -84,7 +82,7 @@ def search_author():
         title="Search for authors",
         authors=authors,
         add_data=add_data,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
@@ -99,15 +97,13 @@ def author(id):
     authors_add_data = authors_add_data.loc[authors_data["name"]]
 
     return render_template(
-        "author_page.html", 
+        "author_page.html",
         author=authors_data,
-        id=id, 
+        id=id,
         add_data=authors_add_data,
         main_logo=mains_logo,
         main_title=mains_title,
     )
-
-
 
 @app.route("/publications", methods=["POST", "GET"])
 def publications():
@@ -145,7 +141,6 @@ def publications():
 #        if "checkbox" in request.form:
 #            data.filters = sum([["Title"], ["Authors Names"], request.form.getlist("show")], list())
 
-
             if data.sorting not in data.filters:
                 data.sorting = "Title"
 
@@ -177,8 +172,6 @@ def publications():
                            main_title=main_title, arrow_left=arrow_left, arrow_right=arrow_right,
                            number=1,)
 
-
-
 @app.route("/co-author=<int:id>")
 def co_authors(id):
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -194,7 +187,7 @@ def co_authors(id):
         id=id,
         add_data=author_add_data,
         papers=data.papers,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
@@ -261,11 +254,11 @@ def author_publications(id):
             papers = data.publications[data.filters].sort_values(by=data.sorting)
 
     return render_template(
-        "author_publications.html", 
-        author=author_data, 
-        id=id, 
+        "author_publications.html",
+        author=author_data,
+        id=id,
         papers=papers,
-        main_logo=main_logo, 
+        main_logo=main_logo,
         main_title=main_title,
     )
 
