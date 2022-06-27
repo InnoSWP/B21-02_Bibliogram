@@ -113,6 +113,8 @@ def author(id):
 def publications():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow_left = url_for("static", filename="images/arrow_left.jpg")
+    arrow_right = url_for("static", filename="images/arrow_right.jpg")
 
     # dataframe modification for further displaying
     if data.page_name != "general_publications":
@@ -171,7 +173,9 @@ def publications():
 
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo, main_title=main_title)
+    return render_template("publications_page.html", papers=all_papers, main_logo=main_logo,
+                           main_title=main_title, arrow_left=arrow_left, arrow_right=arrow_right,
+                           number=1,)
 
 
 
