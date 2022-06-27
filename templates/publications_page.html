@@ -136,7 +136,7 @@
                 </div>
                 <div class="modal-body div-class213123">
 
-                    <div class="form-check div-class123125" style="margin-left: 36px;">
+                    <div class="form-check div-class123125 block-liner" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="sort-by-doi" value="Title" name="sort">
                         <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-doi">Title</label>
                     </div>
@@ -175,6 +175,15 @@
                                name="sort">
                         <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="sort-by-citations">Citations count</label>
+                    </div>
+                    <div class="form-check form-switch block-liner" style="margin-left: 60%; margin-top: -37%;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="order" name="order"
+                               value="Order"
+                               checked style="margin-top: -86%;"
+                               onclick="ordering(this, 'label-type');">
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="order"
+                               name="label-type" id="label-type">Descending Order</label>
                     </div>
                 </div>
 
@@ -283,11 +292,11 @@
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
-
-
-
-
 </script>
-
+<script>
+    function ordering(chk, label) {
+                        document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
+                        }
+</script>
 </body>
 </html>
