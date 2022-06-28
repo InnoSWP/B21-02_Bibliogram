@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from random import randint
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
@@ -290,8 +291,13 @@ rects = ax.patches
 for rect, label in zip(rects, y):
     height = rect.get_height()
     ax.text(
-        rect.get_x() + rect.get_width() / 2, height + 5, label, ha="center", va="bottom",
-        family="Open Sans, arial", size="x-large"
+        rect.get_x() + rect.get_width() / 2,
+        height + 5,
+        label,
+        ha="center",
+        va="bottom",
+        family="Open Sans, arial",
+        size="x-large",
     )
 
 ax.plot(x, y, "#004", lw=2)
