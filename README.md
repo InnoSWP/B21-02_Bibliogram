@@ -17,10 +17,7 @@ The repository includes:
 ![image](https://user-images.githubusercontent.com/71354878/175936571-aa44bd08-656b-4b65-ab17-3792be6b6d04.png)
 
 
-Лицензия с открытым исходным кодом защищает участников и пользователей. Компании и опытные разработчики не будут трогать проект без этой защиты.
-A short and simple permissive license with conditions only requiring preservation of copyright and license notices. 
-Лицензия MIT кратка и по делу. Это позволяет людям делать с вашим проектом практически все, что они хотят
-We chose MIT because we want it simple and permissive, не паримся насчет work in a community nor sharing improvements like in other types of licenses.
+Our team choose MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for out team. The license is needed because our team want to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, MIT license is the most appropriate protection for us and possible users.
 
 MIT License
 
