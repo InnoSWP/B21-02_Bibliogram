@@ -139,10 +139,10 @@ def publications():
         elif "page" in request.form:
             number = request.form["page"]
         elif "right.x" in request.form or "right.y" in request.form:
-            number+=1
+            number += 1
         elif "left.x" in request.form or "left.y" in request.form:
-            if number>1:
-                number-=1
+            if number > 1:
+                number -= 1
 
     return render_template(
         "publications_page.html",
