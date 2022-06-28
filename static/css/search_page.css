@@ -112,7 +112,7 @@ a {
   height: 48px;
   left: 1059px;
   top: 150px;
-  background: #072653;
+  background: #12203d;
   border-radius: 5px;
   color: #fff;
 }
@@ -269,9 +269,9 @@ label {
 
 .button-sort {
   display: inline-block;
-  background-color: #072653;
-  min-width: 18%;
-  max-width: 18%;
+  background-color: #12203d;
+  min-width: 23%;
+  max-width: 23%;
   height: 50px;
   margin-left: 1%;
   margin-right: 1%;

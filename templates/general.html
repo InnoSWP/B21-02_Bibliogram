@@ -25,7 +25,7 @@
         </li>
         <li>
 
-            <a href="/publications" class="light-up">Publications</a>
+            <a href="/general" class="light-up">Publications</a>
 
         </li>
         <li>
@@ -42,19 +42,17 @@
     </ul>
 
 </div>
-<h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: -0.5%; ">
-    Latest updates
+<ul class="nav nav-tabs" style="background-color: #050911">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/general" style="color: #050911">General statistics</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/publications" style="color: #fff">All publications</a>
+    </li>
+</ul>
+<h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: 3%; ">
+    General statistics about publications
 </h1>
-<div class="container-md">
-    <a href="/publications" style="text-decoration: none;">
-        <div class="d-flex" style="margin-left: 75%;">
-            <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#parameters"
-                    style="color:#fff; margin-top: -15%;">
-                See all publications
-            </button>
-        </div>
-    </a>
-</div>
 <div class="container author-catalogue">
     <table class="table table-bordered">
         <caption></caption>
@@ -127,6 +125,7 @@
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
+
 
 
 
