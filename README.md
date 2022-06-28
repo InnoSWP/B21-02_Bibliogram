@@ -48,6 +48,12 @@ If you want to choose a version of the data, select one of the displayed. Also, 
 
 ## List of features
 
++ Sorting system for the tables
++ Filtration system for the tables
++ Ability to choose parameters in the tables
++ Download data
++ 
+
 ## Project installation
 
 The repository includes:
