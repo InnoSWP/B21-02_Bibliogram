@@ -15,30 +15,34 @@ After the welcome part, you can know more about the goals that you can achive us
 At the end of main page, you can see general statistics of Innopolis University (you will be here by clicking the field "About IU" in the header).
 The arrow at the right bottom will open welcome part of the main page.
 
-2. **Publications of IU**
+2. **General statistics of publications** (by clicking on Publications in header)
 
 The header works identically to the main page. 
+Here you can see general statistics of publications in Innopolis University. 
+
+3. **Publications of IU**
+
 The main part of this page is a table with the data about the publications of IU selected by some criteria.
 The middle of the page contains 4 buttons. Clicking on one of them will open a modal window. Using "Show parameters" you can choose which fields of the table to show. "Sort by" will sort by selected parameters in the chosen order. "Filter by" helps to specify year, source and work type, amount of citations and quartile. The "Download statistics" button suggest to choose a type of the file.
 
-3. **Find author** (by clicking on Authors in header)
+4. **Find author** (by clicking on Authors in header)
 
 Here you can select the author whose profile you want to view. Just scroll down. Also you can write a name of the researcher in the searching field and press button "Search" or Enter. Then just click on the field corresponding to the person you are looking for.
 
-4. **Author's profile**
+5. **Author's profile**
 
 This page contains the full name of the researcher, his/her photo, department, scientific fields and general statistics (amount of publications and citations, h-index and research beginning year).
 In the lower header you can choose the type of information about the selected author (Profile, Co-authors, Publications).
 
-5. **Co-authors**
+6. **Co-authors**
 
 This page contains the information about people who have ever conducted a joint study with the selected researcher. The usage possibilities are similar to the publications page. 
 
-6. **Author's publications**
+7. **Author's publications**
 
 This page contains the information about the studies of the selected researcher. The usage possibilities are similar to the publications page. 
 
-7. **Refresh**
+8. **Refresh**
 
 If you want to choose a version of the data, select one of the displayed. Also, you can call a new version by pressing "Refresh now" button.
 
