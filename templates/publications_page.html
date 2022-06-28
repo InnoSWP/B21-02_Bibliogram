@@ -37,7 +37,7 @@
                 Show parameters
             </button>
             <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#sort-by-modal"
-                    style="color:#fff; margin-top: 5%;">
+                    style="color:#fff; margin-top: 5%;" id="jinja">
                 Sort by
             </button>
             <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#filter-by-modal"
@@ -492,9 +492,11 @@
             <img src="{{arrow_left}}" alt="Logo not found" width="45%" height="auto" style="border-radius: 50%;">
         </a>
     </div>
+    <form id="page-number" class="arrow-switch" onsubmit="fnc()" style="width:150px;">
     <input class="form-control arrow-switch" type="text"
            placeholder="{{number}}" aria-label="Search"
-           name="page" id="page">
+           name="page" id="page" style="width:100px;">
+        </form>
     <div class="arrow-switch">
         <a href="/publications" class="lighter-up">
             <img src="{{arrow_right}}" alt="Logo not found" width="45%" height="auto" style="border-radius: 50%;">
@@ -514,6 +516,14 @@
     function ordering(chk, label) {
                         document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
                         }
+</script>
+<script>
+    $("#page-number").keyup(function(event){
+    if(event.keyCode == 13){
+        event.preventDefault();
+         document.getElementById("jinja").click();
+    }
+});
 </script>
 </body>
 </html>
