@@ -1,7 +1,9 @@
 # Bibliogram
-This is an implementation of analytics System for Innopolis University bibliometrics on Python 3 (Flask). The system gets bibliometric information about Innopolis publications and authors, which was taken by web-scrapping, and provides user-friendly web-application for displaying it.
+This is an implementation of analytics system for Innopolis University bibliometrics on Python 3. The system gets bibliometric information about Innopolis publications and authors, which was taken by web-scrapping, and provides user-friendly web-application for displaying it.
 
-![image](https://user-images.githubusercontent.com/71354878/175934950-7f2f0916-3249-4b82-9e06-be49c38f542f.png)
+### Video-demonstration of the application:
+
+https://user-images.githubusercontent.com/95312480/176195740-b23b22fe-cb3a-4929-b54e-8f010efe30fd.mp4
 
 The repository includes:
 
@@ -14,12 +16,9 @@ The repository includes:
 - Unit and Functional Tests (on PyTest and PyTest-Cov)
 - Database of publications and researches
 
-![image](https://user-images.githubusercontent.com/71354878/175936571-aa44bd08-656b-4b65-ab17-3792be6b6d04.png)
-
+## MIT License
 
 Our team choose MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for out team. The license is needed because our team want to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, MIT license is the most appropriate protection for us and possible users.
-
-MIT License
 
 Copyright (c) 2022 Shulepin D.A.
               2022 Sokolov Y.
