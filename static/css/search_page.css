@@ -221,7 +221,7 @@ label {
 
 #nav {
   text-align: center;
-  width: 90%;
+  width: 100%;
 }
 
 #nav li {
@@ -270,11 +270,30 @@ label {
 .button-sort {
   display: inline-block;
   background-color: #072653;
-  min-width: 30%;
-  max-width: 30%;
+  min-width: 22%;
+  max-width: 22%;
   height: 50px;
   margin-left: 1.5%;
   margin-right: 1.5%;
   margin-bottom: 1.5%;
   font-size: 27px;
+}
+
+.arrow-switch {
+  display: inline-block;
+}
+
+#page {
+  width: 3%;
+  display: inline-block;
+  text-align: center;
+}
+
+.page-switch {
+  text-align: center;
+  margin-bottom: 1%;
+}
+
+.block-liner {
+  display: inline-block;
 }

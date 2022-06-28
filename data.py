@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from random import randint
+from photos import photos_dic
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -9,50 +10,6 @@ from PIL import Image
 
 # password for user update
 password = "IU"
-
-
-# authors from IU
-# class Author:
-#     id: int
-#     name: str
-#     photo_link: str
-#     overall_citation: int
-#     citations: {}
-#     papers_published: {}
-#     institution: str
-#     department: str
-#     hirsch_ind: int
-#     disciplines: []
-#     papers_id: []
-#
-#     def __init__(self, author):
-#         self.id = author.id
-#         self.name = author.name
-#         self.photo_link = author.photo_link
-#         self.overall_citation = author.overall_citation
-#         self.citations = author.citations
-#         self.papers_published = author.papers_published
-#         self.institution = author.institution
-#         self.department = author.department
-#         self.hirsch_ind = author.hirsch_ind
-#         self.disciplines = author.disciplines
-#         self.papers_id = author.paper_id  # name of class object differs from name of JSON object
-#
-#
-# # papers published in IU
-# class Paper:
-#     id: int
-#     title: str
-#     publication_year: int
-#     authors_id: []
-#     citations: {}
-#
-#     def __init__(self, paper):
-#         self.id = paper.id
-#         self.title = paper.title
-#         self.publication_year = paper.publication_year
-#         self.authors_id = paper.authors  # name of class object differs from name of JSON object
-#         self.citations = paper.citations
 
 
 # general statistics of IU
@@ -64,14 +21,6 @@ class University:
 
     def __init__(self):
         self.cit_per_person = 0
-
-
-# # write JSON file
-# def write(dt, filename):
-#     dt = json.dumps(dt)
-#     dt = json.loads(str(dt))
-#     with open(filename, "w", encoding="utf-8") as file:
-#         json.dump(dt, file, indent=3)
 
 
 # # automatic refresh of the remote DB
@@ -103,7 +52,7 @@ def str_to_int(string_word):
     return int(string_word)
 
 
-# convert String keys to Integer keys in dictionary
+# convert String values to Integer values in dictionary
 def dic_to_int(dictionary):
     for key in dictionary.keys():
         dictionary[key] = int(dictionary.get(key))
@@ -121,20 +70,16 @@ def dic_values_sum(dictionary):
     return sum(map(int, df.values()))
 
 
-def ind_to_name(data_authors, authors_names):
+def ind_to_name(data_authors, author_id):
+    temp_names = []
+    list_id = list(data_authors["id"].values)
+    data_authors = data_authors.set_index("id")
 
-    name = ["Michael", "Laura", "Jack", "Daniel", "Robbin", "Bruce", "Stephen"]
-    surname = ["Johns", "Black", "Jordan", "White", "Oscar", "Lee", "Castle"]
-    # temp_array = []
+    for au_id in author_id:
+        if au_id in list_id:
+            temp_names.append(data_authors.loc[au_id]["name"])
 
-    for i in range(len(authors_names)):
-        if authors_names[i] in list(data_authors["id"].values):
-            authors_names[i] = data_authors.set_index("id").loc[
-                authors_names[i], "name"
-            ]
-        else:
-            authors_names[i] = name[randint(0, 6)] + " " + surname[randint(0, 6)]
-    return authors_names
+    return temp_names
 
 
 def page_check(page):
@@ -176,35 +121,38 @@ def sorting_check():
 # ).json()
 
 # authors = pd.DataFrame(data["authors"])
-authors = pd.read_json("data/authors_info.json")
-authors_add = pd.read_json("data/authors_4_0.json")
+authors = pd.read_json("data/authors_info_new.json")
+authors_add = pd.read_json("data/authors_add_info.json")
+authors_photos = photos_dic
 papers = pd.read_csv("data/papers_v1.csv", index_col="id")
 
 # dataframes modification
-authors["citations"] = authors["citations"].apply(dic_to_int)
+authors["citations"] = authors["inno_affil_citations"].apply(dic_to_int)
 authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
-authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
-
+authors["overall_citations"] = authors["overall_citations"].apply(str_to_int)
+# authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
-# authors["paper_id"] = authors["paper_id"].apply(list_to_int)
+authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
-authors["start_date"] = authors["papers_published"].apply(
-    lambda x: min([y for y in x.keys() if x[y] != 0])
-)
+# authors["start_date"] = authors["papers_published"].apply(
+#     lambda x: min([y for y in x.keys() if x[y] != 0])
+# )
+authors["institution"] = authors["institution"].apply(lambda x: ", ".join(x))
 
-papers["source_quartile"] = papers["source_quartile"].apply(
-    lambda x: abs(str_to_int(x))
-)
+papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
+papers["source_quartile"] = papers["source_quartile"].apply(lambda x: "-" if x == -1 else x)
 papers["citations"] = papers["citations"].apply(dic_values_sum)
 
 source_type = "Source Type"
 work_type = "Work Type"
-authors_id = "Authors"
+authors_id = "Authors ID"
 authors_names = "Authors Names"
 public_date = "Publication Date"
 affiliation = "Affiliation"
 authors_affiliation = "Authors Affiliation"
+
 sorting = ""
+page_name = ""
 filters = [
     "Title",
     "Publisher",
@@ -217,7 +165,7 @@ filters = [
     affiliation,
     public_date,
 ]
-page_name = ""
+
 publications = papers
 publications = publications.rename(columns=lambda x: x[0].upper() + x[1:])
 publications.rename(
@@ -232,7 +180,7 @@ publications.rename(
     inplace=True,
 )
 publications[authors_id] = publications[authors_affiliation].apply(
-    lambda x: list(eval(x).keys())
+    lambda x: list(map(int, eval(x).keys()))
 )
 
 publications[affiliation] = publications[authors_affiliation].apply(
@@ -242,7 +190,13 @@ publications[affiliation] = publications[affiliation].apply(
     lambda x: set(sum(x, list()))
 )
 publications[affiliation] = publications[affiliation].apply(lambda x: ", ".join(x))
-publications.drop(columns=authors_affiliation, inplace=True)
+# publications.drop(columns=authors_affiliation, inplace=True)
+
+publications[authors_names] = publications[authors_id].apply(
+    lambda x: ind_to_name(authors, x)
+)
+publications[authors_names] = publications[authors_names].apply(lambda x: ",\n".join(x))
+
 publications = publications.reindex(
     columns=[
         "Title",
@@ -250,7 +204,7 @@ publications = publications.reindex(
         work_type,
         "Publisher",
         public_date,
-        authors_id,
+        authors_names,
         affiliation,
         "Quartile",
         "Citations",
@@ -258,29 +212,17 @@ publications = publications.reindex(
     ]
 )
 
-author_data = authors
-publications[authors_names] = publications[authors_id]
-publications[authors_names] = publications[authors_names].apply(
-    lambda x: ind_to_name(author_data, x)
-)
-publications[authors_names] = publications[authors_names].apply(lambda x: ",\n".join(x))
-publications[authors_id] = publications[authors_id].apply(lambda x: ",\n".join(x))
-
 
 # get statistics of IU
 uni = University()
 uni.num_researchers = authors.shape[0]
 uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
-uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
-
-# write(data, "data_output.json")
+uni.cit_per_person = authors["overall_citations"].sum() / uni.num_researchers
 
 
 # creating a wordcloud
 # create_wordcloud()
-
-
 def date_citation():  # pragma: no cover
     dict = {}
     for ind in publications.index:

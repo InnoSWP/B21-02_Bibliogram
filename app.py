@@ -30,44 +30,16 @@ def main_page():
     )
 
 
-@app.route("/aboutIU")
-def about_section():
-    arrow_up = url_for("static", filename="images/arrow_down.jpg")
-    return render_template(
-        "about_page.html",
-        title="About IU",
-        amount_of_publications=data.uni.num_publications,
-        number_of_researches=data.uni.num_researchers,
-        pubications_per_person=data.uni.public_per_person,
-        citations_per_person=data.uni.cit_per_person,
-        arrowUp=arrow_up,
-    )
-
-
-# @app.route("/features")
-# def features_section():
-#     number1 = url_for("static", filename="images/1.jpg")
-#     number2 = url_for("static", filename="images/2.jpg")
-#     number3 = url_for("static", filename="images/3.jpg")
-#     number4 = url_for("static", filename="images/4.jpg")
-#     arrow_up = url_for("static", filename="images/arrow_up.jpg")
-#     arrow_down = url_for("static", filename="images/arrow_down.jpg")
-#     return render_template(
-#         "features_page.html",
-#         title="What to see here?",
-#         number1=number1,
-#         number2=number2,
-#         number3=number3,
-#         number4=number4,
-#         arrowUp=arrow_up,
-#         arrowDown=arrow_down,
-#     )
-
-
 @app.route("/search", methods=["POST", "GET"])
 def search_author():
     authors = data.authors.rename(columns=lambda x: x[0].upper() + x[1:])
-    add_data = data.authors_add.set_index("name")
+    filt = authors["Institution"].str.contains("Innopolis University")
+    authors = authors.loc[filt].sort_values(by="Overall_citations", ascending=False)
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+
+    def to_list(arg):
+        return list(arg)
 
     if request.method == "POST":
         author_name = request.form["author"]
@@ -79,25 +51,61 @@ def search_author():
     return render_template(
         "search_page.html",
         title="Search for authors",
-        authors=authors,
-        add_data=add_data,
+        authors=authors.set_index("Id"),
+        list=list(authors["Id"].values),
+        add_data=data.authors_add,
+        photos=data.authors_photos,
+        main_logo=main_logo,
+        main_title=main_title,
+        to_list=to_list,
     )
 
 
 @app.route("/author_id=<int:id>")
 def author(id):
-    author_data = data.authors.set_index("id")
-    author_data = author_data.loc[id]
-    author_add_data = data.authors_add.set_index("name")
-    author_add_data = author_add_data.loc[author_data["name"]]
+    mains_logo = url_for("static", filename="images/dark_logo.png")
+    mains_title = url_for("static", filename="images/innopolis_title.png")
+    authors_data = data.authors.set_index("id")
+    authors_data = authors_data.loc[id]
+
+    if authors_data["name"] in list(data.authors_add["name"].values):
+        authors_add = data.authors_add.set_index("name")
+        if_photo = True
+        photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
+        department = authors_add.loc[authors_data["name"]]["department"]
+        disciplines = authors_add.loc[authors_data["name"]]["disciplines"]
+
+    else:
+        if_photo = False
+        photo_link = ""
+        department = "Computer Science"
+        disciplines = [
+            "Machine Learning",
+            "Neural Networks and Artificial Intelligence",
+            "Computer Vision",
+        ]
 
     return render_template(
-        "author_page.html", author=author_data, id=id, add_data=author_add_data
+        "author_page.html",
+        author=authors_data,
+        id=id,
+        if_photo=if_photo,
+        photo_link=photo_link,
+        department=department,
+        disciplines=disciplines,
+        photos=data.authors_photos,
+        main_logo=mains_logo,
+        main_title=mains_title,
     )
 
 
 @app.route("/publications", methods=["POST", "GET"])
 def publications():  # pragma: no cover
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow_left = url_for("static", filename="images/arrow_left.jpg")
+    arrow_right = url_for("static", filename="images/arrow_right.jpg")
+
     # dataframe modification for further displaying
     data.page_check("general_publications")
 
@@ -109,6 +117,10 @@ def publications():  # pragma: no cover
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
             data.sorting = data.sorting_check()
+
+            if data.sorting not in data.filters:
+                data.sorting = "Title"
+
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
         elif "downloading" in request.form:
@@ -129,7 +141,15 @@ def publications():  # pragma: no cover
             data.sorting = data.sorting_check_with(request.form["sort"])
             all_papers = data.publications[data.filters].sort_values(by=data.sorting)
 
-    return render_template("publications_page.html", papers=all_papers)
+    return render_template(
+        "publications_page.html",
+        papers=all_papers,
+        main_logo=main_logo,
+        main_title=main_title,
+        arrow_left=arrow_left,
+        arrow_right=arrow_right,
+        number=1,
+    )
 
 
 @app.route("/co-author=<int:id>")
@@ -138,6 +158,8 @@ def co_authors(id):
     author_data = author_data.loc[id]
     author_add_data = data.authors_add.set_index("name")
     author_add_data = author_add_data.loc[author_data["name"]]
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
 
     return render_template(
         "co-author.html",
@@ -145,23 +167,26 @@ def co_authors(id):
         id=id,
         add_data=author_add_data,
         papers=data.papers,
+        main_logo=main_logo,
+        main_title=main_title,
     )
 
 
 @app.route("/author_publications=<int:id>", methods=["POST", "GET"])
 def author_publications(id):  # pragma: no cover
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
     author_data = data.authors.set_index("id")
     author_data = author_data.loc[id]
 
     # dataframe modification for further displaying
     data.page_check(author_data["name"])
 
-    # filt = data.publications["Authors"].str.contains(id)
+    filt = data.publications["Authors Names"].str.contains(author_data["name"])
 
-    papers = data.publications[data.filters].sort_values(by=data.sorting)
+    papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
 
     if request.method == "POST":
-
         if "downloading" in request.form:
             file_type = request.form["download"]
 
@@ -181,27 +206,32 @@ def author_publications(id):  # pragma: no cover
                 [["Title"], ["Authors Names"], request.form.getlist("show")], list()
             )
             data.sorting = data.sorting_check()
-            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
 
         elif "sorting" in request.form:
             data.sorting = data.sorting_check_with(request.form["sort"])
-            papers = data.publications[data.filters].sort_values(by=data.sorting)
+            papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
 
     return render_template(
-        "author_publications.html", author=author_data, id=id, papers=papers
+        "author_publications.html",
+        author=author_data,
+        id=id,
+        papers=papers,
+        main_logo=main_logo,
+        main_title=main_title,
     )
 
 
-# @app.route("/test_public")
-# def test_public():
-#     main_logo = url_for("static", filename="images/dark_logo.png")
-#     main_title = url_for("static", filename="images/innopolis_title.png")
-#     return render_template(
-#         "test_public.html",
-#         title="Bibliogram",
-#         main_logo=main_logo,
-#         main_title=main_title,
-#     )
+@app.route("/refresh")
+def refresh():
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+
+    return render_template(
+        "refresh_page.html",
+        main_logo=main_logo,
+        main_title=main_title,
+    )
 
 
 if __name__ == "__main__":
