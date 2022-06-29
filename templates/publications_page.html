@@ -25,6 +25,14 @@
         <li><a href="/refresh" class="light-up">Refresh</a></li>
     </ul>
 </div>
+<ul class="nav nav-tabs" style="background-color: #050911">
+    <li class="nav-item">
+        <a class="nav-link" href="/general" style="color: #fff">General statistics</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page"  href="/publications" style="color: #050911">All publications</a>
+    </li>
+</ul>
 <h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: -0.5%; ">
     Publications in IU
 </h1>
@@ -32,6 +40,10 @@
 <form method="post">
     <div class="container-md">
         <div class="d-flex">
+<!--            <button type="button" class="button-sort" data-bs-toggle="modal" onclick="generalgo()"-->
+<!--                    style="color:#fff; margin-top: 5%;">-->
+<!--                General statistics-->
+<!--            </button>-->
             <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#parameters"
                     style="color:#fff; margin-top: 5%;">
                 Show parameters
@@ -129,7 +141,8 @@
 </form>
 
 <form method="post">
-    <div class="modal fade style1212r23r23r" id="sort-by-modal" tabindex="-1" aria-labelledby="sort-by-modal-label" aria-hidden="true">
+    <div class="modal fade style1212r23r23r" id="sort-by-modal" tabindex="-1" aria-labelledby="sort-by-modal-label"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
 
             <div class="modal-content">
@@ -219,19 +232,22 @@
                         <input class="form-check-input" type="checkbox" role="switch" id="2009" name="date_filter"
                                value="2009"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2009">2009</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2009">2009</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2010" name="date_filter"
                                value="2010"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2010">2010</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2010">2010</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2011" name="date_filter"
                                value="2011"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2011">2011</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2011">2011</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2012" name="date_filter"
@@ -272,7 +288,8 @@
                         <input class="form-check-input" type="checkbox" role="switch" id="2017" name="date_filter"
                                value="2017"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2017">2017</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2017">2017</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2018" name="date_filter"
@@ -386,7 +403,8 @@
                                for="fourth-quartile">Q4</label>
                     </div>
                 </div>
-                <div class="modal-body name-of-table4" style="margin-left:75%; margin-top: -150.9%; margin-bottom: 60%;">
+                <div class="modal-body name-of-table4"
+                     style="margin-left:75%; margin-top: -150.9%; margin-bottom: 60%;">
                     <h5 class="modal-title name-of-table1">Citations</h5>
                     <div class="form-control">
                         <label class="form-check-label" style="margin-bottom: 2px;"
@@ -470,7 +488,6 @@
         </thead>
         <tbody>
             {% for i in range(20*(page_num - 1), 20*page_num) if i < papers.shape[0] %}
-
                 <tr>
                     <td>
                         {{ i + 1 }}
@@ -503,14 +520,14 @@
         {% endif %}
     </div>
 
-    <form id="page-number" class="arrow-switch" onsubmit="fnc()" style="width:150px;">
-        <input class="form-control arrow-switch" type="text"
-               placeholder="{{page_num}}" aria-label="Search"
+    <form id="page-number" class="arrow-switch" style="width:150px;" method="post">
+        <input class="form-control" type="text"
+               placeholder="{{page_num}}"
                name="page" id="page" style="width:100px;">
     </form>
 
     <div class="arrow-switch">
-        {% if (page_num+1)*20 > papers.shape[0] %}
+        {% if (page_num+1)*20 - papers.shape[0] > 20 %}
         <a href="/publications/page={{page_num}}" class="lighter-up">
             <img src="{{arrow_right}}" alt="Logo not found" width="45%" height="auto" style="border-radius: 50%;">
         </a>
@@ -530,19 +547,31 @@
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
+
+
 </script>
 <script>
     function ordering(chk, label) {
                         document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
                         }
+
+
 </script>
 <script>
     $("#page-number").keyup(function(event){
     if(event.keyCode == 13){
         event.preventDefault();
-         document.getElementById("jinja").click();
+         document.getElementById("page").click();
     }
 });
+
+
+</script>
+<script>
+    function generalgo(){
+     window.location = "/general"
+}
+
 </script>
 </body>
 </html>

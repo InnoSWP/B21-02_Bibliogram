@@ -1,5 +1,5 @@
 import data
-from flask import Flask, render_template, request, send_file, url_for
+from flask import Flask, render_template, request, send_file, url_for, redirect
 
 app = Flask(__name__)
 
@@ -159,7 +159,12 @@ def publications(num):  # pragma: no cover
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "page" in request.form:
-            num = request.form["page"]
+            new_num = int(request.form["page"])
+            print(new_num)
+            if new_num > 0 and new_num * 20 - all_papers.shape[0] <= 20:
+                return redirect("/publications/page=" + str(new_num))
+            else:
+                return redirect("/publications/page=" + str(num))
 
     return render_template(
         "publications_page.html",
@@ -193,13 +198,11 @@ def co_authors(id):
 
     co_authors_dic = {}
     for au_id in co_authors_list:
-        print(au_id)
         temp_dic = {}
         com_papers = 0
         affiliation = []
 
         for ind in list_ind:
-            print("ind: ", ind)
             if au_id in author_papers.loc[ind]["Authors ID"]:
                 com_papers += 1
                 affiliation.append(eval(author_papers.loc[ind]["Authors Affiliation"])[str(au_id)])
@@ -211,8 +214,6 @@ def co_authors(id):
             temp_dic["affiliation"] = affiliation
             co_authors_dic[au_id] = temp_dic
 
-    print(co_authors_dic.keys())
-    print(co_authors_dic)
     return render_template(
         "co-author.html",
         author_name=author_data["name"],
@@ -302,6 +303,18 @@ def refresh():
 
     return render_template(
         "refresh_page.html",
+        main_logo=main_logo,
+        main_title=main_title,
+    )
+
+
+@app.route("/general")
+def general():
+    main_logo = url_for("static", filename="images/dark_logo.png")
+    main_title = url_for("static", filename="images/innopolis_title.png")
+
+    return render_template(
+        "general.html",
         main_logo=main_logo,
         main_title=main_title,
     )
