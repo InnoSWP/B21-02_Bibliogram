@@ -5,6 +5,17 @@ This is an implementation of analytics system for Innopolis University bibliomet
 
 https://user-images.githubusercontent.com/95312480/176200658-9a06f215-f2eb-4df3-bfa9-3027577a4c0d.mp4
 
+The repository includes:
+
+- Data Parser (data.py)
+- Filtration System (data.py)
+- Search System (data.py)
+- Refreshing System (data.py)
+- Flask web-application (app.py)
+- HTML and CSS files
+- Unit and Functional Tests (on PyTest and PyTest-Cov)
+- Database of publications and researches
+
 ## How to use the application:
 Run the app.py or go on the webpage. The application will open on the main page. 
 
@@ -48,26 +59,57 @@ If you want to choose a version of the data, select one of the displayed. Also, 
 
 ## List of features
 
++ Easy navigation - everything is in the page header
++ Convenient search of the researcher
++ Ability to sort, filter and select display parameters in the tables
++ Interesting statistics with graphic and word cloud
++ Ability to update data by request
++ Refreshing system
+
+? we do not need that ?
++ Moving arrow "Back up"
++ List of goal that can be reached usin this application
++ General statistics of research activities in IU
++ World cloud 
++ Diagram
++ General statistics about publications 
 + Sorting system for the tables
 + Filtration system for the tables
 + Ability to choose parameters in the tables
 + Download data
-+ 
++ Data representation in the form of tables
++ Ability to search an author by his/her name
++ List of all authors
++ General information about the authors in format of numbers and bullet list
++ List of co-authors of chosen researcher
++ List of publications of chosen researcher
++ Refresh system
+
+## Requrements
+
+idna>=2.10                    
+requests>=2.25.1
+six>=1.15.0
+tornado>=6.1
+urllib3>=1.26.4
+Flask>=2.1.2
+matplotlib==3.5.2
+matplotlib-inline==0.1.2
+numpy>=1.21.2
+pandas>=1.4.3
+image>=1.5.33
 
 ## Project installation
 
-The repository includes:
+1. Clone this repository
+  
+2. Install dependencies
+```
+pip3 install -r requirements.txt
+```
+5. Run app.py
+6. Open the WEB application by the given link in the console
 
-- Data Parser (data.py)
-- Filtration System (data.py)
-- Search System (data.py)
-- Refreshing System (data.py)
-- Flask web-application (app.py)
-- HTML and CSS files
-- Unit and Functional Tests (on PyTest and PyTest-Cov)
-- Database of publications and researches
-
-## Used technologies and frameworks
 
 ## Badges
 
