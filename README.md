@@ -94,6 +94,9 @@ pip3 install -r requirements.txt
 
 ## Badges
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/context:javascript)
+
 ## MIT License
 
 Our team choose MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for out team. The license is needed because our team want to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, MIT license is the most appropriate protection for us and possible users.
