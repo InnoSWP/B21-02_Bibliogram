@@ -24,7 +24,7 @@
         </li>
         <li>
 
-            <a href="/publications" class="light-up">Publications</a>
+            <a href="/publications/page=1" class="light-up">Publications</a>
 
         </li>
         <li>
@@ -56,43 +56,25 @@
         </li>
     </ul>
 <div style="margin-top: 10px; margin-left: 120px;">
-    <h1 style="font-size: 50px; font-family:'Open Sans', arial, sans-serif;">Co-authors of {{ author["name"] }}</h1>
+    <h1 style="font-size: 50px; font-family:'Open Sans', arial, sans-serif;">Co-authors of {{ author_name }}</h1>
 </div>
     <div class="container author-catalogue">
         <table class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">Author</th>
-                <th scope="col">Quantity of publications</th>
+                <th scope="col">Quantity of common publications</th>
                 <th scope="col">Affiliation</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">Manuel Mazzara</th>
-                <td>3</td>
-                <td>IU</td>
-            </tr>
-            <tr>
-                <th scope="row">Vladimir Ivanov</th>
-                <td>4</td>
-                <td>IU</td>
-            </tr>
-            <tr>
-                <th scope="row">Peter Johnson</th>
-                <td>1</td>
-                <td>Cambridge</td>
-            </tr>
-            <tr>
-                <th scope="row">Caleb Blackgate</th>
-                <td>1</td>
-                <td>MIT</td>
-            </tr>
-            <tr>
-                <th scope="row">Alexey Petrov</th>
-                <td>1</td>
-                <td>ITMO</td>
-            </tr>
+                {% for id in co_authors %}
+                    <tr>
+                        <th scope="row">{{ co_authors_data[id]["name"] }}</th>
+                        <td>{{ co_authors_data[id]["common_papers"] }}</td>
+                        <td>{{ co_authors_data[id]["affiliation"] }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

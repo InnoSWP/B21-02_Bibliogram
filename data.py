@@ -83,13 +83,18 @@ def ind_to_name(data_authors, author_id):
 
 
 def page_check(page):
-    global page_name
-    global filters
-    global sorting
+    global page_name, parameters, date_filter, source_filter
+    global quart_filter, sorting, citations_to, citations_from
+    global is_data, is_source, is_quart, is_cit
+
     if page_name != page:
+        is_data = True
+        is_source = True
+        is_quart = True
+        is_cit = True
         page_name = page
         sorting = "Title"
-        filters = [
+        parameters = [
             "Title",
             "Source Type",
             "Work Type",
@@ -101,24 +106,144 @@ def page_check(page):
             "Citations",
             "DOI",
         ]
+        date_filter = [str(x) for x in range(2009, 2023)]
+        source_filter = [
+            "Conference Proceeding",
+            "Journal",
+            "Book Series",
+            "Trade Journal",
+            "Book",
+        ]
+        quart_filter = [1, 2, 3, 4, 100000]
+        citations_from = 0
+        citations_to = 100000
 
 
 def sorting_check_with(new_sort):
-    if sorting not in filters:
+    if new_sort not in parameters:
         return "Title"
     return new_sort
 
 
 def sorting_check():
-    if sorting not in filters:
+    if sorting not in parameters:
         return "Title"
     return sorting
 
+
+def date_check_with(new_date_list):
+    global is_data
+    if "Publication Date" not in parameters:
+        is_data = False
+        return [str(x) for x in range(2009, 2023)]
+    else:
+        is_data = True
+        return new_date_list
+
+
+def date_check():
+    global is_data
+    if "Publication Date" not in parameters:
+        is_data = False
+        return [str(x) for x in range(2009, 2023)]
+    else:
+        is_data = True
+        return date_filter
+
+
+def source_check_with(new_source_list):
+    global is_source
+    if "Source Type" not in parameters:
+        is_source = False
+        return ["Conference Proceeding", "Journal", "Book Series", "Trade Journal", "Book"]
+    else:
+        is_source = True
+        return new_source_list
+
+
+def source_check():
+    global is_source
+    if "Source Type" not in parameters:
+        is_source = False
+        return ["Conference Proceeding", "Journal", "Book Series", "Trade Journal", "Book"]
+    else:
+        is_source = True
+        return source_filter
+
+
+def quart_check_with(new_quart_list):
+    global is_quart
+    if "Quartile" not in parameters:
+        is_quart = False
+        return [1, 2, 3, 4, 100000]
+    else:
+        is_quart = True
+        return new_quart_list
+
+
+def quart_check():
+    global is_quart
+    if "Quartile" not in parameters:
+        is_quart = False
+        return [1, 2, 3, 4, 100000]
+    else:
+        is_quart = True
+        return quart_filter
+
+
+def cit_check_with(cit_from, cit_to):
+    global is_cit
+    if "Citations" not in parameters:
+        is_cit = False
+        return 0, 100000
+    else:
+        is_cit = True
+        return cit_from, cit_to
+
+
+def cit_check():
+    global is_cit
+    if "Citations" not in parameters:
+        is_cit = False
+        return 0, 100000
+    else:
+        is_cit = True
+        return citations_from, citations_to
+
+
+def data_modification(papers_data):
+    global date_filter, source_filter, quart_filter, citations_from, citations_to, sorting
+
+    date_filter = date_check()
+    if is_data:
+        filt_1 = papers_data["Publication Date"].apply(lambda x: x[:4]).isin(date_filter)
+        papers_data = papers_data.loc[filt_1]
+
+    source_filter = source_check()
+    if is_source:
+        filt_2 = papers_data["Source Type"].isin(source_filter)
+        papers_data = papers_data.loc[filt_2]
+
+    quart_filter = quart_check()
+    if is_quart:
+        filt_4 = papers_data["Quartile"].isin(quart_filter)
+        papers_data = papers_data.loc[filt_4]
+
+    citations_from, citations_to = cit_check()
+    if is_cit:
+        filt_5 = (papers_data["Citations"] >= citations_from) & \
+                 (papers_data["Citations"] <= citations_to)
+        papers_data = papers_data.loc[filt_5]
+
+    sorting = sorting_check()
+
+    return papers_data[parameters].sort_values(by=sorting, ascending=order)
 
 # download data
 # data = requests.get(
 #     "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
 # ).json()
+
 
 # authors = pd.DataFrame(data["authors"])
 authors = pd.read_json("data/authors_info_new.json")
@@ -140,8 +265,9 @@ authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.val
 authors["institution"] = authors["institution"].apply(lambda x: ", ".join(x))
 
 papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
-papers["source_quartile"] = papers["source_quartile"].apply(lambda x: "-" if x == -1 else x)
+papers["source_quartile"] = papers["source_quartile"].apply(lambda x: 100000 if x == -1 else x)
 papers["citations"] = papers["citations"].apply(dic_values_sum)
+papers["publication_year"] = papers["publication_date"].apply(lambda x: x[:4])
 
 source_type = "Source Type"
 work_type = "Work Type"
@@ -153,7 +279,21 @@ authors_affiliation = "Authors Affiliation"
 
 sorting = ""
 page_name = ""
-filters = [
+order = True
+is_data = True
+is_source = True
+is_quart = True
+is_cit = True
+date_filter = [str(x) for x in range(2009, 2023)]
+source_filter = [
+    "Conference Proceeding",
+    "Journal",
+    "Book Series",
+]
+quart_filter = [1, 2, 3, 4, 100000]
+citations_from = 0
+citations_to = 100000
+parameters = [
     "Title",
     "Publisher",
     "Quartile",
@@ -176,6 +316,8 @@ publications.rename(
         "Work_type": work_type,
         "Source_quartile": "Quartile",
         "Authors_affils": authors_affiliation,
+        "id": "ID",
+        "publication_year": "Publication Year",
     },
     inplace=True,
 )
@@ -209,6 +351,10 @@ publications = publications.reindex(
         "Quartile",
         "Citations",
         "DOI",
+        "ID",
+        authors_id,
+        authors_affiliation,
+        "Publication Year",
     ]
 )
 

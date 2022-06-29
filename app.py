@@ -99,8 +99,8 @@ def author(id):
     )
 
 
-@app.route("/publications", methods=["POST", "GET"])
-def publications():  # pragma: no cover
+@app.route("/publications/page=<int:num>", methods=["POST", "GET"])
+def publications(num):  # pragma: no cover
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
     arrow_left = url_for("static", filename="images/arrow_left.jpg")
@@ -109,27 +109,48 @@ def publications():  # pragma: no cover
     # dataframe modification for further displaying
     data.page_check("general_publications")
 
-    all_papers = data.publications[data.filters].sort_values(by=data.sorting)
+    all_papers = data.data_modification(data.publications)
 
     if request.method == "POST":
+
         if "filtration" in request.form:
-            data.filters = sum(
+            data.date_filter = data.date_check_with(request.form.getlist("date_filter"))
+            data.source_filter = data.source_check_with(request.form.getlist("source_filter"))
+            data.quart_filter = data.quart_check_with(list(map(int, request.form.getlist("quartile_filter"))))
+            if request.form["citations_from"]:
+                cit_from = int(request.form["citations_from"])
+            else:
+                cit_from = 0
+            if request.form["citations_to"]:
+                cit_to = int(request.form["citations_to"])
+            else:
+                cit_to = 100000
+            data.citations_from, data.citations_to = data.cit_check_with(cit_from, cit_to)
+
+            all_papers = data.data_modification(data.publications)
+
+        elif "parameters" in request.form:
+            data.parameters = sum(
                 [["Authors Names"], ["Title"], request.form.getlist("show")], list()
             )
-            data.sorting = data.sorting_check()
+            all_papers = data.data_modification(data.publications)
 
-            if data.sorting not in data.filters:
-                data.sorting = "Title"
+        elif "sorting" in request.form:
+            data.sorting = data.sorting_check_with(request.form["sort"])
+            if request.form.get("order"):
+                data.order = False
+            else:
+                data.order = True
 
-            all_papers = data.publications[data.filters].sort_values(by=data.sorting)
+            all_papers = data.data_modification(data.publications)
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
 
-            if file_type == "tsv":
-                all_papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "csv":
+            if file_type == "csv":
                 all_papers.to_csv("downloads/download.csv")
+            elif file_type == "tsv":
+                all_papers.to_csv("downloads/download.tsv", sep="\t")
             elif file_type == "json":
                 all_papers.to_csv("downloads/download.json")
             elif file_type == "xlsx":
@@ -137,9 +158,8 @@ def publications():  # pragma: no cover
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
-        elif "sorting" in request.form:
-            data.sorting = data.sorting_check_with(request.form["sort"])
-            all_papers = data.publications[data.filters].sort_values(by=data.sorting)
+        elif "page" in request.form:
+            num = request.form["page"]
 
     return render_template(
         "publications_page.html",
@@ -148,25 +168,57 @@ def publications():  # pragma: no cover
         main_title=main_title,
         arrow_left=arrow_left,
         arrow_right=arrow_right,
-        number=1,
+        page_num=num,
     )
 
 
 @app.route("/co-author=<int:id>")
 def co_authors(id):
-    author_data = data.authors.set_index("id")
-    author_data = author_data.loc[id]
-    author_add_data = data.authors_add.set_index("name")
-    author_add_data = author_add_data.loc[author_data["name"]]
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
 
+    authors_data = data.authors
+    author_data = authors_data.set_index("id").loc[id]
+    filt = data.publications["Authors Names"].str.contains(author_data["name"])
+    author_papers = data.publications.loc[filt]
+    print(author_papers)
+    list_ind = list(author_papers.index)
+    print(list_ind)
+
+    co_authors_list = []
+    for ind in list_ind:
+        co_authors_list.append(author_papers.loc[ind]["Authors ID"])
+    co_authors_list = list(set(sum(co_authors_list, list())))
+    co_authors_list.remove(id)
+
+    co_authors_dic = {}
+    for au_id in co_authors_list:
+        print(au_id)
+        temp_dic = {}
+        com_papers = 0
+        affiliation = []
+
+        for ind in list_ind:
+            print("ind: ", ind)
+            if au_id in author_papers.loc[ind]["Authors ID"]:
+                com_papers += 1
+                affiliation.append(eval(author_papers.loc[ind]["Authors Affiliation"])[str(au_id)])
+        affiliation = ", ".join(set(sum(affiliation, list())))
+
+        if au_id in list(authors_data["id"].values):
+            temp_dic["name"] = authors_data.set_index("id").loc[au_id]["name"]
+            temp_dic["common_papers"] = com_papers
+            temp_dic["affiliation"] = affiliation
+            co_authors_dic[au_id] = temp_dic
+
+    print(co_authors_dic.keys())
+    print(co_authors_dic)
     return render_template(
         "co-author.html",
-        author=author_data,
+        author_name=author_data["name"],
+        co_authors=co_authors_dic.keys(),
+        co_authors_data=co_authors_dic,
         id=id,
-        add_data=author_add_data,
-        papers=data.papers,
         main_logo=main_logo,
         main_title=main_title,
     )
@@ -184,10 +236,42 @@ def author_publications(id):  # pragma: no cover
 
     filt = data.publications["Authors Names"].str.contains(author_data["name"])
 
-    papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
+    papers = data.data_modification(data.publications.loc[filt])
 
     if request.method == "POST":
-        if "downloading" in request.form:
+
+        if "filtration" in request.form:
+            data.source_filter = data.source_check_with(request.form.getlist("source_filter"))
+            data.date_filter = data.date_check_with(request.form.getlist("date_filter"))
+            data.quart_filter = data.quart_check_with(list(map(int, request.form.getlist("quartile_filter"))))
+            if request.form["citations_to"]:
+                cit_to = int(request.form["citations_to"])
+            else:
+                cit_to = 100000
+            if request.form["citations_from"]:
+                cit_from = int(request.form["citations_from"])
+            else:
+                cit_from = 0
+            data.citations_from, data.citations_to = data.cit_check_with(cit_from, cit_to)
+
+            papers = data.data_modification(data.publications.loc[filt])
+
+        elif "parameters" in request.form:
+            data.parameters = sum(
+                [["Authors Names"], ["Title"], request.form.getlist("show")], list()
+            )
+            papers = data.data_modification(data.publications.loc[filt])
+
+        elif "sorting" in request.form:
+            data.sorting = data.sorting_check_with(request.form["sort"])
+            if request.form.get("order"):
+                data.order = False
+            else:
+                data.order = True
+
+            papers = data.data_modification(data.publications.loc[filt])
+
+        elif "downloading" in request.form:
             file_type = request.form["download"]
 
             if file_type == "csv":
@@ -200,17 +284,6 @@ def author_publications(id):  # pragma: no cover
                 papers.to_csv("downloads/download.json")
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
-
-        elif "filtration" in request.form:
-            data.filters = sum(
-                [["Title"], ["Authors Names"], request.form.getlist("show")], list()
-            )
-            data.sorting = data.sorting_check()
-            papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
-
-        elif "sorting" in request.form:
-            data.sorting = data.sorting_check_with(request.form["sort"])
-            papers = data.publications.loc[filt, data.filters].sort_values(by=data.sorting)
 
     return render_template(
         "author_publications.html",
