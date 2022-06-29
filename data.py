@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 from random import randint
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
@@ -230,6 +231,7 @@ uni.num_publications = papers.shape[0]
 uni.public_per_person = uni.num_publications / uni.num_researchers
 uni.cit_per_person = authors["overall_citation"].sum() / uni.num_researchers
 
+
 # write(data, 'data_output.json')
 
 # creating a wordcloud
@@ -259,18 +261,51 @@ myList = tuple.items()
 myList = sorted(myList)
 x, y = zip(*myList)
 
-fig, axes = plt.subplots(1, 1, figsize=(16, 12))
+# fig, axes = plt.subplots(1, 1, figsize=(16, 12))
+#
+# axes.plot(x, y, "#004", lw=2)
+# axes.grid(False)
+# axes.bar(x, y, color="#036e8e", width=0.08)
+# plt.ylim(ymin=0, ymax=2200)
+# plt.rc("axes", labelsize=1000)
 
-axes.plot(x, y, "#004", lw=2)
-axes.grid(False)
-axes.bar(x, y, color="#036e8e", width=0.08)
-plt.ylim(ymin=0, ymax=2200)
-plt.rc("axes", labelsize=1000)
+# fig.savefig("static/images/graphic.png")
+# plt.close(fig)
+#
+# im = Image.open("static/images/graphic.png")
+# width, height = im.size
+# im1 = im.crop((150, 130, width - 150, height - 100))
+# im1.save("static/images/graphic.png")
+
+x = list(x)
+y = list(y)
+
+y_plot = pd.Series(y)
+
+fig = plt.figure(figsize=(16, 12))
+ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
+ax.set_xticklabels(x)
+
+rects = ax.patches
+
+for rect, label in zip(rects, y):
+    height = rect.get_height()
+    ax.text(
+        rect.get_x() + rect.get_width() / 2,
+        height + 5,
+        label,
+        ha="center",
+        va="bottom",
+        family="Open Sans, arial",
+        size="x-large",
+    )
+
+ax.plot(x, y, "#004", lw=2)
 
 fig.savefig("static/images/graphic.png")
 plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
-im1 = im.crop((150, 130, width - 150, height - 100))
+im1 = im.crop((150, 130, width - 150, height - 80))
 im1.save("static/images/graphic.png")
