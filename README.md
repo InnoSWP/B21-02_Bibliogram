@@ -66,25 +66,6 @@ If you want to choose a version of the data, select one of the displayed. Also, 
 + Ability to update data by request
 + Refreshing system
 
-? we do not need that ?
-+ Moving arrow "Back up"
-+ List of goal that can be reached usin this application
-+ General statistics of research activities in IU
-+ World cloud 
-+ Diagram
-+ General statistics about publications 
-+ Sorting system for the tables
-+ Filtration system for the tables
-+ Ability to choose parameters in the tables
-+ Download data
-+ Data representation in the form of tables
-+ Ability to search an author by his/her name
-+ List of all authors
-+ General information about the authors in format of numbers and bullet list
-+ List of co-authors of chosen researcher
-+ List of publications of chosen researcher
-+ Refresh system
-
 ## Requrements
 
 idna>=2.10                    
