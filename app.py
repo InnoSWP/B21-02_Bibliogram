@@ -1,3 +1,5 @@
+import pandas as pd
+
 import data
 from flask import Flask, render_template, request, send_file, url_for, redirect
 
@@ -177,7 +179,7 @@ def publications(num):  # pragma: no cover
     )
 
 
-@app.route("/co-author=<int:id>")
+@app.route("/co-author=<int:id>", methods=["POST", "GET"])
 def co_authors(id):
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
@@ -186,15 +188,17 @@ def co_authors(id):
     author_data = authors_data.set_index("id").loc[id]
     filt = data.publications["Authors Names"].str.contains(author_data["name"])
     author_papers = data.publications.loc[filt]
-    print(author_papers)
     list_ind = list(author_papers.index)
-    print(list_ind)
 
     co_authors_list = []
     for ind in list_ind:
         co_authors_list.append(author_papers.loc[ind]["Authors ID"])
     co_authors_list = list(set(sum(co_authors_list, list())))
     co_authors_list.remove(id)
+
+    download_file = {"Co-Authors Names": [],
+                     "Quantity of joint publications": [],
+                     "Affiliation": []}
 
     co_authors_dic = {}
     for au_id in co_authors_list:
@@ -213,6 +217,32 @@ def co_authors(id):
             temp_dic["common_papers"] = com_papers
             temp_dic["affiliation"] = affiliation
             co_authors_dic[au_id] = temp_dic
+            temp_list = download_file.get("Co-Authors Names")
+            temp_list.append(temp_dic["name"])
+            download_file["Co-Authors Names"] = temp_list
+            temp_list = download_file.get("Quantity of joint publications")
+            temp_list.append(temp_dic["common_papers"])
+            download_file["Quantity of joint publications"] = temp_list
+            temp_list = download_file.get("Affiliation")
+            temp_list.append(temp_dic["affiliation"])
+            download_file["Affiliation"] = temp_list
+
+    download_file = pd.DataFrame(download_file)
+    # download_file = download_file.loc["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
+
+    if request.method == "POST":
+        file_type = request.form["download"]
+
+        if file_type == "csv":
+            download_file.to_csv("downloads/download.csv")
+        elif file_type == "json":
+            download_file.to_csv("downloads/download.json")
+        elif file_type == "tsv":
+            download_file.to_csv("downloads/download.tsv", sep="\t")
+        elif file_type == "xlsx":
+            download_file.to_excel("downloads/download.xlsx")
+
+        return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "co-author.html",

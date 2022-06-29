@@ -60,7 +60,7 @@
             <thead>
             <tr>
                 <th scope="col">Author</th>
-                <th scope="col">Quantity of common publications</th>
+                <th scope="col">Quantity of joint publications</th>
                 <th scope="col">Affiliation</th>
             </tr>
             </thead>
@@ -75,13 +75,64 @@
             </tbody>
         </table>
     </div>
-    <div class="container-md">
-        <div class="d-flex">
-            <button class="button-sort" style="color:#fff; margin-top: 5%; margin-left:75%;">
-                Download statistics
-            </button>
+    <form method="post">
+        <div class="container-md">
+            <div class="d-flex">
+                <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#file-download"
+                        style="color:#fff; margin-top: 5%; margin-left:75%;">
+                    Download statistics
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <form method="post">
+    <div class="modal fade" id="file-download" tabindex="-1" aria-labelledby="download-file-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="download-file-label">File type to download</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-check" style="margin-left: 36px;">
+                        <input class="form-check-input" type="radio" id="download-csv" value="csv" name="download">
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-csv">CSV</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 36px;">
+                        <input class="form-check-input" type="radio" id="download-tsv" value="tsv" name="download"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-tsv">TSV</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 36px;">
+                        <input class="form-check-input" type="radio" id="download-json" value="json" name="download">
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-json">JSON</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 36px;">
+                        <input class="form-check-input" type="radio" id="download-xlsx" value="xlsx" name="download"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-xlsx">XLSX</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button name="downloading" type="submit" class="btn btn-primary"
+                            style="text-decoration: none; color: #fff">
+                        Download
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+    </form>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <script>
         function toggleSidebar() {
