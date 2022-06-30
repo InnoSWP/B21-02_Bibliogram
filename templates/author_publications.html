@@ -150,7 +150,7 @@
 
                 <div class="modal-footer passive37">
                     <button type="button" class="btn btn-info passive38" data-bs-dismiss="modal">Cancel</button>
-                    <button name="filtration" type="submit" class="btn btn-primary passive39"
+                    <button name="parameters" type="submit" class="btn btn-primary passive39"
                             style="text-decoration: none; color: #fff">
                         Apply
                     </button>
@@ -239,217 +239,208 @@
         </div>
     </div>
 </form>
+
 <form method="post">
-    <div class="modal fade class2iuy7t6ghj" id="filter-by-modal" tabindex="-1" aria-labelledby="filter-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg class2kjiyutfg">
+    <div class="modal fade" id="filter-by-modal" tabindex="-1" aria-labelledby="filter-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
 
-            <div class="modal-content class27yuhyu7h">
+            <div class="modal-content">
 
-                <div class="modal-header class2lkiuyg">
+                <div class="modal-header">
                     <h5 class="modal-title name-of-table1" id="filter-label">Filter by</h5>
                     <button type="button" class="btn-close name-of-table2" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
 
-                <div class="modal-body name-of-table4 class2jhu7ygh">
-                    <h5 class="modal-title name-of-table1uy7ytgh class2">Year</h5>
-                    <div class="form-check form-switch name-of-table5 class2uytyghhu7y" style="margin-left: 36px;">
-                        <input class="form-check-input class2kjuyt" type="checkbox" role="switch" id="2009" name="show"
+                <div class="modal-body name-of-table4">
+                    <h5 class="modal-title name-of-table1">Year</h5>
+                    <div class="form-check form-switch name-of-table5" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2009" name="date_filter"
                                value="2009"
                                checked>
-                        <label class="form-check-label class2lkijuy7" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2009">2009</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2009">2009</label>
                     </div>
-                    <div class="form-check form-switch class26tyhjn" style="margin-left: 36px;">
-                        <input class="form-check-input class2lkjhuytr5" type="checkbox" role="switch" id="2010" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2010" name="date_filter"
                                value="2010"
                                checked>
-                        <label class="form-check-label class2poiu8y7t" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2010">2010</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2010">2010</label>
                     </div>
-                    <div class="form-check form-switch class2kjiyut65" style="margin-left: 36px;">
-                        <input class="form-check-input class2iuyt65" type="checkbox" role="switch" id="2011" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2011" name="date_filter"
                                value="2011"
                                checked>
-                        <label class="form-check-label class2878676" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2011">2011</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2011">2011</label>
                     </div>
-                    <div class="form-check form-switch class2090789687" style="margin-left: 36px;">
-                        <input class="form-check-input class225543523" type="checkbox" role="switch" id="2012" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2012" name="date_filter"
                                value="2012"
                                checked>
-                        <label class="form-check-label class2134254635" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2012">2012</label>
                     </div>
-                    <div class="form-check form-switch class2412e141" style="margin-left: 36px;">
-                        <input class="form-check-input class234556" type="checkbox" role="switch" id="2013" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2013" name="date_filter"
                                value="2013"
                                checked>
-                        <label class="form-check-label class213432" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2013">2013</label>
                     </div>
-                    <div class="form-check form-switch class208098768" style="margin-left: 36px;">
-                        <input class="form-check-input class2123e123" type="checkbox" role="switch" id="2014" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2014" name="date_filter"
                                value="2014"
                                checked>
-                        <label class="form-check-label class22131" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2014">2014</label>
                     </div>
-                    <div class="form-check form-switch class234141" style="margin-left: 36px;">
-                        <input class="form-check-input class2131" type="checkbox" role="switch" id="2015" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2015" name="date_filter"
                                value="2015"
                                checked>
-                        <label class="form-check-label class212313" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2015">2015</label>
                     </div>
-                    <div class="form-check form-switch class246468769657" style="margin-left: 36px;">
-                        <input class="form-check-input class2543647" type="checkbox" role="switch" id="2016" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2016" name="date_filter"
                                value="2016"
                                checked>
-                        <label class="form-check-label class2568680" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2016">2016</label>
                     </div>
-                    <div class="form-check form-switch class234141131" style="margin-left: 36px;">
-                        <input class="form-check-input class23241" type="checkbox" role="switch" id="2017" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2017" name="date_filter"
                                value="2017"
                                checked>
-                        <label class="form-check-label class21414" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2017">2017</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2017">2017</label>
                     </div>
-                    <div class="form-check form-switch class243245" style="margin-left: 36px;">
-                        <input class="form-check-input class298193" type="checkbox" role="switch" id="2018" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2018" name="date_filter"
                                value="2018"
                                checked>
-                        <label class="form-check-label class20220255055" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2018">2018</label>
                     </div>
-                    <div class="form-check form-switch class20000131" style="margin-left: 36px;">
-                        <input class="form-check-input class2213313135" type="checkbox" role="switch" id="2019" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2019" name="date_filter"
                                value="2019"
                                checked>
-                        <label class="form-check-labe class25115113" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2019">2019</label>
                     </div>
-                    <div class="form-check form-switch class2879789" style="margin-left: 36px;">
-                        <input class="form-check-input class2572" type="checkbox" role="switch" id="2020" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2020" name="date_filter"
                                value="2020"
                                checked>
-                        <label class="form-check-label class21533138" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2020">2020</label>
                     </div>
-                    <div class="form-check form-switch class26516388" style="margin-left: 36px;">
-                        <input class="form-check-input class26546" type="checkbox" role="switch" id="2021" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2021" name="date_filter"
                                value="2021"
                                checked>
-                        <label class="form-check-label class2381651" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2021">2021</label>
                     </div>
-                    <div class="form-check form-switch class29879797" style="margin-left: 36px;">
-                        <input class="form-check-input class23135153" type="checkbox" role="switch" id="2022" name="show"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2022" name="date_filter"
                                value="2022"
                                checked>
-                        <label class="form-check-label class254654" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="2022">2022</label>
                     </div>
                 </div>
-                <div class="modal-body name-of-table4 class235250298" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
-                    <h5 class="modal-title name-of-table1 class241412">Source type</h5>
-                    <div class="form-check form-switch class2094871" style="margin-left: 36px;">
-                        <input class="form-check-input class20130810" type="checkbox" role="switch" id="conference-proceeding"
-                               name="show"
-                               value="Conference Proceeding"
+                <div class="modal-body name-of-table4" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
+                    <h5 class="modal-title name-of-table1">Source type</h5>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="conference-proceeding"
+                               name="source_filter" value="Conference Proceeding"
                                checked>
-                        <label class="form-check-label class21212313" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="conference-proceeding">Conference Proceeding</label>
                     </div>
-                    <div class="form-check form-switch class2257568" style="margin-left: 36px;">
-                        <input class="form-check-input class20190381" type="checkbox" role="switch" id="journal" name="show"
-                               value="journal"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="journal" name="source_filter"
+                               value="Journal"
                                checked>
-                        <label class="form-check-label class22543634" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="journal">Journal</label>
                     </div>
-                    <div class="form-check form-switch class256486" style="margin-left: 36px;">
-                        <input class="form-check-input class22132" type="checkbox" role="switch" id="book-series" name="show"
-                               value="Book Series"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="book-series"
+                               name="source_filter" value="Book Series"
                                checked>
-                        <label class="form-check-label class24335" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="book-series">Book Series</label>
                     </div>
-                </div>
-                <div class="modal-body name-of-table4 class21212" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
-                    <h5 class="modal-title name-of-table1 class2321">Work type</h5>
-                    <div class="form-check form-switch class233" style="margin-left: 36px;">
-                        <input class="form-check-input class31" type="checkbox" role="switch" id="conference" name="show"
-                               value="Conference Paper"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="book"
+                               name="source_filter" value="Book"
                                checked>
-                        <label class="form-check-label class30" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="conference">Conference Paper</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="book">Book</label>
                     </div>
-                    <div class="form-check form-switch class29" style="margin-left: 36px;">
-                        <input class="form-check-input class28" type="checkbox" role="switch" id="article" name="show"
-                               value="article"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="trade-journal"
+                               name="source_filter" value="Trade Journal"
                                checked>
-
-                        <label class="form-check-label class27" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="article">Article</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="trade-journal">Trade Journal</label>
                     </div>
                 </div>
-                <div class="modal-body name-of-table4 class26" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
-                    <h5 class="modal-title name-of-table1 class25">Quartile</h5>
-                    <div class="form-check form-switch class24" style="margin-left: 36px;">
-                        <input class="form-check-input class23" type="checkbox" role="switch" id="no-quartile" name="show"
-                               value="No Quartile"
+                <div class="modal-body name-of-table4" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
+                    <h5 class="modal-title name-of-table1">Quartile</h5>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="no-quartile"
+                               name="quartile_filter" value="100000"
                                checked>
-                        <label class="form-check-label class22" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="no-quartile">-</label>
                     </div>
-                    <div class="form-check form-switch class21" style="margin-left: 36px;">
-                        <input class="form-check-input class20" type="checkbox" role="switch" id="first-quartile" name="show"
-                               value="First Quartile"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="first-quartile"
+                               name="quartile_filter" value="1"
                                checked>
-                        <label class="form-check-label class19" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="first-quartile">Q1</label>
                     </div>
-                    <div class="form-check form-switch class18" style="margin-left: 36px;">
-                        <input class="form-check-input class17" type="checkbox" role="switch" id="second-quartile" name="show"
-                               value="Second Quartile"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="second-quartile"
+                               name="quartile_filter" value="2"
                                checked>
-                        <label class="form-check-label class17" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="second-quartile">Q2</label>
                     </div>
-                    <div class="form-check form-switch class16" style="margin-left: 36px;">
-                        <input class="form-check-input class15" type="checkbox" role="switch" id="third-quartile" name="show"
-                               value="Third Quartile"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="third-quartile"
+                               name="quartile_filter" value="3"
                                checked>
-                        <label class="form-check-label class14" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="third-quartile">Q3</label>
                     </div>
-                    <div class="form-check form-switch class13" style="margin-left: 36px;">
-                        <input class="form-check-input class12" type="checkbox" role="switch" id="fourth-quartile" name="show"
-                               value="Fourth Quartile"
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="fourth-quartile"
+                               name="quartile_filter" value="4"
                                checked>
-                        <label class="form-check-label class11" style="margin-left: 8px; margin-bottom: 2px;"
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="fourth-quartile">Q4</label>
                     </div>
                 </div>
-                <div class="modal-body name-of-table4 class10"
-                     style="margin-left:75%; margin-top: -150.9%; margin-bottom: 60%;">
-                    <h5 class="modal-title name-of-table1 class9">Citations</h5>
-                    <div class="form-check form-switch class8">
-                        <label class="form-check-label class7" style="margin-bottom: 2px;"
+                <div class="modal-body name-of-table4" style="margin-left:75%; margin-top: -143.5%; margin-bottom: 60%;">
+                    <h5 class="modal-title name-of-table1">Citations</h5>
+                    <div class="form-control">
+                        <label class="form-check-label" style="margin-bottom: 2px;"
                                for="from-citations">From</label>
-                        <input type="text" role="switch" id="from-citations" name="show" checked style="width: 25%;">
+                        <input  type="text" id="from-citations" name="citations_from" style="width: 25%;">
                     </div>
-                    <div class="form-check form-switch class6">
-                        <label class="class5 form-check-label" style="margin-bottom: 2px;"
+                    <div class="form-control">
+                        <label class="form-check-label" style="margin-bottom: 2px;"
                                for="to-citations">To</label>
-                        <input type="text" role="switch" id="to-citations" name="show" checked style="width: 25%;">
+                        <input type="text" id="to-citations" name="citations_to" style="width: 25%;">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info class2" data-bs-dismiss="modal">Cancel</button>
-                    <button name="filtration" type="submit" class="class3 btn btn-primary"
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+                    <button name="filtration" type="submit" class="btn btn-primary"
                             style="text-decoration: none; color: #fff">
                         Apply
                     </button>
@@ -512,17 +503,25 @@
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th>№</th>
             {% for title in papers.columns %}
             <th scope="col">{{ title }}</th>
             {% endfor %}
         </tr>
         </thead>
         <tbody>
-        {% for i in range(20) %}
+        {% for i in range(papers.shape[0]) %}
         <tr>
+            <td>
+                {{ i + 1 }}
+            </td>
             {% for el in papers.iloc[i] %}
             <td>
-                {{ el }}
+                {% if el == 100000 %}
+                    -
+                {% else %}
+                    {{ el }}
+                {% endif %}
             </td>
             {% endfor %}
 
