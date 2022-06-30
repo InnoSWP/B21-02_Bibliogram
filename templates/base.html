@@ -97,9 +97,9 @@
     </table>
 </div>
 
-<div class="arrow" id="scroll-to-top">
-    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
-                     align="right"></a>
+<div class="arrow" id="scroll-to-top" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
 </div>
 
 <div class="panel-delimeter" style="margin-top: 0px;" id="bottom-block">
@@ -198,6 +198,7 @@
         </tbody>
     </table>
 </div>
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
 <script type="text/javascript">
           $(function() {
