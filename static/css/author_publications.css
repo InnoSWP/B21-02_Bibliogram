@@ -1,7 +1,6 @@
 body{
     background-repeat: no-repeat;
     overflow-x: hidden;
-
 }
 
 .panel-delimeter{
@@ -153,7 +152,7 @@ a{
 }
 
 .avatar-column{
-    max-width: 75px;
+    max-width: 50px;
 }
 
 .author-catalogue{

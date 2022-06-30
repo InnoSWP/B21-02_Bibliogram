@@ -430,7 +430,7 @@ for rect, label in zip(rects, y):
         label,
         ha="center",
         va="bottom",
-        family="Open Sans, arial",
+        family="Arial",
         size="x-large",
     )
 
