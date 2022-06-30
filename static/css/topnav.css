@@ -5,6 +5,19 @@ body {
   overflow-x: hidden;
 }
 
+footer {
+  background-image: url("../images/panel2.png");
+  height: 160px;
+  width: 110%;
+  margin-top: 5%;
+  margin-left: -10%;
+  margin-bottom: -10%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
 .main-logo-title img {
   max-width: 20%;
   max-height: auto;
@@ -116,7 +129,8 @@ table th {
 }
 
 .table-label-numbers {
-    margin-top: 10%;
+    margin-top: 40%;
+    margin-bottom: -10%;
     text-align: center;
     display: inline-block;
     font-size: 72px;

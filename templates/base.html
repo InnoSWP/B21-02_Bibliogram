@@ -125,23 +125,22 @@
 </div>
 
 <div class="container-xl row justify-content-center">
-    <table class="table table-bordered features-table" summary="Statistics of the University">
+    <table class="table table-bordered features-table" summary="Statistics of the University" style="margin-top: 40px;">
         <tbody>
         <tr>
             <th style="width: 35%" id="num6564">
-                <h2 class="table-label-numbers">
-
+                <div style="display: inline-block;">
                     <img src="/static/images/wordcloud.png" alt="Missing" width="350px" height="auto"
                          style="border: 5px solid #004; margin-bottom: -100px;">
-                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Research fields</h2>
-                </h2>
+                    <h2 class="table-label-numbers" style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">Research fields</h2>
+                </div>
             </th>
             <th style="width: 35%" id="num34255">
-                <h2 class="table-label-numbers">
+                <div style="display: inline-block;">
                     <img src="/static/images/graphic.png" alt="Missing" width="600px" height="383px"
-                         style="border: 5px solid #004; margin-bottom: -100px; margin-top: -15px;">
-                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Citations by year</h2>
-                </h2>
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers" style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">Citations by year</h2>
+                </div>
             </th>
         </tr>
         <!--        <tr>-->
@@ -164,48 +163,34 @@
     <table class="table table-bordered features-table" summary="Statistics of the University">
         <tbody>
         <tr>
-            <th style="width: 50%" id="num5">
+            <th style="width: 25%;" id="num5">
                 <h2 class="table-label-numbers">
                     {{ amount_of_publications }}
                 </h2>
-            </th>
-            <th style="width: 50%" id="num6">
-                <h2 class="table-label-numbers">
-                    {{ number_of_researches }}
-                </h2>
-            </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" class="tab-label-height" id="label5">
                 <h4 class="table-label-header">
                     Amount of publications
                 </h4>
             </th>
-            <th style="width: 50%" class="tab-label-height" id="label6">
+            <th style="width: 25%;" id="num6">
+                <h2 class="table-label-numbers">
+                    {{ number_of_researches }}
+                </h2>
                 <h4 class="table-label-header">
                     Number of researchers
                 </h4>
             </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" id="num7">
+            <th style="width: 25%;" id="num7">
                 <h2 class="table-label-numbers">
                     {{ publications_per_person }}
                 </h2>
-            </th>
-            <th style="width: 50%" id="num8">
-                <h2 class="table-label-numbers">
-                    {{ citations_per_person }}
-                </h2>
-            </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" class="tab-label-height" id="label7">
                 <h4 class="table-label-header">
                     Publications per person
                 </h4>
             </th>
-            <th style="width: 50%" class="tab-label-height" id="label8">
+            <th style="width: 25%;" id="num8">
+                <h2 class="table-label-numbers">
+                    {{ citations_per_person }}
+                </h2>
                 <h4 class="table-label-header">
                     Citations per person
                 </h4>
@@ -231,4 +216,7 @@
           });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>
