@@ -338,10 +338,75 @@ def refresh():
     )
 
 
-@app.route("/general")
+@app.route("/general", methods=["POST", "GET"])
 def general():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+
+    filt = data.publications["Affiliation"].str.contains("Innopolis University")
+    papers = data.publications.loc[filt]
+
+    indicators_names = [
+        "Number of publications",
+        "Articles",
+        "Books",
+        "Book Chapters",
+        "Conference Papers",
+        "Reviews",
+        "Short Surveys",
+        "Others",
+        "Scopus",
+        "Q1 & Q2",
+        "Number of citations",
+        ">10",
+        "5-9",
+        "1-4",
+        "0",
+    ]
+    info = pd.DataFrame(indicators_names, columns=["Indicators"])
+
+    for year in range(2016, 2023):
+        year_filt = papers["Publication Date"].apply(lambda x: x[:4]) == str(year)
+        temp_papers = papers.loc[year_filt]
+        info_param = [temp_papers.shape[0]]
+        number = 0
+
+        for type in indicators_names[1:7]:
+            type = type[:-1]
+            add_filt = temp_papers["Work Type"] == type
+            info_param.append(temp_papers.loc[add_filt].shape[0])
+            number += info_param[-1]
+        info_param.append(temp_papers.shape[0] - number)
+
+        info_param.append(temp_papers.shape[0])
+        add_filt = (temp_papers["Quartile"] == 1) | (temp_papers["Quartile"] == 2)
+        info_param.append(temp_papers.loc[add_filt].shape[0])
+        info_param.append(sum(list(temp_papers["Citations"].values)))
+
+        add_filt = temp_papers["Citations"] > 10
+        info_param.append(temp_papers.loc[add_filt].shape[0])
+        add_filt = (temp_papers["Citations"] > 4) & (temp_papers["Quartile"] < 10)
+        info_param.append(temp_papers.loc[add_filt].shape[0])
+        add_filt = (temp_papers["Citations"] > 0) & (temp_papers["Quartile"] < 5)
+        info_param.append(temp_papers.loc[add_filt].shape[0])
+        add_filt = temp_papers["Citations"] == 0
+        info_param.append(temp_papers.loc[add_filt].shape[0])
+
+        info[year] = info_param
+
+    if request.method == "POST":
+        file_type = request.form["download"]
+
+        if file_type == "csv":
+            info.to_csv("downloads/download.csv")
+        elif file_type == "json":
+            info.to_csv("downloads/download.json")
+        elif file_type == "xlsx":
+            info.to_excel("downloads/download.xlsx")
+        elif file_type == "tsv":
+            info.to_csv("downloads/download.tsv", sep="\t")
+
+        return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "general.html",

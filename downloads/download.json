@@ -1,24 +1,16 @@
-,Co-Authors Names,Quantity of joint publications,Affiliation
-0,Semen A. Kurkin,18,"Immanuel Kant Baltic Federal University, Innopolis University"
-1,Alexander K. Kuc,11,"Immanuel Kant Baltic Federal University, Yuri Gagarin State Technical University of Saratov, Innopolis University"
-2,Andrey V. Andreev,4,"Immanuel Kant Baltic Federal University, Innopolis University"
-3,Susanna Yu Gordleeva,1,"Immanuel Kant Baltic Federal University, Lobachevsky State University of Nizhni Novgorod, Innopolis University"
-4,Alexander E. Hramov,44,"Lobachevsky State University of Nizhni Novgorod, Innolpolis University, Saint Petersburg State University, Saratov State Medical University named after V. I. Razumovsky, Innopolis University, Immanuel Kant Baltic Federal University"
-5,Nikita Frolov,21,"Immanuel Kant Baltic Federal University, Innopolis University"
-6,Anastasiya E. Runnova,7,"Saratov State Medical University named after V. I. Razumovsky, Yuri Gagarin State Technical University of Saratov, Innopolis University"
-7,Victor Borisovich Kazantsev,2,"Immanuel Kant Baltic Federal University, Samara State Medical University, Lobachevsky State University of Nizhni Novgorod, Innopolis University"
-8,Vladimir V. Makarov,5,Innopolis University
-9,Vadim V. Grubov,25,"Research and Production Company Immersmed, Saratov State Medical University named after V. I. Razumovsky, University of Innopolis, Innopolis University, Immanuel Kant Baltic Federal University"
-10,Nikita S. Frolov,1,"Immanuel Kant Baltic Federal University, Innopolis University"
-11,Vladimir M. Antipov,1,Innopolis University
-12,Natalya A. Aleksandrova,1,Saratov State University
-13,Artem Badarin,9,"Immanuel Kant Baltic Federal University, Innopolis University"
-14,Natalija A. Malova,1,Innopolis University
-15,Alexey N. Pavlov,2,"Saratov State University, Yuri Gagarin State Technical University of Saratov"
-16,Alexander N. Pisarchik,24,"Innolpolis University, Universidad Politécnica de Madrid, Innopolis University, Immanuel Kant Baltic Federal University, Centro de Tecnología Biomédica"
-17,V. S. Khorev,6,"Saratov State University, Innopolis University"
-18,Muhammad Salman Kabir,1,Innopolis University
-19,Elena N. Pitsik,11,"Immanuel Kant Baltic Federal University, Innopolis University"
-20,Vladimir O. Nedaivozov,2,Innopolis University
-21,Daniil V. Kirsanov,1,Innopolis University
-22,Maksim O. Zhuravlev,4,"Saratov State University, Innopolis University"
+,Indicators,2016,2017,2018,2019,2020,2021,2022
+0,Number of publications,74,82,159,320,359,288,88
+1,Articles,16,22,48,89,87,114,53
+2,Books,0,2,2,2,0,1,0
+3,Book Chapters,3,4,2,4,6,2,8
+4,Conference Papers,54,51,103,212,256,157,20
+5,Reviews,0,2,1,3,3,7,4
+6,Short Surveys,0,0,0,0,0,0,1
+7,Others,1,1,3,10,7,7,2
+8,Scopus,74,82,159,320,359,288,88
+9,Q1 & Q2,18,18,50,64,68,98,44
+10,Number of citations,552,1342,1424,2187,1715,536,41
+11,>10,16,24,40,48,31,17,1
+12,5-9,23,21,49,60,75,32,1
+13,1-4,36,34,73,140,144,99,15
+14,0,15,9,28,108,145,175,72

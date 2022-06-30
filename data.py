@@ -290,6 +290,8 @@ source_filter = [
     "Conference Proceeding",
     "Journal",
     "Book Series",
+    "Trade Journal",
+    "Book",
 ]
 quart_filter = [1, 2, 3, 4, 100000]
 citations_from = 0
