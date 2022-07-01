@@ -85,18 +85,18 @@ If you want to choose a version of the statistical data, select one of the displ
 ## Requrements
 
 ```
-idna>=2.10                    
-requests>=2.25.1
-six>=1.15.0
-tornado>=6.1
-urllib3>=1.26.4
-Flask>=2.1.2
-matplotlib==3.5.2
-matplotlib-inline==0.1.2
-numpy>=1.21.2
-pandas>=1.4.3
-image>=1.5.33
+Flask~=2.1.2
+matplotlib~=3.5.2
+pandas~=1.4.2
+requests~=2.28.0
+Pillow~=9.1.1
+pytest~=7.1.2
+pytest-cov~=3.0.0
+xlwt~=1.3.0
+openpyxl~=3.0.10
+xlrd~=2.0.1
 ```
+The project mainly was developed with Python3, HTML5 and CSS. Used frameworks: PyTest, Flask, jQuery.
 
 ## Project installation
 
