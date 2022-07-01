@@ -3,7 +3,9 @@ This is an implementation of analytics system for Innopolis University bibliomet
 
 ### Video-demonstration of the application:
 
-https://user-images.githubusercontent.com/95312480/176200658-9a06f215-f2eb-4df3-bfa9-3027577a4c0d.mp4
+
+https://user-images.githubusercontent.com/95312480/176891253-8be20905-8c63-4187-9d0f-6f4c1d7bc298.mp4
+
 
 The repository includes:
 
@@ -23,15 +25,21 @@ Run the app.py or go on the webpage. The application will open on the main page.
 
 Now you are on the welcome page. 
 On the top you can click on IU logo to return on main page. On the right part of the header you can choose one of four other pages: Publications, Authors, About IU, Refresh. The detailed description look in 2-5.
-Scroll down and you will see a list of the existing features of our application.
-After features list, you can see general statistics of Innopolis University (you will be here by clicking the field "About IU" in the header).
+Scroll down and you will see a list of the existing **features** of our application.
+After features list, you can see **general statistics** of Innopolis University (you will be here by clicking the field "About IU" in the header).
 The arrow in the bottom right corner will return you back to the welcome page.
+
+![image](https://user-images.githubusercontent.com/95312480/176883379-6c1d980b-5849-408a-9d7d-9dcc2809d265.png)
+
 
 2. **General statistics of publications** (by clicking on Publications in header)
 
 The header works identically to the main page. 
 Here you can see general statistics of publications in Innopolis University.
 Clicking on "All Publications" will take you to a page with a complete list of the university's publications.
+
+![image](https://user-images.githubusercontent.com/95312480/176883637-2e92102a-94f6-47fc-a040-ac8347de733f.png)
+
 
 3. **Publications of IU**
 
@@ -50,6 +58,9 @@ Also you can use search bar to find suitable author faster. Just write a name of
 
 This page contains the full name of the researcher, his/her photo, department, scientific fields and general statistics (amount of publications and citations, h-index and research beginning year).
 In the lower header you can choose the type of information about the selected author (Profile, Co-authors, Publications).
+
+![image](https://user-images.githubusercontent.com/95312480/176887670-c900eec6-1dba-436b-9c60-a45b0945cddb.png)
+
 
 6. **Co-authors**
 
@@ -73,17 +84,19 @@ If you want to choose a version of the statistical data, select one of the displ
 
 ## Requrements
 
-* idna>=2.10                    
-* requests>=2.25.1
-* six>=1.15.0
-* tornado>=6.1
-* urllib3>=1.26.4
-* Flask>=2.1.2
-* matplotlib==3.5.2
-* matplotlib-inline==0.1.2
-* numpy>=1.21.2
-* pandas>=1.4.3
-* image>=1.5.33
+```
+idna>=2.10                    
+requests>=2.25.1
+six>=1.15.0
+tornado>=6.1
+urllib3>=1.26.4
+Flask>=2.1.2
+matplotlib==3.5.2
+matplotlib-inline==0.1.2
+numpy>=1.21.2
+pandas>=1.4.3
+image>=1.5.33
+```
 
 ## Project installation
 
