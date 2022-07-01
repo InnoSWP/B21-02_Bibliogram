@@ -94,17 +94,14 @@ pip3 install -r requirements.txt
 
 ## Badges
 
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=bugs)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
 
-[![Lint Code Base](https://github.com/InnoSWP/B21-02_Bibliogram/actions/workflows/linter.yml/badge.svg?branch=main)](https://github.com/InnoSWP/B21-02_Bibliogram/actions/workflows/linter.yml)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/context:javascript)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=bugs)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=InnoSWP_B21-02_Bibliogram&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=InnoSWP_B21-02_Bibliogram)
+
 
 ## MIT License
 
