@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no,
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/search_page.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Publications</title>
 </head>
 <body>
@@ -21,30 +22,28 @@
         </a>
         </li>
         <li>
-            <a href="/publications" class="light-up" id="buttonpub">Publications</a>
+            <a href="/general" class="light-up" id="buttonpub">Publications</a>
         </li>
         <li>
             <a href="/search" class="light-up" id="buttonauth">Authors</a>
         </li>
         <li>
-            <a href="/aboutIU" class="light-up" id="buttonabout">About IU</a>
+            <a href="/#bottom-block" class="light-up" id="buttonabout">About IU</a>
         </li>
+        <li><a href="/refresh" class="light-up">Refresh</a></li>
     </ul>
 
 </div>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" style="background-color: #050911">
     <li class="nav-item">
-        <a class="nav-link" href="/author_id={{id}}">Profile</a>
+        <a class="nav-link" href="/author_id={{id}}" style="color: #fff">Profile</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/co-author={{id}}">Co-authors</a>
+        <a class="nav-link" href="/co-author={{id}}" style="color: #fff">Co-authors</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page"  href="/author_publications={{id}}">Publications</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled">Secret info</a>
+        <a class="nav-link active" aria-current="page" href="/author_publications={{id}}" style="color: #050911">Publications</a>
     </li>
 </ul>
 <div style="margin-top: 25px; margin-left: 120px; margin-bottom: -35px;">
@@ -52,18 +51,22 @@
 </div>
 
 <form method="post">
-    <div class="container-md">
-        <div class="d-flex">
-            <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#parameters"
+    <div class="container-md passive1">
+        <div class="d-flex passive2">
+            <button type="button" class="button-sort passive3" data-bs-toggle="modal" data-bs-target="#parameters"
                     style="color:#fff; margin-top: 5%;">
                 Show parameters
             </button>
-            <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#sort-by-modal"
+            <button type="button" class="button-sort passive4" data-bs-toggle="modal" data-bs-target="#sort-by-modal"
                     style="color:#fff; margin-top: 5%;">
                 Sort by
             </button>
-            <button type="button" class="button-sort" data-bs-toggle="modal" data-bs-target="#file-download"
-                    style="color:#fff; margin-top: 5%;" >
+            <button type="button" class="button-sort passive512" data-bs-toggle="modal" data-bs-target="#filter-by-modal"
+                    style="color:#fff; margin-top: 5%;">
+                Filter by
+            </button>
+            <button type="button" class="button-sort classsssss" data-bs-toggle="modal" data-bs-target="#file-download"
+                    style="color:#fff; margin-top: 5%;">
                 Download statistics
             </button>
         </div>
@@ -71,58 +74,84 @@
 </form>
 
 <form method="post">
-    <div class="modal fade" id="parameters" tabindex="-1" aria-labelledby="parameters-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal fade passive6" id="parameters" tabindex="-1" aria-labelledby="parameters-label"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg passive7">
 
-            <div class="modal-content">
+            <div class="modal-content passive8">
 
-                <div class="modal-header">
-                    <h5 class="modal-title something" id="parameters-label">What parameters to show?</h5>
-                    <button type="button" id="something1" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <div class="modal-header passive9">
+                    <h5 class="modal-title something passive10" id="parameters-label">What parameters to show?</h5>
+                    <button type="button" id="something1" class="btn-close passive11" data-bs-dismiss="modal"
+                            aria-label="Close">
                     </button>
                 </div>
 
-                <div class="modal-body something3">
-                    <div class="form-check form-switch" id="something4" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-source" name="show" value="Source Type"
+                <div class="modal-body something3 passive12">
+                    <div class="form-check form-switch passive13" id="something4" style="margin-left: 36px;">
+                        <input class="form-check-input passive14" type="checkbox" role="switch" id="show-source"
+                               name="show"
+                               value="Source Type"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-source">Source type</label>
+                        <label class="form-check-label passive15" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-source">Source
+                            type</label>
                     </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-areas" name="show" value="Work Type"
-                        checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-areas">Work Type</label>
-                    </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-date" name="show" value="Publication Date"
+                    <div class="form-check form-switch passive17" style="margin-left: 36px;">
+                        <input class="form-check-input passive18" type="checkbox" role="switch" id="show-areas"
+                               name="show"
+                               value="Work Type"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-date">Publication date</label>
+                        <label class="form-check-label passive19" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-areas">Work
+                            Type</label>
                     </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-affiliation" name="show" value="Affiliation"
+                    <div class="form-check form-switch passive20" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="show-date" name="show"
+                               value="Publication Date"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-affiliation">Affiliation</label>
+                        <label class="form-check-label passive21" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-date">Publication
+                            date</label>
                     </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-quartile" name="show" value="Quartile"
+                    <div class="form-check form-switch passive22" style="margin-left: 36px;">
+                        <input class="form-check-input passive27" type="checkbox" role="switch" id="show-affiliation"
+                               name="show"
+                               value="Affiliation"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-quartile">Quartile</label>
+                        <label class="form-check-label passive28" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-affiliation">Affiliation</label>
                     </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-citations" name="show" value="Citations"
+                    <div class="form-check form-switch passive23" style="margin-left: 36px;">
+                        <input class="form-check-input passive29" type="checkbox" role="switch" id="show-quartile"
+                               name="show"
+                               value="Quartile"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-citations">Citations count</label>
+                        <label class="form-check-label passive30" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-quartile">Quartile</label>
                     </div>
-                    <div class="form-check form-switch" style="margin-left: 36px;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="show-doi" name="show" value="DOI"
+                    <div class="form-check form-switch passive31" style="margin-left: 36px;">
+                        <input class="form-check-input passive32" type="checkbox" role="switch" id="show-citations"
+                               name="show"
+                               value="Citations"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="show-doi">DOI</label>
+                        <label class="form-check-label passive33" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-citations">Citations count</label>
+                    </div>
+                    <div class="form-check form-switch passive34" style="margin-left: 36px;">
+                        <input class="form-check-input passive35" type="checkbox" role="switch" id="show-doi"
+                               name="show"
+                               value="DOI"
+                               checked>
+                        <label class="form-check-label passive36" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="show-doi">DOI</label>
                     </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                    <button name="filtration" type="submit" class="btn btn-primary" style="text-decoration: none; color: #fff">
+                <div class="modal-footer passive37">
+                    <button type="button" class="btn btn-info passive38" data-bs-dismiss="modal">Cancel</button>
+                    <button name="parameters" type="submit" class="btn btn-primary passive39"
+                            style="text-decoration: none; color: #fff">
                         Apply
                     </button>
                 </div>
@@ -138,7 +167,8 @@
             <div class="modal-content something231">
                 <div class="modal-header something3142">
                     <h5 class="modal-title something2113" id="sort-by-modal-label">Sort by</h5>
-                    <button type="button" id="something123213" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" id="something123213" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">
                     </button>
                 </div>
 
@@ -150,35 +180,269 @@
                     <div class="form-check" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="sort-by-source" value="Source Type" name="sort"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-source">Source type</label>
+                        <label class="form-check-label passive4523" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-source">Source type</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
-                        <input class="form-check-input" type="radio" id="sort-by-affiliation" value="Work Type" name="sort">
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-affiliation">Work Type</label>
+                        <input class="form-check-input passive3252352" type="radio" id="sort-by-affiliation"
+                               value="Work Type"
+                               name="sort">
+                        <label class="form-check-label passive32275" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-affiliation">Work Type</label>
                     </div>
-                    <div class="form-check" style="margin-left: 36px;">
+                    <div class="form-check passive124254376" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="sort-by-areas" value="Publisher" name="sort"
-                        checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-areas">Publisher</label>
+                               checked>
+                        <label class="form-check-label passive47465858" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-areas">Publisher</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
-                        <input class="form-check-input" type="radio" id="sort-by-date" value="Publication Date" name="sort"
-                        checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-date">Publication date</label>
+                        <input class="form-check-input passive5765768" type="radio" id="sort-by-date"
+                               value="Publication Date"
+                               name="sort"
+                               checked>
+                        <label class="form-check-label passive1343246758" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-date">Publication date</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="sort-by-quartile" value="Quartile" name="sort">
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-quartile">Quartile</label>
+                        <label class="form-check-label passive465475689" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-quartile">Quartile</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
-                        <input class="form-check-input" type="radio" id="sort-by-citations" value="Citations" name="sort">
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="sort-by-citations">Citations count</label>
+                        <input class="form-check-input passive353465374" type="radio" id="sort-by-citations"
+                               value="Citations"
+                               name="sort">
+                        <label class="form-check-label passive321424668" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="sort-by-citations">Citations count</label>
+                    </div>
+                    <div class="form-check form-switch block-liner blockerr32432"
+                         style="margin-left: 60%; margin-top: -37%;">
+                        <input class="form-check-input blockerr21324324" type="checkbox" role="switch" id="order"
+                               name="order"
+                               value="Order"
+                               checked style="margin-top: -86%;"
+                               onclick="ordering(this, 'label-type');">
+                        <label class="form-check-label blockerr2323434312" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="order"
+                               name="label-type" id="label-type">Descending Order</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button name="sorting" type="submit" class="btn btn-primary" style="text-decoration: none; color: #fff">
+                    <button name="sorting" type="submit" class="btn btn-primary passive32432653764"
+                            style="text-decoration: none; color: #fff">
                         Sort
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form method="post">
+    <div class="modal fade" id="filter-by-modal" tabindex="-1" aria-labelledby="filter-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title name-of-table1" id="filter-label">Filter by</h5>
+                    <button type="button" class="btn-close name-of-table2" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body name-of-table4">
+                    <h5 class="modal-title name-of-table1">Year</h5>
+                    <div class="form-check form-switch name-of-table5" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2009" name="date_filter"
+                               value="2009"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2009">2009</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2010" name="date_filter"
+                               value="2010"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2010">2010</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2011" name="date_filter"
+                               value="2011"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2011">2011</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2012" name="date_filter"
+                               value="2012"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2012">2012</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2013" name="date_filter"
+                               value="2013"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2013">2013</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2014" name="date_filter"
+                               value="2014"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2014">2014</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2015" name="date_filter"
+                               value="2015"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2015">2015</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2016" name="date_filter"
+                               value="2016"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2016">2016</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2017" name="date_filter"
+                               value="2017"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2017">2017</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2018" name="date_filter"
+                               value="2018"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2018">2018</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2019" name="date_filter"
+                               value="2019"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2019">2019</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2020" name="date_filter"
+                               value="2020"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2020">2020</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2021" name="date_filter"
+                               value="2021"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2021">2021</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="2022" name="date_filter"
+                               value="2022"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="2022">2022</label>
+                    </div>
+                </div>
+                <div class="modal-body name-of-table4" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
+                    <h5 class="modal-title name-of-table1">Source type</h5>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="conference-proceeding"
+                               name="source_filter" value="Conference Proceeding"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="conference-proceeding">Conference Proceeding</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="journal" name="source_filter"
+                               value="Journal"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="journal">Journal</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="book-series"
+                               name="source_filter" value="Book Series"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="book-series">Book Series</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="book"
+                               name="source_filter" value="Book"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="book">Book</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="trade-journal"
+                               name="source_filter" value="Trade Journal"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="trade-journal">Trade Journal</label>
+                    </div>
+                </div>
+                <div class="modal-body name-of-table4" style="margin-left:25%; margin-bottom:78%; margin-top: -78%;">
+                    <h5 class="modal-title name-of-table1">Quartile</h5>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="no-quartile"
+                               name="quartile_filter" value="100000"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="no-quartile">-</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="first-quartile"
+                               name="quartile_filter" value="1"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="first-quartile">Q1</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="second-quartile"
+                               name="quartile_filter" value="2"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="second-quartile">Q2</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="third-quartile"
+                               name="quartile_filter" value="3"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="third-quartile">Q3</label>
+                    </div>
+                    <div class="form-check form-switch" style="margin-left: 36px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="fourth-quartile"
+                               name="quartile_filter" value="4"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="fourth-quartile">Q4</label>
+                    </div>
+                </div>
+                <div class="modal-body name-of-table4" style="margin-left:75%; margin-top: -143.5%; margin-bottom: 60%;">
+                    <h5 class="modal-title name-of-table1">Citations</h5>
+                    <div class="form-control">
+                        <label class="form-check-label" style="margin-bottom: 2px;"
+                               for="from-citations">From</label>
+                        <input  type="text" id="from-citations" name="citations_from" style="width: 25%;">
+                    </div>
+                    <div class="form-control">
+                        <label class="form-check-label" style="margin-bottom: 2px;"
+                               for="to-citations">To</label>
+                        <input type="text" id="to-citations" name="citations_to" style="width: 25%;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancel</button>
+                    <button name="filtration" type="submit" class="btn btn-primary"
+                            style="text-decoration: none; color: #fff">
+                        Apply
                     </button>
                 </div>
             </div>
@@ -200,26 +464,33 @@
                 <div class="modal-body">
                     <div class="form-check" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="download-csv" value="csv" name="download">
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="download-csv">CSV</label>
+                        <label class="form-check-label passive987857789709667"
+                               style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-csv">CSV</label>
                     </div>
-                    <div class="form-check" style="margin-left: 36px;">
+                    <div class="form-check passive907647567" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="download-tsv" value="tsv" name="download"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="download-tsv">TSV</label>
+                        <label class="form-check-label passive45648648139" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-tsv">TSV</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="download-json" value="json" name="download">
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="download-json">JSON</label>
+                        <label class="form-check-label passive5676965561313"
+                               style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-json">JSON</label>
                     </div>
                     <div class="form-check" style="margin-left: 36px;">
                         <input class="form-check-input" type="radio" id="download-xlsx" value="xlsx" name="download"
-                        checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="download-xlsx">XLSX</label>
+                               checked>
+                        <label class="form-check-label passive453519666" style="margin-left: 8px; margin-bottom: 2px;"
+                               for="download-xlsx">XLSX</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button name="downloading" type="submit" class="btn btn-primary" style="text-decoration: none; color: #fff">
+                    <button name="downloading" type="submit" class="btn btn-primary passive3213131313"
+                            style="text-decoration: none; color: #fff">
                         Download
                     </button>
                 </div>
@@ -232,17 +503,25 @@
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th>№</th>
             {% for title in papers.columns %}
             <th scope="col">{{ title }}</th>
             {% endfor %}
         </tr>
         </thead>
         <tbody>
-        {% for i in range(20) %}
+        {% for i in range(papers.shape[0]) %}
         <tr>
+            <td>
+                {{ i + 1 }}
+            </td>
             {% for el in papers.iloc[i] %}
             <td>
-                {{ el }}
+                {% if el == 100000 %}
+                    -
+                {% else %}
+                    {{ el }}
+                {% endif %}
             </td>
             {% endfor %}
 
@@ -253,8 +532,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"></script>
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 <script>
         function toggleSidebar() {
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
@@ -262,6 +541,13 @@
         }
 
 </script>
+<script>
+    function ordering(chk, label) {
+                        document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
+                        }
 
+
+
+</script>
 </body>
 </html>

@@ -90,10 +90,8 @@ a {
 .search-bar {
   height: 48px;
   width: 88%;
-  left: 0;
-  top: 0;
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 12px, 16px;
   margin-top: 35px;
   border: 2px solid #072653;
   position: center;
@@ -104,15 +102,16 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0 16px;
-  margin-left: 180px;
+  padding: 0.01px 16px;
   margin-top: 25px;
+  margin-left: 180px;
   position: absolute;
   width: 180px;
   height: 48px;
   left: 1059px;
   top: 150px;
-  background: #12203d;
+  z-index: -1;
+  background: #072653;
   border-radius: 5px;
   color: #fff;
 }
@@ -149,15 +148,7 @@ a {
 .title-results {
   margin-top: 1.5%;
   font-size: 48px;
-  margin-left: 120px;
-}
-
-.info-amm {
-  display: inline-block;
-}
-
-.info-amm2 {
-  display: inline-block;
+  margin-left: 20%;
 }
 
 .inline-statistics {
@@ -168,7 +159,6 @@ a {
   display: inline-block;
   width: 200px;
   margin-left: 4px;
-  margin-top: 0;
 }
 
 .block-info h3 {
@@ -192,13 +182,6 @@ a {
   font-family: "Open Sans", arial, sans-serif;
   font-style: normal;
   color: #004;
-}
-
-label {
-  color: #003;
-  font-family: "Open Sans", arial, sans-serif;
-  text-decoration: none;
-  font-size: 24px;
 }
 
 .round {
@@ -269,31 +252,12 @@ label {
 
 .button-sort {
   display: inline-block;
-  background-color: #12203d;
-  min-width: 23%;
-  max-width: 23%;
+  background-color: #072653;
+  min-width: 85%;
+  max-width: 100%;
   height: 50px;
-  margin-left: 1%;
-  margin-right: 1%;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
   margin-bottom: 1.5%;
   font-size: 27px;
-}
-
-.arrow-switch {
-  display: inline-block;
-}
-
-#page {
-  width: 3%;
-  display: inline-block;
-  text-align: center;
-}
-
-.page-switch {
-  text-align: center;
-  margin-bottom: 1%;
-}
-
-.block-liner {
-  display: inline-block;
 }

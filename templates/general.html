@@ -5,12 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no,
            initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/co-author.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>Publications</title>
 </head>
 <body>
-    <div class="panel-delimeter">
+<div class="panel-delimeter">
     <ul id="nav">
 
         <li><a class="active" href="/">
@@ -41,40 +42,83 @@
     </ul>
 
 </div>
-    <ul class="nav nav-tabs" style="background-color: #050911">
-        <li class="nav-item">
-            <a class="nav-link" href="/author_id={{id}}" style="color: #fff">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/co-author={{id}}" style="color: #050911">Co-authors</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/author_publications={{id}}" style="color: #fff">Publications</a>
-        </li>
-    </ul>
-<div style="margin-top: 10px; margin-left: 120px;">
-    <h1 style="font-size: 50px; font-family:'Open Sans', arial, sans-serif;">Co-authors of {{ author_name }}</h1>
+<ul class="nav nav-tabs" style="background-color: #050911">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/general" style="color: #050911">General statistics</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/publications/page=1" style="color: #fff">All publications</a>
+    </li>
+</ul>
+<h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: 3%; ">
+    General statistics about publications
+</h1>
+<div class="container author-catalogue">
+    <table class="table table-bordered">
+        <caption></caption>
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Source</th>
+            <th scope="col">Link</th>
+            <th scope="col">Title</th>
+            <th scope="col">Something</th>
+            <th scope="col">Data</th>
+            <th scope="col">Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">27.06.2022</th>
+            <td><a href="https://www.google.com">Link64</a></td>
+            <td><a href="https://www.google.com">Link67</a></td>
+            <td><a href="https://www.google.com">Link234</a></td>
+            <td><a href="https://www.google.com">Link2365</a></td>
+            <td><a href="https://www.google.com">Link546</a></td>
+            <td><a href="https://www.google.com">Link345</a></td>
+        </tr>
+        <tr>
+            <th scope="row">23.06.2022</th>
+            <td>Link1</td>
+            <td>Link2</td>
+            <td>Link3</td>
+            <td>Link4</td>
+            <td>Link5</td>
+            <td>Link6</td>
+        </tr>
+        <tr>
+            <th scope="row">12.06.2022</th>
+            <td>Link7</td>
+            <td>Link8</td>
+            <td>Link9</td>
+            <td>Link10</td>
+            <td>Link11</td>
+            <td>Link12</td>
+        </tr>
+        <tr>
+            <th scope="row">07.06.2022</th>
+            <td>Link13</td>
+            <td>Link14</td>
+            <td>Link15</td>
+            <td>Link16</td>
+            <td>Link17</td>
+            <td>Link18</td>
+        </tr>
+        <tr>
+            <th scope="row">29.05.2022</th>
+            <td>Link19</td>
+            <td>Link20</td>
+            <td>Link21</td>
+            <td>Link22</td>
+            <td>Link23</td>
+            <td>Link24</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-    <div class="container author-catalogue">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">Author</th>
-                <th scope="col">Quantity of joint publications</th>
-                <th scope="col">Affiliation</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for id in co_authors %}
-                    <tr>
-                        <th scope="row">{{ co_authors_data[id]["name"] }}</th>
-                        <td>{{ co_authors_data[id]["common_papers"] }}</td>
-                        <td>{{ co_authors_data[id]["affiliation"] }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+
+
+
     <form method="post">
         <div class="container-md">
             <div class="d-flex">
@@ -133,13 +177,21 @@
     </div>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script>
         function toggleSidebar() {
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
-    </script>
+
+
+
+
+</script>
 
 </body>
 </html>

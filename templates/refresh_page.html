@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,
+           initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/refresh_page.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Publications</title>
+</head>
+<body>
+<div class="panel-delimeter">
+    <ul id="nav">
+
+        <li><a class="active" href="/">
+            <div class="logomargin">
+
+                <img src="{{ main_logo }}" alt="Logo not found" class="round logo">
+                <img src="{{ main_title }}" alt="Title not found" class="logo">
+
+            </div>
+        </a>
+        </li>
+        <li>
+
+            <a href="/general" class="light-up">Publications</a>
+
+        </li>
+        <li>
+
+            <a href="/search" class="light-up">Authors</a>
+
+        </li>
+        <li>
+
+            <a href="/#bottom-block" class="light-up">About IU</a>
+
+        </li>
+        <li><a href="/refresh" class="light-up">Refresh</a></li>
+    </ul>
+
+</div>
+<h1 style="margin-top: 1%; font-size: 50px; margin-left: 120px; margin-bottom: -0.5%; ">
+    Latest updates
+</h1>
+<div class="container author-catalogue">
+    <table class="table table-bordered">
+        <caption></caption>
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Source</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">27.06.2022</th>
+            <td><a href="https://www.google.com">Link</a></td>
+        </tr>
+        <tr>
+            <th scope="row">23.06.2022</th>
+            <td><a href="https://www.google.com">Link</a></td>
+        </tr>
+        <tr>
+            <th scope="row">12.06.2022</th>
+            <td><a href="https://www.google.com">Link</a></td>
+        </tr>
+        <tr>
+            <th scope="row">07.06.2022</th>
+            <td><a href="https://www.google.com">Link</a></td>
+        </tr>
+        <tr>
+            <th scope="row">29.05.2022</th>
+            <td><a href="https://www.google.com">Link</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container-md">
+    <div class="d-flex">
+        <button class="button-sort" style="color:#fff; margin-top: 3.5%; margin-left:75%;">
+            Refresh now
+        </button>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script>
+        function toggleSidebar() {
+            document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
+            document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
+        }
+
+</script>
+
+</body>
+</html>
