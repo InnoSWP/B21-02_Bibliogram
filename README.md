@@ -37,11 +37,14 @@ Clicking on "All Publications" will take you to a page with a complete list of t
 
 The main part of this page is a table with the data about the publications of IU selected by some criteria.
 The middle of the page contains 4 buttons. Clicking on one of them will open a modal window. Using "Show parameters" you can choose which fields of the table to show. "Sort by" will sort by selected parameters in the chosen order. "Filter by" helps to specify year, source type, amount of citations and quartile. The "Download statistics" button suggest to choose a type of the file with information on publications you would like to download.
-At the footer you can switch by
+At the footer you can switch by the different pages with publications.
 
 4. **Find author** (by clicking on Authors in header)
 
-Here you can select the author whose profile you want to view. Just scroll down to find appropriate one. Also you can use search bar to find suitable author faster. Just write a name of the researcher in the searching field and press button "Search" or Enter. Then just click on the field corresponding to the person you are looking for.
+Here you can select the author whose profile you want to view. Just scroll down to find appropriate one. 
+Also you can use search bar to find suitable author faster. Just write a name of the researcher in the searching field and press button "Search" or Enter. Then just click on the field corresponding to the person you are looking for.
+
+![image](https://user-images.githubusercontent.com/71354878/176884400-d6424cf8-44a8-4cef-abe1-e0daf1a37abf.png)
 
 5. **Author's profile**
 
@@ -50,7 +53,7 @@ In the lower header you can choose the type of information about the selected au
 
 6. **Co-authors**
 
-This page contains the information about people who have ever conducted a joint study with the selected researcher. The usage possibilities are similar to the publications page. 
+This page contains the information about researches who have ever conducted a joint study with the selected author. The information about co-authors could be downloades.
 
 7. **Author's publications**
 
@@ -58,30 +61,29 @@ This page contains the information about the studies of the selected researcher.
 
 8. **Refresh**
 
-If you want to choose a version of the data, select one of the displayed. Also, you can call a new version by pressing "Refresh now" button.
+If you want to choose a version of the statistical data, select one of the displayed. Also, you can call a new version by pressing "Refresh now" button.
 
 ## List of features
 
 + Easy navigation - everything is in the page header
 + Convenient search of the researcher
 + Ability to sort, filter and select display parameters in the tables
-+ Updated statistics with graphic and word cloud
++ Up-to-date statistics
 + Ability to update data by request
-+ Refreshing system
 
 ## Requrements
 
-idna>=2.10                    
-requests>=2.25.1
-six>=1.15.0
-tornado>=6.1
-urllib3>=1.26.4
-Flask>=2.1.2
-matplotlib==3.5.2
-matplotlib-inline==0.1.2
-numpy>=1.21.2
-pandas>=1.4.3
-image>=1.5.33
+* idna>=2.10                    
+* requests>=2.25.1
+* six>=1.15.0
+* tornado>=6.1
+* urllib3>=1.26.4
+* Flask>=2.1.2
+* matplotlib==3.5.2
+* matplotlib-inline==0.1.2
+* numpy>=1.21.2
+* pandas>=1.4.3
+* image>=1.5.33
 
 ## Project installation
 
@@ -91,8 +93,9 @@ image>=1.5.33
 ```
 pip3 install -r requirements.txt
 ```
-5. Run app.py
-6. Open the WEB application by the given link in the console
+3. Run app.py
+
+4. Open the WEB application by the given link in the console
 
 
 ## Badges
@@ -111,9 +114,9 @@ pip3 install -r requirements.txt
 Our team chose the MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for our team. The license is needed because our team wants to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, the MIT license is the most appropriate protection for us and possible users.
 
 Copyright (c) 2022 Shulepin D.A.
+              2022 Zaitseva S.A.
               2022 Sokolov Y.I.
               2022 Urzhumov V.A.
-              2022 Zaitseva S.A.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
