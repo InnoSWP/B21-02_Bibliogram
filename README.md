@@ -127,10 +127,10 @@ pip3 install -r requirements.txt
 A comparison of the two licenses, the MIT License and the GNU General Public License v3.0, shows that the second one has a stronger copyright and a larger set of conditions.
 Our team chose the MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for our team. The license is needed because our team wants to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, the MIT license is the most appropriate protection for us and possible users.
 
-Copyright (c) 2022 Shulepin D.A.
-              2022 Zaitseva S.A.
-              2022 Sokolov Y.I.
-              2022 Urzhumov V.A.
+Copyright (c) 2022 Shulepin D.A.<br />
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022 Zaitseva S.A.<br />
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022 Sokolov Y.I.<br />
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;2022 Urzhumov V.A.<br />
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
