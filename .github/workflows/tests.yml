@@ -3,8 +3,13 @@
 name: Tests
 
 on:
-  - push
-  - pull_request
+  push:
+    branches-ignore: [master, main, readme-feature]
+    # Remove the line above to run when pushing to master
+#   pull_request:
+#     branches: [master, main]
+#   - push
+#   - pull_request
 
 jobs:
   test:
