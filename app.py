@@ -347,7 +347,7 @@ def general():
     papers = data.publications.loc[filt]
 
     indicators_names = [
-        "Number of publications",
+        "Number of all publications",
         "Articles",
         "Books",
         "Book Chapters",
@@ -408,10 +408,46 @@ def general():
 
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
+    add_filt_1 = info["Indicators"] == "Number of all publications"
+    info_1 = info.loc[add_filt_1]
+
+    types = [
+        "Articles",
+        "Books",
+        "Book Chapters",
+        "Conference Papers",
+        "Reviews",
+        "Short Surveys",
+        "Others",
+    ]
+    add_filt_2 = info["Indicators"].isin(types)
+    info_2 = info.loc[add_filt_2]
+
+    scopus = [
+        "Scopus",
+        "Q1 & Q2",
+        "Number of citations",
+    ]
+    add_filt_3 = info["Indicators"].isin(scopus)
+    info_3 = info.loc[add_filt_3]
+
+    citations = [
+        ">10",
+        "5-9",
+        "1-4",
+        "0",
+    ]
+    add_filt_4 = info["Indicators"].isin(citations)
+    info_4 = info.loc[add_filt_4]
+
     return render_template(
         "general.html",
         main_logo=main_logo,
         main_title=main_title,
+        info_1=info_1,
+        info_2=info_2,
+        info_3=info_3,
+        info_4=info_4,
     )
 
 
