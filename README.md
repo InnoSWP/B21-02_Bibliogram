@@ -93,7 +93,7 @@ pip3 install -r requirements.txt
 
 
 ## Badges
-
+[![Lint Code Base](https://github.com/InnoSWP/B21-02_Bibliogram/actions/workflows/linter.yml/badge.svg?branch=main)](https://github.com/InnoSWP/B21-02_Bibliogram/actions/workflows/linter.yml)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/InnoSWP/B21-02_Bibliogram.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/InnoSWP/B21-02_Bibliogram/context:javascript)
 
