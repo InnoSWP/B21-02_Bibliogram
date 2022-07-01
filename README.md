@@ -21,24 +21,27 @@ Run the app.py or go on the webpage. The application will open on the main page.
 
 1. **Main page**
 
-Now you are on the welcome page. On the top you can click on IU logo to return on this page. On the right part of the header you can choose one of four other pages: Publications, Authors, About IU, Refresh. The detailed description look in 2-5.
-After the welcome part, you can know more about the goals that you can achive using our application. 
-At the end of main page, you can see general statistics of Innopolis University (you will be here by clicking the field "About IU" in the header).
-The arrow at the right bottom will open welcome part of the main page.
+Now you are on the welcome page. 
+On the top you can click on IU logo to return on main page. On the right part of the header you can choose one of four other pages: Publications, Authors, About IU, Refresh. The detailed description look in 2-5.
+Scroll down and you will see a list of the existing features of our application.
+After features list, you can see general statistics of Innopolis University (you will be here by clicking the field "About IU" in the header).
+The arrow in the bottom right corner will return you back to the welcome page.
 
 2. **General statistics of publications** (by clicking on Publications in header)
 
 The header works identically to the main page. 
-Here you can see general statistics of publications in Innopolis University. 
+Here you can see general statistics of publications in Innopolis University.
+Clicking on "All Publications" will take you to a page with a complete list of the university's publications.
 
 3. **Publications of IU**
 
 The main part of this page is a table with the data about the publications of IU selected by some criteria.
-The middle of the page contains 4 buttons. Clicking on one of them will open a modal window. Using "Show parameters" you can choose which fields of the table to show. "Sort by" will sort by selected parameters in the chosen order. "Filter by" helps to specify year, source and work type, amount of citations and quartile. The "Download statistics" button suggest to choose a type of the file.
+The middle of the page contains 4 buttons. Clicking on one of them will open a modal window. Using "Show parameters" you can choose which fields of the table to show. "Sort by" will sort by selected parameters in the chosen order. "Filter by" helps to specify year, source type, amount of citations and quartile. The "Download statistics" button suggest to choose a type of the file with information on publications you would like to download.
+At the footer you can switch by
 
 4. **Find author** (by clicking on Authors in header)
 
-Here you can select the author whose profile you want to view. Just scroll down. Also you can write a name of the researcher in the searching field and press button "Search" or Enter. Then just click on the field corresponding to the person you are looking for.
+Here you can select the author whose profile you want to view. Just scroll down to find appropriate one. Also you can use search bar to find suitable author faster. Just write a name of the researcher in the searching field and press button "Search" or Enter. Then just click on the field corresponding to the person you are looking for.
 
 5. **Author's profile**
 
@@ -62,7 +65,7 @@ If you want to choose a version of the data, select one of the displayed. Also, 
 + Easy navigation - everything is in the page header
 + Convenient search of the researcher
 + Ability to sort, filter and select display parameters in the tables
-+ Interesting statistics with graphic and word cloud
++ Updated statistics with graphic and word cloud
 + Ability to update data by request
 + Refreshing system
 
@@ -105,7 +108,7 @@ pip3 install -r requirements.txt
 
 ## MIT License
 
-Our team choose MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for out team. The license is needed because our team want to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, MIT license is the most appropriate protection for us and possible users.
+Our team chose the MIT license because we want a simple and permissive one. We do not care about working in the community or sharing improvements as much as about simplicity and understandability of the license for our team. The license is needed because our team wants to work on a project together, and share the solution with the client. Probably, developers may want to improve or expand our program. In summary, the MIT license is the most appropriate protection for us and possible users.
 
 Copyright (c) 2022 Shulepin D.A.
               2022 Sokolov Y.I.
