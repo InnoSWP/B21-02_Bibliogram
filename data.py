@@ -384,32 +384,14 @@ def date_citation():  # pragma: no cover
                 "Citations"
             ][ind]
 
-    # return sorted(dict.items())
     return dict
 
 
 tuple = date_citation()
 
-# print(tuple)
 myList = tuple.items()
 myList = sorted(myList)
 x, y = zip(*myList)
-
-# fig, axes = plt.subplots(1, 1, figsize=(16, 12))
-#
-# axes.plot(x, y, "#004", lw=2)
-# axes.grid(False)
-# axes.bar(x, y, color="#036e8e", width=0.08)
-# plt.ylim(ymin=0, ymax=2200)
-# plt.rc("axes", labelsize=1000)
-
-# fig.savefig("static/images/graphic.png")
-# plt.close(fig)
-#
-# im = Image.open("static/images/graphic.png")
-# width, height = im.size
-# im1 = im.crop((150, 130, width - 150, height - 100))
-# im1.save("static/images/graphic.png")
 
 x = list(x)
 y = list(y)
@@ -419,6 +401,8 @@ y_plot = pd.Series(y)
 fig = plt.figure(figsize=(16, 12))
 ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
 ax.set_xticklabels(x)
+for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+	label.set_fontsize(20)
 
 rects = ax.patches
 
@@ -426,12 +410,12 @@ for rect, label in zip(rects, y):
     height = rect.get_height()
     ax.text(
         rect.get_x() + rect.get_width() / 2,
-        height + 5,
+        height + 5.6,
         label,
         ha="center",
         va="bottom",
         family="Arial",
-        size="x-large",
+        size=20,
     )
 
 ax.plot(x, y, "#004", lw=2)
@@ -441,5 +425,5 @@ plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
-im1 = im.crop((150, 130, width - 150, height - 80))
+im1 = im.crop((110, 130, width - 150, height - 30))
 im1.save("static/images/graphic.png")

@@ -79,16 +79,15 @@
         <tr>
             <th colspan="3" style="font-family:'Open Sans', arial, sans-serif; font-size: 50px; margin-left: 20px;">
                 {{ author["name"] }}
-                <div style="font-family:'Open Sans', arial, sans-serif; margin-left: 120px; margin-top: 25px; font-size:25px;" class="info-amm">
+                <div style="font-family:'Open Sans', arial, sans-serif; margin-left: 120px; margin-top: 25px; font-size:25px;"
+                     class="info-amm">
                     <h3>Scientific researcher of the Innopolis University</h3>
                     <h3>{{ department }}</h3>
                 </div>
             </th>
         </tr>
         <tr>
-            <th colspan="5">
-                -
-            </th>
+
         </tr>
         <tr>
             <th colspan="5">
@@ -106,6 +105,26 @@ font-size:25px;">
                     </ul>
                 </div>
             </th>
+            <th style="width: 35%" id="num6564" colspan="5">
+                <div style="display: inline-block; margin-left:70px;">
+                    <img src="/static/images/graphic_author_papers.png" alt="Missing" width="475px" height="300px"
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers"
+                        style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px; margin-left:120px;">
+                        Publications by year</h2>
+                </div>
+            </th>
+            <th style="width: 35%" id="num34255" colspan="5">
+                <div style="display: inline-block; margin-left:70px;">
+                    <img src="/static/images/graphic_author_citations.png" alt="Missing" width="475px" height="300px"
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers"
+                        style="margin-left:150px; color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">
+                        Citations by year</h2>
+                </div>
+            </th>
+        </tr>
+        <tr>
             <th colspan="4">
                 <div class="info-amm2">
                     <div class="inline-statistics">
@@ -159,6 +178,7 @@ font-size:25px;">
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
+
 
 
 
