@@ -61,8 +61,7 @@
                     style="color:#fff; margin-top: 5%;">
                 Sort by
             </button>
-            <button type="button" class="button-sort passive512" data-bs-toggle="modal"
-                    data-bs-target="#filter-by-modal"
+            <button type="button" class="button-sort passive512" data-bs-toggle="modal" data-bs-target="#filter-by-modal"
                     style="color:#fff; margin-top: 5%;">
                 Filter by
             </button>
@@ -259,22 +258,19 @@
                         <input class="form-check-input" type="checkbox" role="switch" id="2009" name="date_filter"
                                value="2009"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2009">2009</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2009">2009</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2010" name="date_filter"
                                value="2010"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2010">2010</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2010">2010</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2011" name="date_filter"
                                value="2011"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2011">2011</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2011">2011</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2012" name="date_filter"
@@ -315,8 +311,7 @@
                         <input class="form-check-input" type="checkbox" role="switch" id="2017" name="date_filter"
                                value="2017"
                                checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="2017">2017</label>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;" for="2017">2017</label>
                     </div>
                     <div class="form-check form-switch" style="margin-left: 36px;">
                         <input class="form-check-input" type="checkbox" role="switch" id="2018" name="date_filter"
@@ -430,13 +425,12 @@
                                for="fourth-quartile">Q4</label>
                     </div>
                 </div>
-                <div class="modal-body name-of-table4"
-                     style="margin-left:75%; margin-top: -143.5%; margin-bottom: 60%;">
+                <div class="modal-body name-of-table4" style="margin-left:75%; margin-top: -143.5%; margin-bottom: 60%;">
                     <h5 class="modal-title name-of-table1">Citations</h5>
                     <div class="form-control">
                         <label class="form-check-label" style="margin-bottom: 2px;"
                                for="from-citations">From</label>
-                        <input type="text" id="from-citations" name="citations_from" style="width: 25%;">
+                        <input  type="text" id="from-citations" name="citations_from" style="width: 25%;">
                     </div>
                     <div class="form-control">
                         <label class="form-check-label" style="margin-bottom: 2px;"
@@ -524,7 +518,7 @@
             {% for el in papers.iloc[i] %}
             <td style="max-width: 180px;">
                 {% if el == 100000 %}
-                -
+                    -
                 {% else %}
                 <p style="max-width: 180px;">{{ el }}</p>
                 {% endif %}
@@ -546,13 +540,11 @@
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
 
-
 </script>
 <script>
     function ordering(chk, label) {
                         document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
                         }
-
 
 
 
