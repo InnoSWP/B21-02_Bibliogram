@@ -500,7 +500,7 @@
 </form>
 
 <div class="container author-catalogue">
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-left:-80px;">
         <thead>
         <tr>
             <th>№</th>
@@ -516,7 +516,7 @@
                 {{ i + 1 }}
             </td>
             {% for el in papers.iloc[i] %}
-            <td>
+            <td style="max-width: 250px;">
                 {% if el == 100000 %}
                     -
                 {% else %}
