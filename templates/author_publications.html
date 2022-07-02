@@ -499,7 +499,7 @@
     </div>
 </form>
 
-<div class="container author-catalogue">
+<div class="container-lg justify-content-center author-catalogue" style="max-width: 100%">
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -516,11 +516,11 @@
                 {{ i + 1 }}
             </td>
             {% for el in papers.iloc[i] %}
-            <td>
+            <td style="max-width: 180px;">
                 {% if el == 100000 %}
                     -
                 {% else %}
-                    {{ el }}
+                <p style="max-width: 180px;">{{ el }}</p>
                 {% endif %}
             </td>
             {% endfor %}

@@ -46,80 +46,165 @@
         <a class="nav-link" href="/author_publications={{id}}" style="color: #fff">Publications</a>
     </li>
 </ul>
-<!--Wow, such empty! Soon here will be content about author. Now you can go-->
-<!--<a href="/" style="text-decoration: none;  color: #051742; font-size:40px;">-->
-<!--    Back to main page!-->
-<h1 style="margin-top: 1%; font-size: 50px; margin-left: 490px; margin-bottom: -0.5%; ">
-    {{ author["name"] }}
-</h1>
-<div class="info-amm">
-    <h4>
-        {% if author['name'] in photos.keys() %}
-            <img  src={{photos[author["name"]]}}
-             onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
-             alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
-             class="round-photo1">
-        {% elif if_photo %}
-             <img  src={{photo_link}}
-             onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
-             alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
-             class="round-photo1">
-        {% else %}
-             <img  src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
-             onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
-             alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
-             class="round-photo1">
-        {% endif %}
-        </h4>
-</div>
-<div style="font-family:'Open Sans', arial, sans-serif; margin-left: 120px; margin-top: 25px;
-font-size:25px;" class="info-amm">
-    <h3>Scientific researcher of the Innopolis University</h3>
-    <h3>{{ department }}</h3>
-</div>
-<div class="info-amm2">
-    <ul type="square" style="font-family:'Open Sans', arial, sans-serif; margin-left: 120px; margin-top: 25px;
+
+<div class="info-amm container-xl">
+    <table>
+        <caption></caption>
+        <thead>
+
+        </thead>
+        <tbody>
+        <tr>
+            <th colspan="2" rowspan="2" id="random29">
+                {% if author['name'] in photos.keys() %}
+                <img src={{photos[author["name"]]}}
+                     onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
+                     alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
+                     class="round-photo1">
+                {% elif if_photo %}
+                <img src={{photo_link}}
+                     onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
+                     alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
+                     class="round-photo1">
+                {% else %}
+                <img src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
+                     onerror=this.src="https://lh3.googleusercontent.com/zDAb_4KBHlWlpcdO_GiB8lFRuxWz3vC1znbI9tg44rceG4S5ZsJhr0dxCwKUR1H6AWo7dZ_jtpi26LFv8QeWiaDaJUnG2vKH1xgAggXv1uq-RjHW7DWuzkRC77A6t6zUR71vUHFut3T051CewNbpwV4ULjX95xsJh63EhFdh4hAiT7-F0-9sjBvbgqdvpULvRMx2h6lmbK1AhO5eOmQzm5qsAqe6cYwY9dLvqZIsM37xsSA-yK2Ov1V0CBM3zYdPvanCL6trQvY-mfJXLee6l8KAI_ukXbRfRkIk1Ei0liAlqTNAzkIwSmcmCdZcAxOYdX1VEXHRV9kefuWSFZHO4pJ1ZacweFpqoy1TiYUvekTERIIkA66Wd98TWDT-EwGRWgMOD7TTDrC3GKn8VJIJVEOw44j4b53WfuBmzrBsbEWVFQ05d9XLzRQ4iSpp8hxXPZ7dqxzN5G4t-_mniEddBJcCuaudbsz850A2Bb4M9ZTfMQuVJh_EnLmdvuN5avpNso_gybc0Tepv1L6fsRTHlVeceusMclaCJMYOndFKXtpPQuwmW5wOzq4uRdv_MB8dKT3pjzEbGCtRIV1q--9SSvo1OHaJkCcIfUoGX9LlasNIECsYh4D9f4xkWue7_KrCwfkIcjOlp4s0nIvzpenO6ltfiB5KA6JAKUpbImDAUq-0Fyw33KdH9JvUAX7SZB0JPpGIMznoDpR-9Pc9HgJqJQmP0BgYVAr6c0cvuHBNskQbVAgeQ7GYZPmhD7tFgO40dwihT_kuWurjtWSS4J78N5csZPtnlJemABfz=w908-h796-no?authuser=0"
+                     alt="Not found" width="450" height="auto" style="margin-left: 120px; margin-top: 30px;"
+                     class="round-photo1">
+                {% endif %}
+            </th>
+            <th id="random28"></th>
+            <th id="random27"></th>
+            <th id="random26"></th>
+        </tr>
+        <tr>
+            <th colspan="3" style="font-family:'Open Sans', arial, sans-serif; font-size: 50px; margin-left: 100px;" width="500px" id="random25">
+                <div style="width: 150%; margin-left: 100px;">{{ author["name"] }}</div>
+                <div style="font-family:'Open Sans', arial, sans-serif; margin-left: 100px; margin-top: 25px; font-size:25px;"
+                     class="info-amm">
+                    <h3 style="width:150%;">Scientific researcher of the Innopolis University</h3>
+                    <h3 style="width:150%;">{{ department }}</h3>
+                </div>
+            </th>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+            <th colspan="5" id="random24">
+
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2" id="random23">
+                <div class="info-amm2">
+                    <ul type="square" style="font-family:'Open Sans', arial, sans-serif; margin-left: 120px; margin-top: 25px;
 font-size:25px;">
-        {% for discipline in disciplines %}
-        <li>{{ discipline }}</li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="info-amm2">
-    <div class="inline-statistics" style="margin-top: -200px;">
-        <div class="block-info">
-            <h3>
-                {{ author["papers_number"] }}
-            </h3>
-            <h4 style="margin-top:20px; margin-left: 50px;">
-                Amount of publications
-            </h4>
-        </div>
-        <div class="block-info">
-            <h3>
-                {{ author["overall_citations"] }}
-            </h3>
-            <h4 style="margin-top:20px; margin-left:55px;">
-                Number of citations
-            </h4>
-        </div>
-        <div class="block-info">
-            <h3>
-                {{ author["hirsch_ind"] }}
-            </h3>
-            <h4 style="margin-top:44px;">
-                H-index
-            </h4>
-        </div>
-        <div class="block-info">
-            <h3>
-                {{ author["publishing_period"] }}
-            </h3>
-            <h4 style="margin-left: 45px; width: 150px; margin-top:20px;">
-                Publication period
-            </h4>
-        </div>
-    </div>
+                        {% for discipline in disciplines %}
+                        <li>{{ discipline }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </th>
+            <th style="width: 35%" id="num6564" colspan="3">
+                <div style="display: inline-block; margin-left:70px;">
+                    <img src="/static/images/graphic_author_papers.png" alt="Missing" width="475px" height="300px"
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers"
+                        style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px; margin-left:120px;">
+                        Publications by year</h2>
+                </div>
+            </th>
+            <th style="width: 35%" id="num34255" colspan="3">
+                <div style="display: inline-block; margin-left:50px;">
+                    <img src="/static/images/graphic_author_citations.png" alt="Missing" width="475px" height="300px"
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers"
+                        style="margin-left:150px; color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">
+                        Citations by year</h2>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th width="500px" id="random22">
+
+            </th>
+            <th width="500px" id="random21">
+
+            </th>
+            <th width="500px" id="random20">
+
+            </th>
+            <th width="100px;" style="margin-left:100px;" id="random19">
+                <div class="block-info" style="margin-top: 50px;">
+                    <h3 style="margin-left:-10px;">
+                        {{ author["papers_number"] }}
+                    </h3>
+                </div>
+            </th>
+            <th width="150px;" id="random18">
+                <div class="block-info" style="margin-top: 50px;">
+                    <h3>
+                        {{ author["overall_citations"] }}
+                    </h3>
+                </div>
+            </th>
+            <th width="50px;" id="random17">
+                <div class="block-info" style="margin-top:60px;">
+                    <h3 style="margin-top: -10px; margin-left: 100px;">
+                        {{ author["hirsch_ind"] }}
+                    </h3>
+                </div>
+            </th>
+            <th style="width: 50px;" id="random16">
+                <div class="block-info" style="margin-top: 50px; margin-left:-120px;">
+                    <h3 style="width: 120%; margin-left: 25px;">
+                        {{ author["publishing_period"] }}
+                    </h3>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th width="500px" id="random15">
+
+            </th>
+            <th width="500px" id="random14">
+
+            </th>
+            <th width="500px" id="random13">
+
+            </th>
+            <th width="100px;" style="margin-left:100px;" id="random12">
+                <div class="block-info" style="margin-top: -10px;">
+                    <h4 style="margin-top:20px; margin-left: -30px;">
+                        Amount of publications
+                    </h4>
+                </div>
+            </th>
+            <th width="150px;" id="random11">
+                <div class="block-info" style="margin-top: -10px;">
+                    <h4 style="margin-top:20px; margin-left:60px;">
+                        Number of citations
+                    </h4>
+                </div>
+            </th>
+            <th width="50px;" id="random10">
+                <div class="block-info" style="margin-top:-5px;">
+                    <h4 style="margin-top:20px; margin-left: 65px;">
+                        H-index
+                    </h4>
+                </div>
+            </th>
+            <th style="width: 50px;" id="random9">
+                <div class="block-info" style="margin-top: -10px; margin-left:-120px;">
+                    <h4 style="margin-left: 65px; width: 150px; margin-top:20px;">
+                        Publication period
+                    </h4>
+                </div>
+            </th>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -130,6 +215,9 @@ font-size:25px;">
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
+
+
+
 
 
 </script>

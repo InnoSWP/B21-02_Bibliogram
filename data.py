@@ -384,62 +384,46 @@ def date_citation():  # pragma: no cover
                 "Citations"
             ][ind]
 
-    # return sorted(dict.items())
     return dict
 
 
 tuple = date_citation()
 
-# print(tuple)
-myList = tuple.items()
-myList = sorted(myList)
-x, y = zip(*myList)
+myList1 = tuple.items()
+myList1 = sorted(myList1)
+x1, y1 = zip(*myList1)
 
-# fig, axes = plt.subplots(1, 1, figsize=(16, 12))
-#
-# axes.plot(x, y, "#004", lw=2)
-# axes.grid(False)
-# axes.bar(x, y, color="#036e8e", width=0.08)
-# plt.ylim(ymin=0, ymax=2200)
-# plt.rc("axes", labelsize=1000)
+x1 = list(x1)
+y1 = list(y1)
 
-# fig.savefig("static/images/graphic.png")
-# plt.close(fig)
-#
-# im = Image.open("static/images/graphic.png")
-# width, height = im.size
-# im1 = im.crop((150, 130, width - 150, height - 100))
-# im1.save("static/images/graphic.png")
-
-x = list(x)
-y = list(y)
-
-y_plot = pd.Series(y)
+y_plot1 = pd.Series(y1)
 
 fig = plt.figure(figsize=(16, 12))
-ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
-ax.set_xticklabels(x)
+ax = y_plot1.plot(kind="bar", color="#036e8e", width=0.08)
+ax.set_xticklabels(x1)
+for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+    label.set_fontsize(20)
 
 rects = ax.patches
 
-for rect, label in zip(rects, y):
-    height = rect.get_height()
+for rect1, label in zip(rects, y1):
+    height = rect1.get_height()
     ax.text(
-        rect.get_x() + rect.get_width() / 2,
-        height + 5,
+        rect1.get_x() + rect1.get_width() / 2,
+        height + 5.6,
         label,
         ha="center",
         va="bottom",
         family="Arial",
-        size="x-large",
+        size=20,
     )
 
-ax.plot(x, y, "#004", lw=2)
+ax.plot(x1, y1, "#004", lw=2)
 
 fig.savefig("static/images/graphic.png")
 plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
-im1 = im.crop((150, 130, width - 150, height - 80))
+im1 = im.crop((110, 130, width - 150, height - 30))
 im1.save("static/images/graphic.png")

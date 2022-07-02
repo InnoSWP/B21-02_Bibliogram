@@ -53,66 +53,100 @@
 <h1 style="margin-top: 2.5%; font-size: 50px; margin-left: 120px; margin-bottom: 3%; ">
     General statistics about publications
 </h1>
+
 <div class="container author-catalogue">
     <table class="table table-bordered">
         <caption></caption>
         <thead>
         <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Source</th>
-            <th scope="col">Link</th>
-            <th scope="col">Title</th>
-            <th scope="col">Something</th>
-            <th scope="col">Data</th>
-            <th scope="col">Time</th>
+            {% for column in info_1.columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
         </tr>
         </thead>
         <tbody>
+            {% for i in range(info_1.shape[0]) %}
+                <tr>
+                    {% for el in info_1.iloc[i] %}
+                        <td>{{ el }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h5 style="margin-top: 2.5%; font-size: 20px; margin-left: 120px;">
+    Number of publications by types:
+</h5>
+<div class="container author-catalogue">
+    <table class="table table-bordered">
+        <caption></caption>
+        <thead>
         <tr>
-            <th scope="row">27.06.2022</th>
-            <td><a href="https://www.google.com">Link64</a></td>
-            <td><a href="https://www.google.com">Link67</a></td>
-            <td><a href="https://www.google.com">Link234</a></td>
-            <td><a href="https://www.google.com">Link2365</a></td>
-            <td><a href="https://www.google.com">Link546</a></td>
-            <td><a href="https://www.google.com">Link345</a></td>
+            {% for column in info_2.columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
         </tr>
+        </thead>
+        <tbody>
+            {% for i in range(info_2.shape[0]) %}
+                <tr>
+                    {% for el in info_2.iloc[i] %}
+                        <td>{{ el }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h5 style="margin-top: 2.5%; font-size: 20px; margin-left: 120px;">
+    Indexed publications:
+</h5>
+<div class="container author-catalogue">
+    <table class="table table-bordered">
+        <caption></caption>
+        <thead>
         <tr>
-            <th scope="row">23.06.2022</th>
-            <td>Link1</td>
-            <td>Link2</td>
-            <td>Link3</td>
-            <td>Link4</td>
-            <td>Link5</td>
-            <td>Link6</td>
+            {% for column in info_3.columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
         </tr>
+        </thead>
+        <tbody>
+            {% for i in range(info_3.shape[0]) %}
+                <tr>
+                    {% for el in info_3.iloc[i] %}
+                        <td>{{ el }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h5 style="margin-top: 2.5%; font-size: 20px; margin-left: 120px;">
+    Number of publications with number of citations:
+</h5>
+<div class="container author-catalogue">
+    <table class="table table-bordered">
+        <caption></caption>
+        <thead>
         <tr>
-            <th scope="row">12.06.2022</th>
-            <td>Link7</td>
-            <td>Link8</td>
-            <td>Link9</td>
-            <td>Link10</td>
-            <td>Link11</td>
-            <td>Link12</td>
+            {% for column in info_4.columns %}
+            <th scope="col">{{ column }}</th>
+            {% endfor %}
         </tr>
-        <tr>
-            <th scope="row">07.06.2022</th>
-            <td>Link13</td>
-            <td>Link14</td>
-            <td>Link15</td>
-            <td>Link16</td>
-            <td>Link17</td>
-            <td>Link18</td>
-        </tr>
-        <tr>
-            <th scope="row">29.05.2022</th>
-            <td>Link19</td>
-            <td>Link20</td>
-            <td>Link21</td>
-            <td>Link22</td>
-            <td>Link23</td>
-            <td>Link24</td>
-        </tr>
+        </thead>
+        <tbody>
+            {% for i in range(info_4.shape[0]) %}
+                <tr>
+                    {% for el in info_4.iloc[i] %}
+                        <td>{{ el }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
