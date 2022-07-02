@@ -9,11 +9,7 @@ import sys
 extra_dll_dir = os.path.join(os.path.dirname(__file__), '.libs')
 
 if sys.platform == 'win32' and os.path.isdir(extra_dll_dir):
-    if sys.version_info >= (3, 8):
-        os.add_dll_directory(extra_dll_dir)
-    else:
-        os.environ.setdefault('PATH', '')
-        os.environ['PATH'] += os.pathsep + extra_dll_dir
+    os.add_dll_directory(extra_dll_dir)
 
 openblas64__info={'libraries': ['openblas64_', 'openblas64_'], 'library_dirs': ['/usr/local/lib'], 'language': 'c', 'define_macros': [('HAVE_CBLAS', None), ('BLAS_SYMBOL_SUFFIX', '64_'), ('HAVE_BLAS_ILP64', None)], 'runtime_library_dirs': ['/usr/local/lib']}
 blas_ilp64_opt_info={'libraries': ['openblas64_', 'openblas64_'], 'library_dirs': ['/usr/local/lib'], 'language': 'c', 'define_macros': [('HAVE_CBLAS', None), ('BLAS_SYMBOL_SUFFIX', '64_'), ('HAVE_BLAS_ILP64', None)], 'runtime_library_dirs': ['/usr/local/lib']}
