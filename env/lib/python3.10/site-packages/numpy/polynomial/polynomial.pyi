@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 
 from numpy import ndarray, dtype, int_
 from numpy.polynomial._polybase import ABCPolyBase

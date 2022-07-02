@@ -1,24 +1,18 @@
 import platform
 import pytest
-import numpy as np
 
 from . import util
-
+from numpy.testing import assert_equal
 
 @pytest.mark.skipif(
-    platform.system() == "Darwin",
+    platform.system() == 'Darwin',
     reason="Prone to error when run with numpy/f2py/tests on mac os, "
-    "but not when run in isolation",
-)
-@pytest.mark.skipif(
-    np.dtype(np.intp).itemsize < 8,
-    reason="32-bit builds are buggy"
-)
+           "but not when run in isolation")
 class TestMultiline(util.F2PyTest):
     suffix = ".pyf"
     module_name = "multiline"
-    code = f"""
-python module {module_name}
+    code = """
+python module {module}
     usercode '''
 void foo(int* x) {{
     char dummy = ';';
@@ -31,27 +25,22 @@ void foo(int* x) {{
             integer intent(out) :: x
         end subroutine foo
     end interface
-end python module {module_name}
-    """
+end python module {module}
+    """.format(module=module_name)
 
     def test_multiline(self):
-        assert self.module.foo() == 42
+        assert_equal(self.module.foo(), 42)
 
 
 @pytest.mark.skipif(
-    platform.system() == "Darwin",
+    platform.system() == 'Darwin',
     reason="Prone to error when run with numpy/f2py/tests on mac os, "
-    "but not when run in isolation",
-)
-@pytest.mark.skipif(
-    np.dtype(np.intp).itemsize < 8,
-    reason="32-bit builds are buggy"
-)
+           "but not when run in isolation")
 class TestCallstatement(util.F2PyTest):
     suffix = ".pyf"
     module_name = "callstatement"
-    code = f"""
-python module {module_name}
+    code = """
+python module {module}
     usercode '''
 void foo(int* x) {{
 }}
@@ -67,8 +56,8 @@ void foo(int* x) {{
             }}
         end subroutine foo
     end interface
-end python module {module_name}
-    """
+end python module {module}
+    """.format(module=module_name)
 
     def test_callstatement(self):
-        assert self.module.foo() == 42
+        assert_equal(self.module.foo(), 42)

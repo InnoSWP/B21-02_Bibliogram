@@ -1,7 +1,5 @@
-from __future__ import annotations
-
 from functools import partial
-from collections.abc import Callable
+from typing import Callable, List, Tuple
 
 import pytest  # type: ignore
 import numpy as np
@@ -13,7 +11,7 @@ KACF = frozenset({None, "K", "A", "C", "F"})
 ACF = frozenset({None, "A", "C", "F"})
 CF = frozenset({None, "C", "F"})
 
-order_list: list[tuple[frozenset, Callable]] = [
+order_list: List[Tuple[frozenset, Callable]] = [
     (KACF, partial(np.ndarray, 1)),
     (KACF, AR.tobytes),
     (KACF, partial(AR.astype, int)),
