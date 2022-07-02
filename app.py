@@ -79,27 +79,27 @@ def author(id):
     papers_published = authors_data["papers_published"]
     papers_published_max = int(papers_published[max(papers_published, key=papers_published.get)])
 
-    myList = citations.items()
-    myList = sorted(myList)
-    x, y = zip(*myList)
+    myList2 = citations.items()
+    myList2 = sorted(myList2)
+    x2, y2 = zip(*myList2)
 
-    x = list(x)
-    y = list(y)
+    x2 = list(x2)
+    y2 = list(y2)
 
-    y_plot = pd.Series(y)
+    y_plot = pd.Series(y2)
 
     fig = plt.figure(figsize=(16, 12))
     ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
-    ax.set_xticklabels(x)
+    ax.set_xticklabels(x2)
     for label in (ax.get_xticklabels() + ax.get_yticklabels()):
         label.set_fontsize(20)
 
     rects = ax.patches
 
-    for rect, label in zip(rects, y):
-        height = rect.get_height()
+    for rect2, label in zip(rects, y2):
+        height = rect2.get_height()
         ax.text(
-            rect.get_x() + rect.get_width() / 2,
+            rect2.get_x() + rect2.get_width() / 2,
             height+citations_max/80,
             label,
             ha="center",
@@ -108,7 +108,7 @@ def author(id):
             size=23.5,
         )
 
-    ax.plot(x, y, "#004", lw=2)
+    ax.plot(x2, y2, "#004", lw=2)
 
     fig.savefig("static/images/graphic_author_citations.png")
     plt.close(fig)

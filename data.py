@@ -389,27 +389,27 @@ def date_citation():  # pragma: no cover
 
 tuple = date_citation()
 
-myList = tuple.items()
-myList = sorted(myList)
-x, y = zip(*myList)
+myList1 = tuple.items()
+myList1 = sorted(myList1)
+x1, y1 = zip(*myList1)
 
-x = list(x)
-y = list(y)
+x1 = list(x1)
+y1 = list(y1)
 
-y_plot = pd.Series(y)
+y_plot1 = pd.Series(y1)
 
 fig = plt.figure(figsize=(16, 12))
-ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
-ax.set_xticklabels(x)
+ax = y_plot1.plot(kind="bar", color="#036e8e", width=0.08)
+ax.set_xticklabels(x1)
 for label in (ax.get_xticklabels() + ax.get_yticklabels()):
-	label.set_fontsize(20)
+    label.set_fontsize(20)
 
 rects = ax.patches
 
-for rect, label in zip(rects, y):
-    height = rect.get_height()
+for rect1, label in zip(rects, y1):
+    height = rect1.get_height()
     ax.text(
-        rect.get_x() + rect.get_width() / 2,
+        rect1.get_x() + rect1.get_width() / 2,
         height + 5.6,
         label,
         ha="center",
@@ -418,7 +418,7 @@ for rect, label in zip(rects, y):
         size=20,
     )
 
-ax.plot(x, y, "#004", lw=2)
+ax.plot(x1, y1, "#004", lw=2)
 
 fig.savefig("static/images/graphic.png")
 plt.close(fig)
