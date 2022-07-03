@@ -151,7 +151,7 @@ def publications(num):  # pragma: no cover
             elif file_type == "tsv":
                 all_papers.to_csv("downloads/download.tsv", sep="\t")
             elif file_type == "json":
-                all_papers.to_csv("downloads/download.json")
+                all_papers.to_json("downloads/download.json")
             elif file_type == "xlsx":
                 all_papers.to_excel("downloads/download.xlsx")
 
@@ -233,7 +233,7 @@ def co_authors(id):
         if file_type == "csv":
             co_authors_data.to_csv("downloads/download.csv")
         elif file_type == "json":
-            co_authors_data.to_csv("downloads/download.json")
+            co_authors_data.to_json("downloads/download.json")
         elif file_type == "tsv":
             co_authors_data.to_csv("downloads/download.tsv", sep="\t")
         elif file_type == "xlsx":
@@ -309,7 +309,7 @@ def author_publications(id):  # pragma: no cover
             elif file_type == "xlsx":
                 papers.to_excel("downloads/download.xlsx")
             elif file_type == "json":
-                papers.to_csv("downloads/download.json")
+                papers.to_json("downloads/download.json")
 
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
@@ -327,11 +327,13 @@ def author_publications(id):  # pragma: no cover
 def refresh():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    date = data.cur_date
 
     return render_template(
         "refresh_page.html",
         main_logo=main_logo,
         main_title=main_title,
+        date=date,
     )
 
 
@@ -397,7 +399,7 @@ def general():
         if file_type == "csv":
             info.to_csv("downloads/download.csv")
         elif file_type == "json":
-            info.to_csv("downloads/download.json")
+            info.to_json("downloads/download.json")
         elif file_type == "xlsx":
             info.to_excel("downloads/download.xlsx")
         elif file_type == "tsv":

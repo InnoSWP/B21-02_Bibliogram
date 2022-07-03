@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import date
 from random import randint
 
 from photos import photos_dic
@@ -107,7 +107,7 @@ def page_check(page):
             "Citations",
             "DOI",
         ]
-        date_filter = [str(x) for x in range(2009, 2023)]
+        date_filter = [str(x) for x in range(2009, cur_date.year + 1)]
         source_filter = [
             "Conference Proceeding",
             "Journal",
@@ -136,7 +136,7 @@ def date_check_with(new_date_list):
     global is_data
     if "Publication Date" not in parameters:
         is_data = False
-        return [str(x) for x in range(2009, 2023)]
+        return [str(x) for x in range(2009, cur_date.year + 1)]
     else:
         is_data = True
         return new_date_list
@@ -146,7 +146,7 @@ def date_check():
     global is_data
     if "Publication Date" not in parameters:
         is_data = False
-        return [str(x) for x in range(2009, 2023)]
+        return [str(x) for x in range(2009, cur_date.year + 1)]
     else:
         is_data = True
         return date_filter
@@ -238,7 +238,7 @@ def data_modification(papers_data):
 
     sorting = sorting_check()
 
-    return papers_data[parameters].sort_values(by=sorting, ascending=order)
+    return papers_data[parameters].sort_values(by=sorting, ascending=order).fillna("-")
 
 # download data
 # data = requests.get(
@@ -278,6 +278,7 @@ public_date = "Publication Date"
 affiliation = "Affiliation"
 authors_affiliation = "Authors Affiliation"
 
+cur_date = date.today()
 sorting = ""
 page_name = ""
 order = True
@@ -285,7 +286,7 @@ is_data = True
 is_source = True
 is_quart = True
 is_cit = True
-date_filter = [str(x) for x in range(2009, 2023)]
+date_filter = [str(x) for x in range(2009, cur_date.year + 1)]
 source_filter = [
     "Conference Proceeding",
     "Journal",
