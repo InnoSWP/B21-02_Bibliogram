@@ -475,6 +475,11 @@
     </div>
 </form>
 
+<div class="arrow" id="scroll-to-top-3" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
+</div>
+
 <div class="container author-catalogue">
     <table class="table table-bordered">
         <thead>
@@ -566,7 +571,25 @@
     function generalgo(){
      window.location = "/general"
 }
+</script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha384-S58meLBGKxIiQmJ/pJ8ilvFUcGcqgla+mWH9EEKGm6i6rKxSTA2kpXJQJ8n7XK4w" crossorigin="anonymous"></script>
+<script type="text/javascript">
+          $(function() {
+              $(window).scroll(function() {
+                  if($(this).scrollTop() != 0) {
+                    $('#scroll-to-top-3').fadeIn();
+                  } else {
+                    $('#scroll-to-top-3').fadeOut();
+                  }
+              });
+              $('#scroll-to-top-3').click(function() {
+                  $('body,html').animate({scrollTop:0},700);
+              });
+          });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>
