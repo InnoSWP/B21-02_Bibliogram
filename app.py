@@ -7,9 +7,12 @@ import pandas as pd
 
 from PIL import Image
 
+
 app = Flask(__name__)
 
 matplotlib.use('Agg')
+
+
 @app.route("/")
 def main_page():
     main_logo = url_for("static", filename="images/dark_logo.png")
@@ -159,21 +162,19 @@ def author(id):
     im1 = im.crop((110, 130, width - 150, height - 30))
     im1.save("static/images/graphic_author_papers.png")
 
-    if authors_data["name"] in list(data.authors_add["name"].values):
+    if authors_data["name"] in list(data.authors_add["name"].values) and \
+            data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":
         authors_add = data.authors_add.set_index("name")
         if_photo = True
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
         department = authors_add.loc[authors_data["name"]]["department"]
         disciplines = authors_add.loc[authors_data["name"]]["disciplines"]
+
     else:
         if_photo = False
         photo_link = ""
-        department = "Computer Science"
-        disciplines = [
-            "Machine Learning",
-            "Neural Networks and Artificial Intelligence",
-            "Computer Vision",
-        ]
+        department = ""
+        disciplines = []
 
     return render_template(
         "author_page.html",
@@ -237,16 +238,7 @@ def publications(num):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                all_papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                all_papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "json":
-                all_papers.to_csv("downloads/download.json")
-            elif file_type == "xlsx":
-                all_papers.to_excel("downloads/download.xlsx")
-
+            data.download_file(all_papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "page" in request.form:
@@ -286,13 +278,12 @@ def co_authors(id):
     co_authors_list = list(set(sum(co_authors_list, list())))
     co_authors_list.remove(id)
 
-    download_file = {"Co-Authors Names": [],
-                     "Quantity of joint publications": [],
-                     "Affiliation": []}
+    co_authors_data = {"ID": [],
+                       "Co-Authors Names": [],
+                       "Quantity of joint publications": [],
+                       "Affiliation": []}
 
-    co_authors_dic = {}
     for au_id in co_authors_list:
-        temp_dic = {}
         com_papers = 0
         affiliation = []
 
@@ -303,42 +294,32 @@ def co_authors(id):
         affiliation = ", ".join(set(sum(affiliation, list())))
 
         if au_id in list(authors_data["id"].values):
-            temp_dic["name"] = authors_data.set_index("id").loc[au_id]["name"]
-            temp_dic["common_papers"] = com_papers
-            temp_dic["affiliation"] = affiliation
-            co_authors_dic[au_id] = temp_dic
-            temp_list = download_file.get("Co-Authors Names")
-            temp_list.append(temp_dic["name"])
-            download_file["Co-Authors Names"] = temp_list
-            temp_list = download_file.get("Quantity of joint publications")
-            temp_list.append(temp_dic["common_papers"])
-            download_file["Quantity of joint publications"] = temp_list
-            temp_list = download_file.get("Affiliation")
-            temp_list.append(temp_dic["affiliation"])
-            download_file["Affiliation"] = temp_list
+            temp_list = co_authors_data.get("ID")
+            temp_list.append(au_id)
+            co_authors_data["ID"] = temp_list
+            temp_list = co_authors_data.get("Co-Authors Names")
+            temp_list.append(authors_data.set_index("id").loc[au_id]["name"])
+            co_authors_data["Co-Authors Names"] = temp_list
+            temp_list = co_authors_data.get("Quantity of joint publications")
+            temp_list.append(com_papers)
+            co_authors_data["Quantity of joint publications"] = temp_list
+            temp_list = co_authors_data.get("Affiliation")
+            temp_list.append(affiliation)
+            co_authors_data["Affiliation"] = temp_list
 
-    download_file = pd.DataFrame(download_file)
-    # download_file = download_file.loc["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
+    co_authors_data = pd.DataFrame(co_authors_data).set_index("ID").\
+        sort_values(by="Quantity of joint publications", ascending=False)
 
     if request.method == "POST":
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            download_file.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            download_file.to_csv("downloads/download.json")
-        elif file_type == "tsv":
-            download_file.to_csv("downloads/download.tsv", sep="\t")
-        elif file_type == "xlsx":
-            download_file.to_excel("downloads/download.xlsx")
-
+        data.download_file(co_authors_data, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "co-author.html",
         author_name=author_data["name"],
-        co_authors=co_authors_dic.keys(),
-        co_authors_data=co_authors_dic,
+        co_authors_id=list(co_authors_data.index),
+        co_authors=co_authors_data,
         id=id,
         main_logo=main_logo,
         main_title=main_title,
@@ -394,16 +375,7 @@ def author_publications(id):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "xlsx":
-                papers.to_excel("downloads/download.xlsx")
-            elif file_type == "json":
-                papers.to_csv("downloads/download.json")
-
+            data.download_file(papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
@@ -421,11 +393,13 @@ def author_publications(id):  # pragma: no cover
 def refresh():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    date = data.cur_date
 
     return render_template(
         "refresh_page.html",
         main_logo=main_logo,
         main_title=main_title,
+        date=date,
     )
 
 
@@ -487,16 +461,7 @@ def general():
 
     if request.method == "POST":
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            info.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            info.to_csv("downloads/download.json")
-        elif file_type == "xlsx":
-            info.to_excel("downloads/download.xlsx")
-        elif file_type == "tsv":
-            info.to_csv("downloads/download.tsv", sep="\t")
-
+        data.download_file(info, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     add_filt_1 = info["Indicators"] == "Number of all publications"

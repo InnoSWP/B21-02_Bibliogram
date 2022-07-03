@@ -8,7 +8,7 @@ from data import authors
         b"Amount of publications",
         b"Number of citations",
         b"H-index",
-        b"Research beginning year",
+        b"Publication period",
     ],
 )
 def test_author_info(test_client, label):
@@ -21,7 +21,6 @@ def test_author_info(test_client, label):
     "parameter",
     [
         "papers_number",
-        "overall_citation",
         "hirsch_ind",
     ],
 )

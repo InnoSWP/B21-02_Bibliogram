@@ -6,7 +6,7 @@ import pytest
     [
         b"Find author",
         b"Search results",
-    ]
+    ],
 )
 def test_coauthors_info(test_client, label):
     response = test_client.get("/search")
@@ -19,7 +19,7 @@ def test_coauthors_info(test_client, label):
     [
         "Marat Mingazov",
         "Maksim Rassabin",
-        "Mohamad Kassab",
+        "Manuel Mazzara",
         "Adil Mehood Khan",
     ],
 )

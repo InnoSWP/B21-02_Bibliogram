@@ -30,7 +30,7 @@ def test_authors_publications_sorting(test_client, sort_type):
 )
 def test_authors_publications_filtration(test_client, filtration):
     app.test_client().post(
-        "/author_publications=57186538600", data={"filtration": filtration}
+        "/author_publications=57186538600", data={"show": filtration}
     )
     response = app.test_client().get("/author_publications=57186538600")
     assert b"Quartile" in response.data
