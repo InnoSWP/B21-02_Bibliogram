@@ -450,6 +450,11 @@
     </div>
 </form>
 
+<div class="arrow" id="scroll-to-top-2" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
+</div>
+
 <form method="post">
     <div class="modal fade" id="file-download" tabindex="-1" aria-labelledby="download-file-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -499,7 +504,7 @@
     </div>
 </form>
 
-<div class="container author-catalogue">
+<div class="container-lg justify-content-center author-catalogue" style="max-width: 100%">
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -516,11 +521,11 @@
                 {{ i + 1 }}
             </td>
             {% for el in papers.iloc[i] %}
-            <td>
+            <td style="max-width: 180px;">
                 {% if el == 100000 %}
                     -
                 {% else %}
-                    {{ el }}
+                <p style="max-width: 180px;">{{ el }}</p>
                 {% endif %}
             </td>
             {% endfor %}
@@ -545,9 +550,24 @@
     function ordering(chk, label) {
                         document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
                         }
-
-
-
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha384-S58meLBGKxIiQmJ/pJ8ilvFUcGcqgla+mWH9EEKGm6i6rKxSTA2kpXJQJ8n7XK4w" crossorigin="anonymous"></script>
+<script type="text/javascript">
+          $(function() {
+              $(window).scroll(function() {
+                  if($(this).scrollTop() != 0) {
+                    $('#scroll-to-top-2').fadeIn();
+                  } else {
+                    $('#scroll-to-top-2').fadeOut();
+                  }
+              });
+              $('#scroll-to-top-2').click(function() {
+                  $('body,html').animate({scrollTop:0},700);
+              });
+          });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>

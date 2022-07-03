@@ -1,9 +1,16 @@
-import pandas as pd
-
 import data
 from flask import Flask, render_template, request, send_file, url_for, redirect
+import matplotlib.pyplot as plt
+import matplotlib
+
+import pandas as pd
+
+from PIL import Image
+
 
 app = Flask(__name__)
+
+matplotlib.use('Agg')
 
 
 @app.route("/")
@@ -39,6 +46,7 @@ def search_author():
     authors = authors.loc[filt].sort_values(by="Overall_citations", ascending=False)
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow = url_for("static", filename="images/arrow_up.jpg")
 
     def to_list(arg):
         return list(arg)
@@ -60,6 +68,7 @@ def search_author():
         main_logo=main_logo,
         main_title=main_title,
         to_list=to_list,
+        arrowUp=arrow,
     )
 
 
@@ -70,7 +79,91 @@ def author(id):
     authors_data = data.authors.set_index("id")
     authors_data = authors_data.loc[id]
 
-    if authors_data["name"] in list(data.authors_add["name"].values):
+    citations = authors_data["citations"]
+    citations_max = int(citations[max(citations, key=citations.get)])
+    papers_published = authors_data["papers_published"]
+    papers_published_max = int(papers_published[max(papers_published, key=papers_published.get)])
+
+    myList2 = citations.items()
+    myList2 = sorted(myList2)
+    x2, y2 = zip(*myList2)
+
+    x2 = list(x2)
+    y2 = list(y2)
+
+    y_plot = pd.Series(y2)
+
+    fig = plt.figure(figsize=(16, 12))
+    ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
+    ax.set_xticklabels(x2)
+    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+        label.set_fontsize(20)
+
+    rects = ax.patches
+
+    for rect2, label in zip(rects, y2):
+        height = rect2.get_height()
+        ax.text(
+            rect2.get_x() + rect2.get_width() / 2,
+            height+citations_max/80,
+            label,
+            ha="center",
+            va="baseline",
+            family="Arial",
+            size=23.5,
+        )
+
+    ax.plot(x2, y2, "#004", lw=2)
+
+    fig.savefig("static/images/graphic_author_citations.png")
+    plt.close(fig)
+
+    im = Image.open("static/images/graphic_author_citations.png")
+    width, height = im.size
+    im1 = im.crop((110, 130, width - 150, height - 30))
+    im1.save("static/images/graphic_author_citations.png")
+
+    myList = papers_published.items()
+    myList = sorted(myList)
+    x, y = zip(*myList)
+
+    x = list(x)
+    y = list(y)
+
+    y_plot = pd.Series(y)
+
+    fig = plt.figure(figsize=(16, 12))
+    ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
+    ax.set_xticklabels(x)
+    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+        label.set_fontsize(20)
+
+    rects = ax.patches
+
+    for rect, label in zip(rects, y):
+        height = rect.get_height()
+        ax.text(
+            rect.get_x() + rect.get_width() / 2,
+            height+papers_published_max/200,
+            label,
+            ha="center",
+            va="bottom",
+            family="Arial",
+            size=23.5,
+        )
+
+    ax.plot(x, y, "#004", lw=2)
+
+    fig.savefig("static/images/graphic_author_papers.png")
+    plt.close(fig)
+
+    im = Image.open("static/images/graphic_author_papers.png")
+    width, height = im.size
+    im1 = im.crop((110, 130, width - 150, height - 30))
+    im1.save("static/images/graphic_author_papers.png")
+
+    if authors_data["name"] in list(data.authors_add["name"].values) and \
+            data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":
         authors_add = data.authors_add.set_index("name")
         if_photo = True
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
@@ -80,12 +173,8 @@ def author(id):
     else:
         if_photo = False
         photo_link = ""
-        department = "Computer Science"
-        disciplines = [
-            "Machine Learning",
-            "Neural Networks and Artificial Intelligence",
-            "Computer Vision",
-        ]
+        department = ""
+        disciplines = []
 
     return render_template(
         "author_page.html",
@@ -107,6 +196,7 @@ def publications(num):  # pragma: no cover
     main_title = url_for("static", filename="images/innopolis_title.png")
     arrow_left = url_for("static", filename="images/arrow_left.jpg")
     arrow_right = url_for("static", filename="images/arrow_right.jpg")
+    arrow = arrow = url_for("static", filename="images/arrow_up.jpg")
 
     # dataframe modification for further displaying
     data.page_check("general_publications")
@@ -148,16 +238,7 @@ def publications(num):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                all_papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                all_papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "json":
-                all_papers.to_csv("downloads/download.json")
-            elif file_type == "xlsx":
-                all_papers.to_excel("downloads/download.xlsx")
-
+            data.download_file(all_papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "page" in request.form:
@@ -176,6 +257,7 @@ def publications(num):  # pragma: no cover
         arrow_left=arrow_left,
         arrow_right=arrow_right,
         page_num=num,
+        arrowUp = arrow,
     )
 
 
@@ -196,13 +278,17 @@ def co_authors(id):
     co_authors_list = list(set(sum(co_authors_list, list())))
     co_authors_list.remove(id)
 
-    download_file = {"Co-Authors Names": [],
-                     "Quantity of joint publications": [],
-                     "Affiliation": []}
+    co_au_names = "Co-Authors Names"
+    authors_id = "ID"
+    joint_pub = "Quantity of joint publications"
+    affil = "Affiliation"
 
-    co_authors_dic = {}
+    co_authors_data = {authors_id: [],
+                       co_au_names: [],
+                       joint_pub: [],
+                       affil: []}
+
     for au_id in co_authors_list:
-        temp_dic = {}
         com_papers = 0
         affiliation = []
 
@@ -213,42 +299,35 @@ def co_authors(id):
         affiliation = ", ".join(set(sum(affiliation, list())))
 
         if au_id in list(authors_data["id"].values):
-            temp_dic["name"] = authors_data.set_index("id").loc[au_id]["name"]
-            temp_dic["common_papers"] = com_papers
-            temp_dic["affiliation"] = affiliation
-            co_authors_dic[au_id] = temp_dic
-            temp_list = download_file.get("Co-Authors Names")
-            temp_list.append(temp_dic["name"])
-            download_file["Co-Authors Names"] = temp_list
-            temp_list = download_file.get("Quantity of joint publications")
-            temp_list.append(temp_dic["common_papers"])
-            download_file["Quantity of joint publications"] = temp_list
-            temp_list = download_file.get("Affiliation")
-            temp_list.append(temp_dic["affiliation"])
-            download_file["Affiliation"] = temp_list
+            temp_list = co_authors_data.get(authors_id)
+            temp_list.append(au_id)
+            co_authors_data[authors_id] = temp_list
 
-    download_file = pd.DataFrame(download_file)
-    # download_file = download_file.loc["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
+            temp_list = co_authors_data.get(co_au_names)
+            temp_list.append(authors_data.set_index("id").loc[au_id]["name"])
+            co_authors_data[co_au_names] = temp_list
+
+            temp_list = co_authors_data.get(joint_pub)
+            temp_list.append(com_papers)
+            co_authors_data[joint_pub] = temp_list
+
+            temp_list = co_authors_data.get(affil)
+            temp_list.append(affiliation)
+            co_authors_data[affil] = temp_list
+
+    co_authors_data = pd.DataFrame(co_authors_data).set_index("ID").\
+        sort_values(by=joint_pub, ascending=False)
 
     if request.method == "POST":
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            download_file.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            download_file.to_csv("downloads/download.json")
-        elif file_type == "tsv":
-            download_file.to_csv("downloads/download.tsv", sep="\t")
-        elif file_type == "xlsx":
-            download_file.to_excel("downloads/download.xlsx")
-
+        data.download_file(co_authors_data, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "co-author.html",
         author_name=author_data["name"],
-        co_authors=co_authors_dic.keys(),
-        co_authors_data=co_authors_dic,
+        co_authors_id=list(co_authors_data.index),
+        co_authors=co_authors_data,
         id=id,
         main_logo=main_logo,
         main_title=main_title,
@@ -304,16 +383,7 @@ def author_publications(id):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "xlsx":
-                papers.to_excel("downloads/download.xlsx")
-            elif file_type == "json":
-                papers.to_csv("downloads/download.json")
-
+            data.download_file(papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
@@ -323,6 +393,7 @@ def author_publications(id):  # pragma: no cover
         papers=papers,
         main_logo=main_logo,
         main_title=main_title,
+        arrowUp=url_for("static", filename="images/arrow_up.jpg"),
     )
 
 
@@ -330,11 +401,13 @@ def author_publications(id):  # pragma: no cover
 def refresh():
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    date = data.cur_date
 
     return render_template(
         "refresh_page.html",
         main_logo=main_logo,
         main_title=main_title,
+        date=date,
     )
 
 
@@ -396,16 +469,7 @@ def general():
 
     if request.method == "POST":
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            info.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            info.to_csv("downloads/download.json")
-        elif file_type == "xlsx":
-            info.to_excel("downloads/download.xlsx")
-        elif file_type == "tsv":
-            info.to_csv("downloads/download.tsv", sep="\t")
-
+        data.download_file(info, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     add_filt_1 = info["Indicators"] == "Number of all publications"

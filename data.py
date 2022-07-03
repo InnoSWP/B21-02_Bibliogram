@@ -1,12 +1,9 @@
-import json
-from datetime import datetime
-from random import randint
+from datetime import date
 
 from photos import photos_dic
 
 import matplotlib.pyplot as plt
 import pandas as pd
-import requests
 from PIL import Image
 
 # password for user update
@@ -107,7 +104,7 @@ def page_check(page):
             "Citations",
             "DOI",
         ]
-        date_filter = [str(x) for x in range(2009, 2023)]
+        date_filter = [str(x) for x in range(2009, cur_date.year + 1)]
         source_filter = [
             "Conference Proceeding",
             "Journal",
@@ -136,7 +133,7 @@ def date_check_with(new_date_list):
     global is_data
     if "Publication Date" not in parameters:
         is_data = False
-        return [str(x) for x in range(2009, 2023)]
+        return [str(x) for x in range(2009, cur_date.year + 1)]
     else:
         is_data = True
         return new_date_list
@@ -146,7 +143,7 @@ def date_check():
     global is_data
     if "Publication Date" not in parameters:
         is_data = False
-        return [str(x) for x in range(2009, 2023)]
+        return [str(x) for x in range(2009, cur_date.year + 1)]
     else:
         is_data = True
         return date_filter
@@ -238,16 +235,21 @@ def data_modification(papers_data):
 
     sorting = sorting_check()
 
-    return papers_data[parameters].sort_values(by=sorting, ascending=order)
-
-# download data
-# data = requests.get(
-#     "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
-# ).json()
+    return papers_data[parameters].sort_values(by=sorting, ascending=order).fillna("-")
 
 
-# authors = pd.DataFrame(data["authors"])
-authors = pd.read_json("data/authors_info_new.json")
+def download_file(data, file_type):
+    if file_type == "csv":
+        data.to_csv("downloads/download.csv")
+    elif file_type == "tsv":
+        data.to_csv("downloads/download.tsv", sep="\t")
+    elif file_type == "json":
+        data.to_json("downloads/download.json")
+    elif file_type == "xlsx":
+        data.to_excel("downloads/download.xlsx")
+
+
+authors = pd.read_json("data/authors_info.json")
 authors_add = pd.read_json("data/authors_add_info.json")
 authors_photos = photos_dic
 papers = pd.read_csv("data/papers_v1.csv", index_col="id")
@@ -256,13 +258,9 @@ papers = pd.read_csv("data/papers_v1.csv", index_col="id")
 authors["citations"] = authors["inno_affil_citations"].apply(dic_to_int)
 authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
 authors["overall_citations"] = authors["overall_citations"].apply(str_to_int)
-# authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
-# authors["start_date"] = authors["papers_published"].apply(
-#     lambda x: min([y for y in x.keys() if x[y] != 0])
-# )
 authors["institution"] = authors["institution"].apply(lambda x: ", ".join(x))
 
 papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
@@ -278,6 +276,7 @@ public_date = "Publication Date"
 affiliation = "Affiliation"
 authors_affiliation = "Authors Affiliation"
 
+cur_date = date.today()
 sorting = ""
 page_name = ""
 order = True
@@ -285,7 +284,7 @@ is_data = True
 is_source = True
 is_quart = True
 is_cit = True
-date_filter = [str(x) for x in range(2009, 2023)]
+date_filter = [str(x) for x in range(2009, cur_date.year + 1)]
 source_filter = [
     "Conference Proceeding",
     "Journal",
@@ -335,7 +334,6 @@ publications[affiliation] = publications[affiliation].apply(
     lambda x: set(sum(x, list()))
 )
 publications[affiliation] = publications[affiliation].apply(lambda x: ", ".join(x))
-# publications.drop(columns=authors_affiliation, inplace=True)
 
 publications[authors_names] = publications[authors_id].apply(
     lambda x: ind_to_name(authors, x)
@@ -384,62 +382,46 @@ def date_citation():  # pragma: no cover
                 "Citations"
             ][ind]
 
-    # return sorted(dict.items())
     return dict
 
 
 tuple = date_citation()
 
-# print(tuple)
-myList = tuple.items()
-myList = sorted(myList)
-x, y = zip(*myList)
+myList1 = tuple.items()
+myList1 = sorted(myList1)
+x1, y1 = zip(*myList1)
 
-# fig, axes = plt.subplots(1, 1, figsize=(16, 12))
-#
-# axes.plot(x, y, "#004", lw=2)
-# axes.grid(False)
-# axes.bar(x, y, color="#036e8e", width=0.08)
-# plt.ylim(ymin=0, ymax=2200)
-# plt.rc("axes", labelsize=1000)
+x1 = list(x1)
+y1 = list(y1)
 
-# fig.savefig("static/images/graphic.png")
-# plt.close(fig)
-#
-# im = Image.open("static/images/graphic.png")
-# width, height = im.size
-# im1 = im.crop((150, 130, width - 150, height - 100))
-# im1.save("static/images/graphic.png")
-
-x = list(x)
-y = list(y)
-
-y_plot = pd.Series(y)
+y_plot1 = pd.Series(y1)
 
 fig = plt.figure(figsize=(16, 12))
-ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
-ax.set_xticklabels(x)
+ax = y_plot1.plot(kind="bar", color="#036e8e", width=0.08)
+ax.set_xticklabels(x1)
+for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+    label.set_fontsize(20)
 
 rects = ax.patches
 
-for rect, label in zip(rects, y):
-    height = rect.get_height()
+for rect1, label in zip(rects, y1):
+    height = rect1.get_height()
     ax.text(
-        rect.get_x() + rect.get_width() / 2,
-        height + 5,
+        rect1.get_x() + rect1.get_width() / 2,
+        height + 5.6,
         label,
         ha="center",
         va="bottom",
         family="Arial",
-        size="x-large",
+        size=20,
     )
 
-ax.plot(x, y, "#004", lw=2)
+ax.plot(x1, y1, "#004", lw=2)
 
 fig.savefig("static/images/graphic.png")
 plt.close(fig)
 
 im = Image.open("static/images/graphic.png")
 width, height = im.size
-im1 = im.crop((150, 130, width - 150, height - 80))
+im1 = im.crop((110, 130, width - 150, height - 30))
 im1.save("static/images/graphic.png")

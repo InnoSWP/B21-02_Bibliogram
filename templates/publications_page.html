@@ -66,11 +66,11 @@
 
 <form method="post">
     <div class="modal fade" id="parameters" tabindex="-1" aria-labelledby="parameters-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-custom">
 
             <div class="modal-content">
 
-                <div class="modal-header">
+                <div class="modal-header" style="margin-left: 5%;">
                     <h5 class="modal-title name-of-table1" id="parameters-label">What parameters to show?</h5>
                     <button type="button" class="btn-close name-of-table2" data-bs-dismiss="modal" aria-label="Close">
                     </button>
@@ -143,10 +143,10 @@
 <form method="post">
     <div class="modal fade style1212r23r23r" id="sort-by-modal" tabindex="-1" aria-labelledby="sort-by-modal-label"
          aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-custom">
 
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="margin-left: 5%;">
                     <h5 class="modal-title" id="sort-by-modal-label">Sort by</h5>
                     <button type="button" class="btn-close button-class2131" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -193,17 +193,16 @@
                         <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
                                for="sort-by-citations">Citations count</label>
                     </div>
-                    <div class="form-check form-switch block-liner" style="margin-left: 60%; margin-top: -37%;">
-                        <input class="form-check-input" type="checkbox" role="switch" id="order" name="order"
-                               style="margin-top: -86%;" onclick="ordering(this, 'label-type');"
-                               value="True"
-                               checked>
-                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px;"
-                               for="order" name="label-type" id="label-type">Descending Order</label>
-                    </div>
                 </div>
 
                 <div class="modal-footer">
+                    <div class="form-check form-switch" style="margin-right: 100px;">
+                        <input class="form-check-input" type="checkbox" role="switch" id="order" name="order" onclick="ordering(this, 'label-type');"
+                               value="True"
+                               checked>
+                        <label class="form-check-label" style="margin-left: 8px; margin-bottom: 2px; font-size: 16px;"
+                               for="order" id="label-type">Descending Order</label>
+                    </div>
                     <button name="sorting" type="submit" class="btn btn-primary"
                             style="text-decoration: none; color: #fff">
                         Sort
@@ -220,7 +219,7 @@
 
             <div class="modal-content">
 
-                <div class="modal-header">
+                <div class="modal-header" style="margin-left: 5%;">
                     <h5 class="modal-title name-of-table1" id="filter-label">Filter by</h5>
                     <button type="button" class="btn-close name-of-table2" data-bs-dismiss="modal" aria-label="Close">
                     </button>
@@ -431,10 +430,10 @@
 
 <form method="post">
     <div class="modal fade" id="file-download" tabindex="-1" aria-labelledby="download-file-label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-custom">
 
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="margin-left: 5%;">
                     <h5 class="modal-title" id="download-file-label">File type to download</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
@@ -475,6 +474,11 @@
         </div>
     </div>
 </form>
+
+<div class="arrow" id="scroll-to-top-3" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
+</div>
 
 <div class="container author-catalogue">
     <table class="table table-bordered">
@@ -554,8 +558,6 @@
     function ordering(chk, label) {
                         document.getElementById(label).innerHTML = chk.checked ? "Descending Order" : "Ascending Order";
                         }
-
-
 </script>
 <script>
     $("#page-number").keyup(function(event){
@@ -564,14 +566,30 @@
          document.getElementById("page").click();
     }
 });
-
-
 </script>
 <script>
     function generalgo(){
      window.location = "/general"
 }
+</script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha384-S58meLBGKxIiQmJ/pJ8ilvFUcGcqgla+mWH9EEKGm6i6rKxSTA2kpXJQJ8n7XK4w" crossorigin="anonymous"></script>
+<script type="text/javascript">
+          $(function() {
+              $(window).scroll(function() {
+                  if($(this).scrollTop() != 0) {
+                    $('#scroll-to-top-3').fadeIn();
+                  } else {
+                    $('#scroll-to-top-3').fadeOut();
+                  }
+              });
+              $('#scroll-to-top-3').click(function() {
+                  $('body,html').animate({scrollTop:0},700);
+              });
+          });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>

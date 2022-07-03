@@ -3,6 +3,34 @@ body{
     overflow-x: hidden;
 }
 
+footer {
+  background-image: url("../images/panel3.png");
+  height: 100px;
+  width: 120%;
+  margin-top: 5%;
+  margin-left: -10%;
+  margin-bottom: -10%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+#scroll-to-top-2 {
+  position: fixed;
+  right: 45px;
+  bottom: 45px;
+}
+
+#object-position-1 {
+  margin-top: -11.5%;
+}
+
+.arrow {
+  height: 70px;
+  width: auto;
+}
+
 .panel-delimeter{
     font-family: 'Open Sans', arial, sans-serif;
     height: 160px;
