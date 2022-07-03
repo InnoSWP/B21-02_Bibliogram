@@ -7,6 +7,7 @@ import pandas as pd
 
 from PIL import Image
 
+
 app = Flask(__name__)
 
 matplotlib.use('Agg')
@@ -234,16 +235,7 @@ def publications(num):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                all_papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                all_papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "json":
-                all_papers.to_json("downloads/download.json")
-            elif file_type == "xlsx":
-                all_papers.to_excel("downloads/download.xlsx")
-
+            data.download_file(all_papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
         elif "page" in request.form:
@@ -315,19 +307,8 @@ def co_authors(id):
         sort_values(by="Quantity of joint publications", ascending=False)
 
     if request.method == "POST":
-        filt_d = ["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
-        co_authors_data = co_authors_data[filt_d]
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            co_authors_data.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            co_authors_data.to_json("downloads/download.json")
-        elif file_type == "tsv":
-            co_authors_data.to_csv("downloads/download.tsv", sep="\t")
-        elif file_type == "xlsx":
-            co_authors_data.to_excel("downloads/download.xlsx")
-
+        data.download_file(co_authors_data, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
@@ -390,16 +371,7 @@ def author_publications(id):  # pragma: no cover
 
         elif "downloading" in request.form:
             file_type = request.form["download"]
-
-            if file_type == "csv":
-                papers.to_csv("downloads/download.csv")
-            elif file_type == "tsv":
-                papers.to_csv("downloads/download.tsv", sep="\t")
-            elif file_type == "xlsx":
-                papers.to_excel("downloads/download.xlsx")
-            elif file_type == "json":
-                papers.to_json("downloads/download.json")
-
+            data.download_file(papers, file_type)
             return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
@@ -484,16 +456,7 @@ def general():
 
     if request.method == "POST":
         file_type = request.form["download"]
-
-        if file_type == "csv":
-            info.to_csv("downloads/download.csv")
-        elif file_type == "json":
-            info.to_json("downloads/download.json")
-        elif file_type == "xlsx":
-            info.to_excel("downloads/download.xlsx")
-        elif file_type == "tsv":
-            info.to_csv("downloads/download.tsv", sep="\t")
-
+        data.download_file(info, file_type)
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     add_filt_1 = info["Indicators"] == "Number of all publications"

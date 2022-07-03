@@ -240,6 +240,17 @@ def data_modification(papers_data):
 
     return papers_data[parameters].sort_values(by=sorting, ascending=order).fillna("-")
 
+
+def download_file(data, file_type):
+    if file_type == "csv":
+        data.to_csv("downloads/download.csv")
+    elif file_type == "tsv":
+        data.to_csv("downloads/download.tsv", sep="\t")
+    elif file_type == "json":
+        data.to_json("downloads/download.json")
+    elif file_type == "xlsx":
+        data.to_excel("downloads/download.xlsx")
+
 # download data
 # data = requests.get(
 #     "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
