@@ -19,7 +19,7 @@ def test_coauthors_info(test_client, label):
     [
         "Marat Mingazov",
         "Maksim Rassabin",
-        "Mohamad Kassab",
+        "Manuel Mazzara",
         "Adil Mehood Khan",
     ],
 )

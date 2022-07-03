@@ -5,12 +5,9 @@ import pytest
     "label",
     [
         b"Author",
-        b"Quantity of publications",
+        b"Quantity of joint publications",
         b"Affiliation",
-        b"Vladimir Ivanov",
-        b"Peter Johnson",
-        b"Caleb Blackgate",
-        b"Alexey Petrov",
+        b"Co-authors of",
     ],
 )
 def test_coauthors_info(test_client, label):

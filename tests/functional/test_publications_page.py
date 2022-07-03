@@ -15,9 +15,9 @@ from app import app
 )
 def test_publications_sorting(test_client, sort_type):
     app.test_client().post(
-        "/publications", data={"sort": sort_type}
+        "/publications/page=1", data={"sort": sort_type}
     )
-    response = app.test_client().get("/publications")
+    response = app.test_client().get("/publications/page=1")
     assert bytes(sort_type, "utf-8") in response.data
 
 
@@ -29,8 +29,8 @@ def test_publications_sorting(test_client, sort_type):
     ],
 )
 def test_publications_filtration(test_client, filtration):
-    app.test_client().post("/publications", data={"filtration": filtration})
-    response = app.test_client().get("/publications")
+    app.test_client().post("/publications/page=1", data={"show": filtration})
+    response = app.test_client().get("/publications/page=1")
     assert b"Quartile" in response.data
     assert b"Citations" in response.data
 
@@ -43,8 +43,8 @@ def test_publications_filtration(test_client, filtration):
     ],
 )
 def test_publications_filtration_error(test_client, filtration):
-    app.test_client().post("/publications", data={"filtration": filtration})
-    response = app.test_client().get("/publications")
+    app.test_client().post("/publications/page=1", data={"show": filtration})
+    response = app.test_client().get("/publications/page=1")
     with pytest.raises(AssertionError):
         assert b"Affiliation" not in response.data
         assert b"DOI" not in response.data
@@ -61,7 +61,7 @@ def test_publications_filtration_error(test_client, filtration):
 )
 def test_publications_downloading(test_client, file_type):
     app.test_client().post(
-        "/publications", data={"download": file_type}
+        "/publications/page=1", data={"download": file_type}
     )
-    response = app.test_client().get("/publications")
+    response = app.test_client().get("/publications/page=1")
     assert bytes(file_type.lower(), "utf-8") in response.data
