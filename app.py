@@ -1,9 +1,15 @@
-import pandas as pd
-
 import data
 from flask import Flask, render_template, request, send_file, url_for, redirect
+import matplotlib.pyplot as plt
+import matplotlib
+
+import pandas as pd
+
+from PIL import Image
 
 app = Flask(__name__)
+
+matplotlib.use('Agg')
 
 
 @app.route("/")
@@ -69,6 +75,89 @@ def author(id):
     mains_title = url_for("static", filename="images/innopolis_title.png")
     authors_data = data.authors.set_index("id")
     authors_data = authors_data.loc[id]
+
+    citations = authors_data["citations"]
+    citations_max = int(citations[max(citations, key=citations.get)])
+    papers_published = authors_data["papers_published"]
+    papers_published_max = int(papers_published[max(papers_published, key=papers_published.get)])
+
+    myList2 = citations.items()
+    myList2 = sorted(myList2)
+    x2, y2 = zip(*myList2)
+
+    x2 = list(x2)
+    y2 = list(y2)
+
+    y_plot = pd.Series(y2)
+
+    fig = plt.figure(figsize=(16, 12))
+    ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
+    ax.set_xticklabels(x2)
+    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+        label.set_fontsize(20)
+
+    rects = ax.patches
+
+    for rect2, label in zip(rects, y2):
+        height = rect2.get_height()
+        ax.text(
+            rect2.get_x() + rect2.get_width() / 2,
+            height+citations_max/80,
+            label,
+            ha="center",
+            va="baseline",
+            family="Arial",
+            size=23.5,
+        )
+
+    ax.plot(x2, y2, "#004", lw=2)
+
+    fig.savefig("static/images/graphic_author_citations.png")
+    plt.close(fig)
+
+    im = Image.open("static/images/graphic_author_citations.png")
+    width, height = im.size
+    im1 = im.crop((110, 130, width - 150, height - 30))
+    im1.save("static/images/graphic_author_citations.png")
+
+    myList = papers_published.items()
+    myList = sorted(myList)
+    x, y = zip(*myList)
+
+    x = list(x)
+    y = list(y)
+
+    y_plot = pd.Series(y)
+
+    fig = plt.figure(figsize=(16, 12))
+    ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
+    ax.set_xticklabels(x)
+    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+        label.set_fontsize(20)
+
+    rects = ax.patches
+
+    for rect, label in zip(rects, y):
+        height = rect.get_height()
+        ax.text(
+            rect.get_x() + rect.get_width() / 2,
+            height+papers_published_max/200,
+            label,
+            ha="center",
+            va="bottom",
+            family="Arial",
+            size=23.5,
+        )
+
+    ax.plot(x, y, "#004", lw=2)
+
+    fig.savefig("static/images/graphic_author_papers.png")
+    plt.close(fig)
+
+    im = Image.open("static/images/graphic_author_papers.png")
+    width, height = im.size
+    im1 = im.crop((110, 130, width - 150, height - 30))
+    im1.save("static/images/graphic_author_papers.png")
 
     if authors_data["name"] in list(data.authors_add["name"].values) and \
             data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":

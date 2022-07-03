@@ -297,3 +297,35 @@ label {
 .block-liner {
   display: inline-block;
 }
+
+.table {
+   margin: auto;
+   width: 80% !important;
+}
+
+.table-label-header {
+    margin-top: 3%;
+    text-align: center;
+    display: inline-block;
+    width: 360px;
+    height: 50px;
+    font-size: 24px;
+    font-family: "Open Sans", arial, sans-serif;
+    font-style: normal;
+    color: #004;
+}
+
+.table-label-image {
+    margin-top: 13%;
+}
+
+.table-label-numbers {
+    margin-top: 40%;
+    margin-bottom: -10%;
+    text-align: center;
+    display: inline-block;
+    font-size: 72px;
+    font-family: "Open Sans", arial, sans-serif;
+    font-style: normal;
+    color: #004;
+}

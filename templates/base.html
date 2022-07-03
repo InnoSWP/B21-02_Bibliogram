@@ -50,44 +50,60 @@
     <table class="table table-bordered features-table" summary="Features of the site">
         <tbody>
         <tr>
-            <th style="width: 50%" id="num1">
+            <th style="width: 50%; height: 70px;" id="num1">
                 <img src="{{ number1 }}" alt="Logo not found" class="round logo table-label-image"
-                     style="width: 300px; height: auto;">
+                     style="width: 300px; height: 70px;">
             </th>
-            <th style="width: 50%" id="num2">
-                <img src="{{ number2 }}" alt="Logo not found" class="round logo table-label-image"
-                     style="width: 300px; height: auto;">
-            </th>
+            <th id="random8"></th>
         </tr>
         <tr>
-            <th style="width: 50%" id="label1">
+            <th style="width: 50%;" class="tab-label-height" id="label1">
                 <h4 class="table-label-header">
                     Monitor the progress of the IU in the research activities
                 </h4>
             </th>
-            <th style="width: 50%" id="label2">
+            <th id="random7"></th>
+        </tr>
+        <tr>
+            <th id="random6"></th>
+            <th style="width: 50%; height: 70px;" id="num2">
+                <img src="{{ number2 }}" alt="Logo not found" class="round logo table-label-image"
+                     style="width: 300px; height: 70px;">
+            </th>
+        </tr>
+        <tr>
+            <th id="random5"></th>
+            <th style="width: 50%;" class="tab-label-height" id="label2">
                 <h4 class="table-label-header">
                     Explore the statistics of the Innopolis University
                 </h4>
             </th>
         </tr>
         <tr>
-            <th style="width: 50%" id="num3">
+            <th style="width: 50%; height: 70px;" id="num3">
                 <img src="{{ number3 }}" alt="Logo not found" class="round logo table-label-image"
-                     style="width: 300px; height: auto;">
+                     style="width: 300px; height: 70px;">
             </th>
-            <th style="width: 50%" id="num4">
+            <th id="random4"></th>
+        </tr>
+        <tr>
+            <th style="width: 50%;" class="tab-label-height" id="label3">
+                <h4 class="table-label-header">
+                    Explore the statistics of a particular researcher
+                </h4>
+            </th>
+            <th id="random3"></th>
+        </tr>
+        <tr>
+            <th id="random2"></th>
+            <th style="width: 50%; height: 70px;" id="num4">
                 <img src="{{ number4 }}" alt="Logo not found" class="round logo table-label-image"
                      style="width: 300px; height: auto;">
             </th>
         </tr>
         <tr>
-            <th style="width: 50%" id="label3">
-                <h4 class="table-label-header">
-                    Explore the statistics of a particular researcher
-                </h4>
-            </th>
-            <th style="width: 50%" id="label4">
+            <th id="random1"></th>
+            <th style="width: 50%;" class="tab-label-height" id="label4">
                 <h4 class="table-label-header">
                     Explore the information about publications
                 </h4>
@@ -97,9 +113,9 @@
     </table>
 </div>
 
-<div class="arrow" id="scroll-to-top">
-    <a href="/"><img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
-                     align="right"></a>
+<div class="arrow" id="scroll-to-top" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
 </div>
 
 <div class="panel-delimeter" style="margin-top: 0px;" id="bottom-block">
@@ -109,32 +125,31 @@
 </div>
 
 <div class="container-xl row justify-content-center">
-    <table class="table table-bordered features-table" summary="Statistics of the University">
+    <table class="table table-bordered features-table" summary="Statistics of the University" style="margin-top: 40px;">
         <tbody>
         <tr>
             <th style="width: 35%" id="num6564">
-                <h2 class="table-label-numbers">
-
+                <div style="display: inline-block;">
                     <img src="/static/images/wordcloud.png" alt="Missing" width="350px" height="auto"
                          style="border: 5px solid #004; margin-bottom: -100px;">
-                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Research fields</h2>
-                </h2>
+                    <h2 class="table-label-numbers" style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">Research fields</h2>
+                </div>
             </th>
             <th style="width: 35%" id="num34255">
-                <h2 class="table-label-numbers">
+                <div style="display: inline-block;">
                     <img src="/static/images/graphic.png" alt="Missing" width="600px" height="383px"
-                         style="border: 5px solid #004; margin-bottom: -100px; margin-top: -15px;">
-                    <h2 style="color: #004; font-family: 'Open Sans', arial, sans-serif;">Citations by year</h2>
-                </h2>
+                         style="border: 5px solid #004; margin-bottom: -100px;">
+                    <h2 class="table-label-numbers" style="color: #004; font-family: 'Open Sans', arial, sans-serif; font-size: 24px; margin-top: 120px;">Citations by year</h2>
+                </div>
             </th>
         </tr>
         <!--        <tr>-->
-        <!--            <th style="width: 30%; padding-top:-10px;" id="label5123">-->
+        <!--            <th style="width: 30%; padding-top:-10px;" class=tab-label-height id="label5123">-->
         <!--                <h4 class="table-label-header">-->
         <!--                    Research areas-->
         <!--                </h4>-->
         <!--            </th>-->
-        <!--            <th style="width: 30%;  padding-top:-10px;" id="label6423">-->
+        <!--            <th style="width: 30%;  padding-top:-10px;" class=tab-label-height id="label6423">-->
         <!--                <h4 class="table-label-header">-->
         <!--                    Number of researchers-->
         <!--                </h4>-->
@@ -148,48 +163,34 @@
     <table class="table table-bordered features-table" summary="Statistics of the University">
         <tbody>
         <tr>
-            <th style="width: 50%" id="num5">
+            <th style="width: 25%;" id="num5">
                 <h2 class="table-label-numbers">
                     {{ amount_of_publications }}
                 </h2>
-            </th>
-            <th style="width: 50%" id="num6">
-                <h2 class="table-label-numbers">
-                    {{ number_of_researches }}
-                </h2>
-            </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" id="label5">
                 <h4 class="table-label-header">
                     Amount of publications
                 </h4>
             </th>
-            <th style="width: 50%" id="label6">
+            <th style="width: 25%;" id="num6">
+                <h2 class="table-label-numbers">
+                    {{ number_of_researches }}
+                </h2>
                 <h4 class="table-label-header">
                     Number of researchers
                 </h4>
             </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" id="num7">
+            <th style="width: 25%;" id="num7">
                 <h2 class="table-label-numbers">
                     {{ publications_per_person }}
                 </h2>
-            </th>
-            <th style="width: 50%" id="num8">
-                <h2 class="table-label-numbers">
-                    {{ citations_per_person }}
-                </h2>
-            </th>
-        </tr>
-        <tr>
-            <th style="width: 50%" id="label7">
                 <h4 class="table-label-header">
                     Publications per person
                 </h4>
             </th>
-            <th style="width: 50%" id="label8">
+            <th style="width: 25%;" id="num8">
+                <h2 class="table-label-numbers">
+                    {{ citations_per_person }}
+                </h2>
                 <h4 class="table-label-header">
                     Citations per person
                 </h4>
@@ -198,6 +199,7 @@
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha384-S58meLBGKxIiQmJ/pJ8ilvFUcGcqgla+mWH9EEKGm6i6rKxSTA2kpXJQJ8n7XK4w" crossorigin="anonymous"></script>
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
 <script type="text/javascript">
           $(function() {
@@ -214,4 +216,7 @@
           });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>

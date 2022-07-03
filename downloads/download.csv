@@ -1,1 +1,16 @@
-id,Title,Source Type,Work Type,Publisher,Publication Date,Authors Names,Affiliation,Quartile,Citations,DOI
+,Indicators,2016,2017,2018,2019,2020,2021,2022
+0,Number of all publications,74,82,159,320,359,288,88
+1,Articles,16,22,48,89,87,114,53
+2,Books,0,2,2,2,0,1,0
+3,Book Chapters,3,4,2,4,6,2,8
+4,Conference Papers,54,51,103,212,256,157,20
+5,Reviews,0,2,1,3,3,7,4
+6,Short Surveys,0,0,0,0,0,0,1
+7,Others,1,1,3,10,7,7,2
+8,Scopus,74,82,159,320,359,288,88
+9,Q1 & Q2,18,18,50,64,68,98,44
+10,Number of citations,552,1342,1424,2187,1715,536,41
+11,>10,16,24,40,48,31,17,1
+12,5-9,23,21,49,60,75,32,1
+13,1-4,36,34,73,140,144,99,15
+14,0,15,9,28,108,145,175,72
