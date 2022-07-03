@@ -14,9 +14,7 @@ from app import app
     ],
 )
 def test_publications_sorting(test_client, sort_type):
-    app.test_client().post(
-        "/publications/page=1", data={"sort": sort_type}
-    )
+    app.test_client().post("/publications/page=1", data={"sort": sort_type})
     response = app.test_client().get("/publications/page=1")
     assert bytes(sort_type, "utf-8") in response.data
 
@@ -60,8 +58,6 @@ def test_publications_filtration_error(test_client, filtration):
     ],
 )
 def test_publications_downloading(test_client, file_type):
-    app.test_client().post(
-        "/publications/page=1", data={"download": file_type}
-    )
+    app.test_client().post("/publications/page=1", data={"download": file_type})
     response = app.test_client().get("/publications/page=1")
     assert bytes(file_type.lower(), "utf-8") in response.data

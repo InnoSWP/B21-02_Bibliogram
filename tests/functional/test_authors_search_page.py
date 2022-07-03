@@ -6,7 +6,7 @@ import pytest
     [
         b"Find author",
         b"Search results",
-    ]
+    ],
 )
 def test_coauthors_info(test_client, label):
     response = test_client.get("/search")
