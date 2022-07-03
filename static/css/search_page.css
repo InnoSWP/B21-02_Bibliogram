@@ -121,16 +121,19 @@ a {
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 
 .round-photo1 {
   border-radius: 50%;
   width: 250px;
   height: 250px;
+  object-fit: cover;
 }
 
 .margined-photo {
   margin-left: 10%;
+  object-fit: cover;
 }
 
 .cluster-author {
