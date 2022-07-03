@@ -1,12 +1,9 @@
-import json
 from datetime import date
-from random import randint
 
 from photos import photos_dic
 
 import matplotlib.pyplot as plt
 import pandas as pd
-import requests
 from PIL import Image
 
 # password for user update
@@ -251,14 +248,8 @@ def download_file(data, file_type):
     elif file_type == "xlsx":
         data.to_excel("downloads/download.xlsx")
 
-# download data
-# data = requests.get(
-#     "https://84c72655-369d-40ae-ae04-8880a8b56f27.mock.pstmn.io/data"
-# ).json()
 
-
-# authors = pd.DataFrame(data["authors"])
-authors = pd.read_json("data/authors_info_new.json")
+authors = pd.read_json("data/authors_info.json")
 authors_add = pd.read_json("data/authors_add_info.json")
 authors_photos = photos_dic
 papers = pd.read_csv("data/papers_v1.csv", index_col="id")
@@ -267,13 +258,9 @@ papers = pd.read_csv("data/papers_v1.csv", index_col="id")
 authors["citations"] = authors["inno_affil_citations"].apply(dic_to_int)
 authors["hirsch_ind"] = authors["hirsch_ind"].apply(str_to_int)
 authors["overall_citations"] = authors["overall_citations"].apply(str_to_int)
-# authors["overall_citation"] = authors["citations"].apply(lambda x: sum(x.values()))
 authors["papers_published"] = authors["papers_published"].apply(dic_to_int)
 authors["paper_id"] = authors["paper_id"].apply(list_to_int)
 authors["papers_number"] = authors["papers_published"].apply(lambda x: sum(x.values()))
-# authors["start_date"] = authors["papers_published"].apply(
-#     lambda x: min([y for y in x.keys() if x[y] != 0])
-# )
 authors["institution"] = authors["institution"].apply(lambda x: ", ".join(x))
 
 papers["source_quartile"] = papers["source_quartile"].apply(str_to_int)
@@ -347,7 +334,6 @@ publications[affiliation] = publications[affiliation].apply(
     lambda x: set(sum(x, list()))
 )
 publications[affiliation] = publications[affiliation].apply(lambda x: ", ".join(x))
-# publications.drop(columns=authors_affiliation, inplace=True)
 
 publications[authors_names] = publications[authors_id].apply(
     lambda x: ind_to_name(authors, x)
