@@ -43,6 +43,7 @@ def search_author():
     authors = authors.loc[filt].sort_values(by="Overall_citations", ascending=False)
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow = url_for("static", filename="images/arrow_up.jpg")
 
     def to_list(arg):
         return list(arg)
@@ -64,6 +65,7 @@ def search_author():
         main_logo=main_logo,
         main_title=main_title,
         to_list=to_list,
+        arrowUp=arrow,
     )
 
 
@@ -163,8 +165,6 @@ def author(id):
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
         department = authors_add.loc[authors_data["name"]]["department"]
         disciplines = authors_add.loc[authors_data["name"]]["disciplines"]
-
-
     else:
         if_photo = False
         photo_link = ""
@@ -195,6 +195,7 @@ def publications(num):  # pragma: no cover
     main_title = url_for("static", filename="images/innopolis_title.png")
     arrow_left = url_for("static", filename="images/arrow_left.jpg")
     arrow_right = url_for("static", filename="images/arrow_right.jpg")
+    arrow = arrow = url_for("static", filename="images/arrow_up.jpg")
 
     # dataframe modification for further displaying
     data.page_check("general_publications")
@@ -264,6 +265,7 @@ def publications(num):  # pragma: no cover
         arrow_left=arrow_left,
         arrow_right=arrow_right,
         page_num=num,
+        arrowUp = arrow,
     )
 
 
@@ -411,6 +413,7 @@ def author_publications(id):  # pragma: no cover
         papers=papers,
         main_logo=main_logo,
         main_title=main_title,
+        arrowUp=url_for("static", filename="images/arrow_up.jpg"),
     )
 
 

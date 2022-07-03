@@ -89,6 +89,13 @@
         </tbody>
     </table>
 </div>
+
+
+<div class="arrow" id="scroll-to-top-1" style="display:none;">
+    <img id="object-position-1" src="{{arrowUp}}" alt="Logo not found" class="square arrow"
+                     align="right">
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
@@ -97,7 +104,24 @@
             document.getElementsByClassName('sidebar')[0].classList.toggle('collapsed');
             document.getElementsByClassName('panel-delimeter')[0].classList.toggle('sidebar-opened');
         }
-
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha384-S58meLBGKxIiQmJ/pJ8ilvFUcGcqgla+mWH9EEKGm6i6rKxSTA2kpXJQJ8n7XK4w" crossorigin="anonymous"></script>
+<script type="text/javascript">
+          $(function() {
+              $(window).scroll(function() {
+                  if($(this).scrollTop() != 0) {
+                    $('#scroll-to-top-1').fadeIn();
+                  } else {
+                    $('#scroll-to-top-1').fadeOut();
+                  }
+              });
+              $('#scroll-to-top-1').click(function() {
+                  $('body,html').animate({scrollTop:0},700);
+              });
+          });
 </script>
 </body>
+<footer>
+    <h5></h5>
+</footer>
 </html>
