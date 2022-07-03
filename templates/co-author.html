@@ -65,11 +65,11 @@
             </tr>
             </thead>
             <tbody>
-                {% for id in co_authors %}
+                {% for id in co_authors_id %}
                     <tr>
-                        <th scope="row">{{ co_authors_data[id]["name"] }}</th>
-                        <td>{{ co_authors_data[id]["common_papers"] }}</td>
-                        <td>{{ co_authors_data[id]["affiliation"] }}</td>
+                        <th scope="row">{{ co_authors.loc[id]["Co-Authors Names"] }}</th>
+                        <td>{{ co_authors.loc[id]["Quantity of joint publications"] }}</td>
+                        <td>{{ co_authors.loc[id]["Affiliation"] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

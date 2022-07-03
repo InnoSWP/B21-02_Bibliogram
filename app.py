@@ -70,7 +70,8 @@ def author(id):
     authors_data = data.authors.set_index("id")
     authors_data = authors_data.loc[id]
 
-    if authors_data["name"] in list(data.authors_add["name"].values):
+    if authors_data["name"] in list(data.authors_add["name"].values) and \
+            data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":
         authors_add = data.authors_add.set_index("name")
         if_photo = True
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
@@ -80,12 +81,8 @@ def author(id):
     else:
         if_photo = False
         photo_link = ""
-        department = "Computer Science"
-        disciplines = [
-            "Machine Learning",
-            "Neural Networks and Artificial Intelligence",
-            "Computer Vision",
-        ]
+        department = ""
+        disciplines = []
 
     return render_template(
         "author_page.html",
@@ -196,13 +193,12 @@ def co_authors(id):
     co_authors_list = list(set(sum(co_authors_list, list())))
     co_authors_list.remove(id)
 
-    download_file = {"Co-Authors Names": [],
-                     "Quantity of joint publications": [],
-                     "Affiliation": []}
+    co_authors_data = {"ID": [],
+                       "Co-Authors Names": [],
+                       "Quantity of joint publications": [],
+                       "Affiliation": []}
 
-    co_authors_dic = {}
     for au_id in co_authors_list:
-        temp_dic = {}
         com_papers = 0
         affiliation = []
 
@@ -213,42 +209,43 @@ def co_authors(id):
         affiliation = ", ".join(set(sum(affiliation, list())))
 
         if au_id in list(authors_data["id"].values):
-            temp_dic["name"] = authors_data.set_index("id").loc[au_id]["name"]
-            temp_dic["common_papers"] = com_papers
-            temp_dic["affiliation"] = affiliation
-            co_authors_dic[au_id] = temp_dic
-            temp_list = download_file.get("Co-Authors Names")
-            temp_list.append(temp_dic["name"])
-            download_file["Co-Authors Names"] = temp_list
-            temp_list = download_file.get("Quantity of joint publications")
-            temp_list.append(temp_dic["common_papers"])
-            download_file["Quantity of joint publications"] = temp_list
-            temp_list = download_file.get("Affiliation")
-            temp_list.append(temp_dic["affiliation"])
-            download_file["Affiliation"] = temp_list
+            temp_list = co_authors_data.get("ID")
+            temp_list.append(au_id)
+            co_authors_data["ID"] = temp_list
+            temp_list = co_authors_data.get("Co-Authors Names")
+            temp_list.append(authors_data.set_index("id").loc[au_id]["name"])
+            co_authors_data["Co-Authors Names"] = temp_list
+            temp_list = co_authors_data.get("Quantity of joint publications")
+            temp_list.append(com_papers)
+            co_authors_data["Quantity of joint publications"] = temp_list
+            temp_list = co_authors_data.get("Affiliation")
+            temp_list.append(affiliation)
+            co_authors_data["Affiliation"] = temp_list
 
-    download_file = pd.DataFrame(download_file)
-    # download_file = download_file.loc["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
+    co_authors_data = pd.DataFrame(co_authors_data).set_index("ID").\
+        sort_values(by="Quantity of joint publications", ascending=False)
 
     if request.method == "POST":
+        filt_d = ["Co-Authors Names", "Quantity of joint publications", "Affiliation"]
+        co_authors_data = co_authors_data[filt_d]
         file_type = request.form["download"]
 
         if file_type == "csv":
-            download_file.to_csv("downloads/download.csv")
+            co_authors_data.to_csv("downloads/download.csv")
         elif file_type == "json":
-            download_file.to_csv("downloads/download.json")
+            co_authors_data.to_csv("downloads/download.json")
         elif file_type == "tsv":
-            download_file.to_csv("downloads/download.tsv", sep="\t")
+            co_authors_data.to_csv("downloads/download.tsv", sep="\t")
         elif file_type == "xlsx":
-            download_file.to_excel("downloads/download.xlsx")
+            co_authors_data.to_excel("downloads/download.xlsx")
 
         return send_file(app.root_path + "\\downloads\\download." + file_type)
 
     return render_template(
         "co-author.html",
         author_name=author_data["name"],
-        co_authors=co_authors_dic.keys(),
-        co_authors_data=co_authors_dic,
+        co_authors_id=list(co_authors_data.index),
+        co_authors=co_authors_data,
         id=id,
         main_logo=main_logo,
         main_title=main_title,
