@@ -162,12 +162,14 @@ def author(id):
     im1 = im.crop((110, 130, width - 150, height - 30))
     im1.save("static/images/graphic_author_papers.png")
 
-    if authors_data["name"] in list(data.authors_add["name"].values) and \
-            data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":
+    if authors_data["name"] in list(data.authors_add["name"].values):
         authors_add = data.authors_add.set_index("name")
         if_photo = True
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
-        department = authors_add.loc[authors_data["name"]]["department"]
+        if authors_add.loc[authors_data["name"]]["department"] != "No department":
+            department = authors_add.loc[authors_data["name"]]["department"]
+        else:
+            department = ""
         disciplines = authors_add.loc[authors_data["name"]]["disciplines"]
 
     else:
