@@ -2,7 +2,7 @@ import data
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
-from flask import Flask, render_template, request, send_file, url_for, redirect
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from PIL import Image
 
 app = Flask(__name__)
@@ -104,7 +104,7 @@ def author(id):
         height = rect2.get_height()
         ax.text(
             rect2.get_x() + rect2.get_width() / 2,
-            height + citations_max/80,
+            height + citations_max / 80,
             label,
             ha="center",
             va="baseline",
@@ -143,7 +143,7 @@ def author(id):
         height = rect.get_height()
         ax.text(
             rect.get_x() + rect.get_width() / 2,
-            height + papers_published_max/200,
+            height + papers_published_max / 200,
             label,
             ha="center",
             va="bottom",
