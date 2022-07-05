@@ -1,16 +1,13 @@
 import data
-from flask import Flask, render_template, request, send_file, url_for, redirect
-import matplotlib.pyplot as plt
 import matplotlib
-
+import matplotlib.pyplot as plt
 import pandas as pd
-
+from flask import Flask, redirect, render_template, request, send_file, url_for
 from PIL import Image
-
 
 app = Flask(__name__)
 
-matplotlib.use('Agg')
+matplotlib.use("Agg")
 
 
 @app.route("/")
@@ -82,7 +79,9 @@ def author(id):
     citations = authors_data["citations"]
     citations_max = int(citations[max(citations, key=citations.get)])
     papers_published = authors_data["papers_published"]
-    papers_published_max = int(papers_published[max(papers_published, key=papers_published.get)])
+    papers_published_max = int(
+        papers_published[max(papers_published, key=papers_published.get)]
+    )
 
     myList2 = citations.items()
     myList2 = sorted(myList2)
@@ -96,7 +95,7 @@ def author(id):
     fig = plt.figure(figsize=(16, 12))
     ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
     ax.set_xticklabels(x2)
-    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+    for label in ax.get_xticklabels() + ax.get_yticklabels():
         label.set_fontsize(20)
 
     rects = ax.patches
@@ -105,7 +104,7 @@ def author(id):
         height = rect2.get_height()
         ax.text(
             rect2.get_x() + rect2.get_width() / 2,
-            height+citations_max/80,
+            height + citations_max / 80,
             label,
             ha="center",
             va="baseline",
@@ -135,7 +134,7 @@ def author(id):
     fig = plt.figure(figsize=(16, 12))
     ax = y_plot.plot(kind="bar", color="#036e8e", width=0.08)
     ax.set_xticklabels(x)
-    for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+    for label in ax.get_xticklabels() + ax.get_yticklabels():
         label.set_fontsize(20)
 
     rects = ax.patches
@@ -144,7 +143,7 @@ def author(id):
         height = rect.get_height()
         ax.text(
             rect.get_x() + rect.get_width() / 2,
-            height+papers_published_max/200,
+            height + papers_published_max / 200,
             label,
             ha="center",
             va="bottom",
@@ -162,12 +161,14 @@ def author(id):
     im1 = im.crop((110, 130, width - 150, height - 30))
     im1.save("static/images/graphic_author_papers.png")
 
-    if authors_data["name"] in list(data.authors_add["name"].values) and \
-            data.authors_add.set_index("name").loc[authors_data["name"]]["department"] != "No department":
+    if authors_data["name"] in list(data.authors_add["name"].values):
         authors_add = data.authors_add.set_index("name")
         if_photo = True
         photo_link = authors_add.loc[authors_data["name"]]["photo_link"]
-        department = authors_add.loc[authors_data["name"]]["department"]
+        if authors_add.loc[authors_data["name"]]["department"] != "No department":
+            department = authors_add.loc[authors_data["name"]]["department"]
+        else:
+            department = ""
         disciplines = authors_add.loc[authors_data["name"]]["disciplines"]
 
     else:
@@ -207,8 +208,12 @@ def publications(num):  # pragma: no cover
 
         if "filtration" in request.form:
             data.date_filter = data.date_check_with(request.form.getlist("date_filter"))
-            data.source_filter = data.source_check_with(request.form.getlist("source_filter"))
-            data.quart_filter = data.quart_check_with(list(map(int, request.form.getlist("quartile_filter"))))
+            data.source_filter = data.source_check_with(
+                request.form.getlist("source_filter")
+            )
+            data.quart_filter = data.quart_check_with(
+                list(map(int, request.form.getlist("quartile_filter")))
+            )
             if request.form["citations_from"]:
                 cit_from = int(request.form["citations_from"])
             else:
@@ -217,7 +222,9 @@ def publications(num):  # pragma: no cover
                 cit_to = int(request.form["citations_to"])
             else:
                 cit_to = 100000
-            data.citations_from, data.citations_to = data.cit_check_with(cit_from, cit_to)
+            data.citations_from, data.citations_to = data.cit_check_with(
+                cit_from, cit_to
+            )
 
             all_papers = data.data_modification(data.publications)
 
@@ -257,7 +264,7 @@ def publications(num):  # pragma: no cover
         arrow_left=arrow_left,
         arrow_right=arrow_right,
         page_num=num,
-        arrowUp = arrow,
+        arrowUp=arrow,
     )
 
 
@@ -283,10 +290,7 @@ def co_authors(id):
     joint_pub = "Quantity of joint publications"
     affil = "Affiliation"
 
-    co_authors_data = {authors_id: [],
-                       co_au_names: [],
-                       joint_pub: [],
-                       affil: []}
+    co_authors_data = {authors_id: [], co_au_names: [], joint_pub: [], affil: []}
 
     for au_id in co_authors_list:
         com_papers = 0
@@ -295,7 +299,9 @@ def co_authors(id):
         for ind in list_ind:
             if au_id in author_papers.loc[ind]["Authors ID"]:
                 com_papers += 1
-                affiliation.append(eval(author_papers.loc[ind]["Authors Affiliation"])[str(au_id)])
+                affiliation.append(
+                    eval(author_papers.loc[ind]["Authors Affiliation"])[str(au_id)]
+                )
         affiliation = ", ".join(set(sum(affiliation, list())))
 
         if au_id in list(authors_data["id"].values):
@@ -315,8 +321,11 @@ def co_authors(id):
             temp_list.append(affiliation)
             co_authors_data[affil] = temp_list
 
-    co_authors_data = pd.DataFrame(co_authors_data).set_index("ID").\
-        sort_values(by=joint_pub, ascending=False)
+    co_authors_data = (
+        pd.DataFrame(co_authors_data)
+        .set_index("ID")
+        .sort_values(by=joint_pub, ascending=False)
+    )
 
     if request.method == "POST":
         file_type = request.form["download"]
@@ -351,9 +360,13 @@ def author_publications(id):  # pragma: no cover
     if request.method == "POST":
 
         if "filtration" in request.form:
-            data.source_filter = data.source_check_with(request.form.getlist("source_filter"))
+            data.source_filter = data.source_check_with(
+                request.form.getlist("source_filter")
+            )
             data.date_filter = data.date_check_with(request.form.getlist("date_filter"))
-            data.quart_filter = data.quart_check_with(list(map(int, request.form.getlist("quartile_filter"))))
+            data.quart_filter = data.quart_check_with(
+                list(map(int, request.form.getlist("quartile_filter")))
+            )
             if request.form["citations_to"]:
                 cit_to = int(request.form["citations_to"])
             else:
@@ -362,7 +375,9 @@ def author_publications(id):  # pragma: no cover
                 cit_from = int(request.form["citations_from"])
             else:
                 cit_from = 0
-            data.citations_from, data.citations_to = data.cit_check_with(cit_from, cit_to)
+            data.citations_from, data.citations_to = data.cit_check_with(
+                cit_from, cit_to
+            )
 
             papers = data.data_modification(data.publications.loc[filt])
 
