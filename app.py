@@ -46,6 +46,7 @@ def search_author():
     authors = authors.loc[filt].sort_values(by="Overall_citations", ascending=False)
     main_logo = url_for("static", filename="images/dark_logo.png")
     main_title = url_for("static", filename="images/innopolis_title.png")
+    arrow = url_for("static", filename="images/arrow_up.jpg")
 
     def to_list(arg):
         return list(arg)
@@ -67,6 +68,7 @@ def search_author():
         main_logo=main_logo,
         main_title=main_title,
         to_list=to_list,
+        arrowUp=arrow,
     )
 
 
@@ -194,6 +196,7 @@ def publications(num):  # pragma: no cover
     main_title = url_for("static", filename="images/innopolis_title.png")
     arrow_left = url_for("static", filename="images/arrow_left.jpg")
     arrow_right = url_for("static", filename="images/arrow_right.jpg")
+    arrow = arrow = url_for("static", filename="images/arrow_up.jpg")
 
     # dataframe modification for further displaying
     data.page_check("general_publications")
@@ -254,6 +257,7 @@ def publications(num):  # pragma: no cover
         arrow_left=arrow_left,
         arrow_right=arrow_right,
         page_num=num,
+        arrowUp = arrow,
     )
 
 
@@ -274,10 +278,15 @@ def co_authors(id):
     co_authors_list = list(set(sum(co_authors_list, list())))
     co_authors_list.remove(id)
 
-    co_authors_data = {"ID": [],
-                       "Co-Authors Names": [],
-                       "Quantity of joint publications": [],
-                       "Affiliation": []}
+    co_au_names = "Co-Authors Names"
+    authors_id = "ID"
+    joint_pub = "Quantity of joint publications"
+    affil = "Affiliation"
+
+    co_authors_data = {authors_id: [],
+                       co_au_names: [],
+                       joint_pub: [],
+                       affil: []}
 
     for au_id in co_authors_list:
         com_papers = 0
@@ -290,21 +299,24 @@ def co_authors(id):
         affiliation = ", ".join(set(sum(affiliation, list())))
 
         if au_id in list(authors_data["id"].values):
-            temp_list = co_authors_data.get("ID")
+            temp_list = co_authors_data.get(authors_id)
             temp_list.append(au_id)
-            co_authors_data["ID"] = temp_list
-            temp_list = co_authors_data.get("Co-Authors Names")
+            co_authors_data[authors_id] = temp_list
+
+            temp_list = co_authors_data.get(co_au_names)
             temp_list.append(authors_data.set_index("id").loc[au_id]["name"])
-            co_authors_data["Co-Authors Names"] = temp_list
-            temp_list = co_authors_data.get("Quantity of joint publications")
+            co_authors_data[co_au_names] = temp_list
+
+            temp_list = co_authors_data.get(joint_pub)
             temp_list.append(com_papers)
-            co_authors_data["Quantity of joint publications"] = temp_list
-            temp_list = co_authors_data.get("Affiliation")
+            co_authors_data[joint_pub] = temp_list
+
+            temp_list = co_authors_data.get(affil)
             temp_list.append(affiliation)
-            co_authors_data["Affiliation"] = temp_list
+            co_authors_data[affil] = temp_list
 
     co_authors_data = pd.DataFrame(co_authors_data).set_index("ID").\
-        sort_values(by="Quantity of joint publications", ascending=False)
+        sort_values(by=joint_pub, ascending=False)
 
     if request.method == "POST":
         file_type = request.form["download"]
@@ -381,6 +393,7 @@ def author_publications(id):  # pragma: no cover
         papers=papers,
         main_logo=main_logo,
         main_title=main_title,
+        arrowUp=url_for("static", filename="images/arrow_up.jpg"),
     )
 
 
