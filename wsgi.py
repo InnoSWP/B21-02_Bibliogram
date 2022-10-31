@@ -1,4 +1,4 @@
-import app
+from app import bibliometrics
 
 if __name__ == "__main__":
-    app.app.run()
+    bibliometrics.run()

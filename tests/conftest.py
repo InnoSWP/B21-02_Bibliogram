@@ -1,9 +1,23 @@
 import pytest
-from app import app
+
+
+from app import bibliometrics
+
+
 
 
 @pytest.fixture(scope="module")
+
+
 def test_client():
-    with app.test_client() as testing_client:
-        with app.app_context():
+
+
+    with bibliometrics.test_client() as testing_client:
+
+
+        with bibliometrics.app_context():
+
+
             yield testing_client
+
+
