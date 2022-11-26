@@ -1,14 +1,80 @@
-import data
+import os
+from datetime import datetime
+
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 from flask import Flask, redirect, render_template, request, send_file, url_for
 from PIL import Image
+from flask_sqlalchemy import SQLAlchemy
+from pybliometrics.scopus import ScopusSearch
 
+import data
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+# todo rename app to bibliometrics again
 bibliometrics = Flask(__name__)
-
+bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
+db = SQLAlchemy(bibliometrics)
 
 matplotlib.use("Agg")
+
+
+#todo move to separate file
+class Publication(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(500), nullable=False)
+    doc_type = db.Column(db.String(255))
+    source_type = db.Column(db.String(255))
+    publisher = db.Column(db.String(255))
+    publication_date = db.Column(db.Date())
+    quartile = db.Column(db.String(15))
+    number_of_citations = db.Column(db.Integer)
+    doi = db.Column(db.String(100))
+    # updated_at = db.Column(db.Date())
+    # affiliations
+    # authors
+
+    def __repr__(self):
+        return f'<Publication "{self.title}">'
+
+
+#todo move to separate file
+class ScopusDataRetriever:
+    scopus_fields_to_db_fields_mapping = {
+        "title": "title",
+        "doc_type": "subtypeDescription",
+        "source_type": "aggregationType",
+        "number_of_citations": "citedby_count",
+        "doi": "doi"
+
+    }
+
+    def retrieve_data_from_scopus(self):
+        search_results = ScopusSearch('( AF-ID ( "Innopolis University"   60105869 ) )', subscriber=False).results
+        for result in search_results:
+            values = {
+                key: getattr(result, value) for key, value in self.scopus_fields_to_db_fields_mapping.items()
+            }
+            values["publication_date"] = datetime.strptime(getattr(result, "coverDate"), '%Y-%m-%d').date()
+            publication = Publication(**values)
+            db.session.add(publication)
+        db.session.commit()
+
+
+# @app.route('/testing_models')
+# def test_view_function():
+#     publications = Publication.query.all()
+#     return render_template('test_index.html', publications=publications)
+
+
+@bibliometrics.route('/refresh-data')
+def refresh_data():
+    scopus_data_retriever = ScopusDataRetriever()
+    scopus_data_retriever.retrieve_data_from_scopus()
+    # retrieve_data_from_scopus()
+    return "Success"
 
 
 @bibliometrics.route("/")
