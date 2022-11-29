@@ -10,12 +10,17 @@ from flask_sqlalchemy import SQLAlchemy
 from pybliometrics.scopus import ScopusSearch
 
 import data
+user=os.environ['DB_USERNAME']
+password=os.environ['DB_PASSWORD']
+db_name=os.environ['DB_NAME']
+db_adress=os.environ['DB_ADRESS']
+db_port=os.environ['DB_PORT']
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # todo rename app to bibliometrics again
 bibliometrics = Flask(__name__)
-bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
+bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{db_adress}:{db_port}/{db_name}'
 db = SQLAlchemy(bibliometrics)
 
 matplotlib.use("Agg")
@@ -59,6 +64,7 @@ class ScopusDataRetriever:
             }
             values["publication_date"] = datetime.strptime(getattr(result, "coverDate"), '%Y-%m-%d').date()
             publication = Publication(**values)
+            db.create_all()
             db.session.add(publication)
         db.session.commit()
 
