@@ -1,5 +1,7 @@
 import os
 from datetime import datetime
+from dotenv import load_dotenv
+load_dotenv()
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -79,7 +81,6 @@ class ScopusDataRetriever:
 def refresh_data():
     scopus_data_retriever = ScopusDataRetriever()
     scopus_data_retriever.retrieve_data_from_scopus()
-    # retrieve_data_from_scopus()
     return "Success"
 
 
