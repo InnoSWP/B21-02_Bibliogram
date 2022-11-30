@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from flask import Flask, redirect, render_template, request, send_file, url_for
 from PIL import Image
-#from flask_sqlalchemy import SQLAlchemy
 from pybliometrics.scopus import ScopusSearch
 
 import data
@@ -65,12 +64,6 @@ class ScopusDataRetriever:
                 publication.authors = self.get_authors(doi)
             db.session.add(publication)
         db.session.commit()
-
-
-# @bibliometrics.route('/testing_models')
-# def test_view_function():
-#     publications = Publication.query.all()
-#     return render_template('test_index.html', publications=publications)
 
 
 @bibliometrics.route('/refresh-data')
