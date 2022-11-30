@@ -1,6 +1,9 @@
 import os
 from datetime import datetime
 from typing import List, Optional
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -12,17 +15,24 @@ from pybliometrics.scopus import ScopusSearch
 import data
 from models import db, Publication, Affiliation, Author
 
+user = os.environ['DB_USERNAME']
+password = os.environ['DB_PASSWORD']
+db_name = os.environ['DB_NAME']
+db_adress = os.environ['DB_ADRESS']
+db_port = os.environ['DB_PORT']
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # todo rename app to bibliometrics again
 bibliometrics = Flask(__name__)
-bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
+
+bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{db_adress}:{db_port}/{db_name}'
 db.init_app(bibliometrics)
 
 matplotlib.use("Agg")
 
 
-#todo move to separate file
+# todo move to separate file
 class ScopusDataRetriever:
     affiliation_field = "affilname"
     affiliation_separator = ";"
@@ -49,6 +59,7 @@ class ScopusDataRetriever:
         pass
 
     def retrieve_data_from_scopus(self):
+        db.create_all()
         search_results = ScopusSearch('( AF-ID ( "Innopolis University"   60105869 ) )', subscriber=False).results
         for result in search_results:
             values = {
@@ -70,7 +81,6 @@ class ScopusDataRetriever:
 def refresh_data():
     scopus_data_retriever = ScopusDataRetriever()
     scopus_data_retriever.retrieve_data_from_scopus()
-    # retrieve_data_from_scopus()
     return "Success"
 
 
