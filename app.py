@@ -1,47 +1,32 @@
 import os
 from datetime import datetime
+from typing import List, Optional
 
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 from flask import Flask, redirect, render_template, request, send_file, url_for
 from PIL import Image
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from pybliometrics.scopus import ScopusSearch
 
 import data
+from models import db, Publication, Affiliation, Author
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 # todo rename app to bibliometrics again
 bibliometrics = Flask(__name__)
 bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'database.db')
-db = SQLAlchemy(bibliometrics)
+db.init_app(bibliometrics)
 
 matplotlib.use("Agg")
 
 
 #todo move to separate file
-class Publication(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(500), nullable=False)
-    doc_type = db.Column(db.String(255))
-    source_type = db.Column(db.String(255))
-    publisher = db.Column(db.String(255))
-    publication_date = db.Column(db.Date())
-    quartile = db.Column(db.String(15))
-    number_of_citations = db.Column(db.Integer)
-    doi = db.Column(db.String(100))
-    # updated_at = db.Column(db.Date())
-    # affiliations
-    # authors
-
-    def __repr__(self):
-        return f'<Publication "{self.title}">'
-
-
-#todo move to separate file
 class ScopusDataRetriever:
+    affiliation_field = "affilname"
+    affiliation_separator = ";"
     scopus_fields_to_db_fields_mapping = {
         "title": "title",
         "doc_type": "subtypeDescription",
@@ -51,6 +36,19 @@ class ScopusDataRetriever:
 
     }
 
+    def get_affiliations(self, affiliation_info: Optional[str]) -> List[Affiliation]:
+        names = set(affiliation_info.split(self.affiliation_separator))
+        affiliations = db.session.query(Affiliation).filter(Affiliation.name.in_(names)).all()
+        affiliations_names = set(affil.name for affil in affiliations)
+        for name in names.difference(affiliations_names):
+            affiliation = Affiliation(name=name)
+            db.session.add(affiliation)
+            affiliations.append(affiliation)
+        return affiliations
+
+    def get_authors(self, doi: str) -> List[Author]:
+        pass
+
     def retrieve_data_from_scopus(self):
         search_results = ScopusSearch('( AF-ID ( "Innopolis University"   60105869 ) )', subscriber=False).results
         for result in search_results:
@@ -59,11 +57,17 @@ class ScopusDataRetriever:
             }
             values["publication_date"] = datetime.strptime(getattr(result, "coverDate"), '%Y-%m-%d').date()
             publication = Publication(**values)
+            affiliations_info = getattr(result, self.affiliation_field)
+            if affiliations_info is not None:
+                publication.affiliations = self.get_affiliations(affiliations_info)
+            doi = getattr(result, "doi")
+            if doi is not None:
+                publication.authors = self.get_authors(doi)
             db.session.add(publication)
         db.session.commit()
 
 
-# @app.route('/testing_models')
+# @bibliometrics.route('/testing_models')
 # def test_view_function():
 #     publications = Publication.query.all()
 #     return render_template('test_index.html', publications=publications)
