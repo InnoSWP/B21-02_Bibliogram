@@ -27,6 +27,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 bibliometrics = Flask(__name__)
 
 bibliometrics.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@{db_adress}:{db_port}/{db_name}'
+bibliometrics.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(bibliometrics)
 
 matplotlib.use("Agg")
